@@ -6,221 +6,258 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Date;
 
+
+/**
+ * Class Matches
+ * @package App\Entity
+ * @ORM\Entity
+ */
 class Matches{
-    /**
-     * @var integer
-     * @ORM\Column(name="matches_id", type"integer", nullable=false, options={"comment"="Matches_id"})
-     * @ORM\Attendace_id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="seq_attendance_id", allocationSize=1, initialValue=1)
-     */
-    private $matches_id;
+        /**
+         * @var integer
+         * @ORM\Column(name="id", type="integer", nullable=false, options={"comment"="ID"})
+         * @ORM\Id
+         * @ORM\GeneratedValue(strategy="SEQUENCE")
+         * @ORM\SequenceGenerator(sequenceName="seq_matches_id", allocationSize=1, initialValue=1)
+         */
+        private $id;
 
-    /**
-     * @var string
-     * @ORM\Column(name="home_team", type="string", nullable=false, options={"comment"="Home_team"})
-     */
-    private $home_team;
+        /**
+         * @var string
+         * @ORM\Column(name="home_team", type="string", nullable=false, options={"comment"="Home_team"})
+         */
+        private $home_team;
 
-    /**
-     * @var string
-     * @ORM\Column(name="away_team", type="string", nullable=false, options={"comment"="Away_team"})
-     */
-    private $away_team;
+        /**
+         * @var string
+         * @ORM\Column(name="away_team", type="string", nullable=false, options={"comment"="Away_team"})
+         */
+        private $away_team;
 
-    /**
-     * @var DateTime
-     * @ORM\Column(name="match_time", type="DateTime", nullable=false, options={"comment"="Match_time"})
-     */
-    private $match_time;
+        /**
+         * @var DateTime
+         * @ORM\Column(name="match_time", type="datetime", nullable=false, options={"comment"="Match_time"})
+         */
+        private $match_time;
 
-    /**
-     * @var string
-     * @ORM\Column(name="address", type="string", nullable=false, options={"comment"="Address"})
-     */
-    private $address;
+        /**
+         * @var string
+         * @ORM\Column(name="address", type="string", nullable=false, options={"comment"="Address"})
+         */
+        private $address;
 
-    /**
-     * @var string
-     * @ORM\Column(name="city", type="string", nullable=false, options={"comment"="City"})
-     */
-    private $city;
+        /**
+         * @var string
+         * @ORM\Column(name="city", type="string", nullable=false, options={"comment"="City"})
+         */
+        private $city;
 
-    /**
-     * @var string
-     * @ORM\Column(name="venue", type="string", nullable=false, options={"comment"="Venue"})
-     */
-    private $venue;
+        /**
+         * @var string
+         * @ORM\Column(name="venue", type="string", nullable=false, options={"comment"="Venue"})
+         */
+        private $venue;
 
-    /**
-     * @var string
-     * @ORM\Column(name="postal_code", type="string", nullable=false, options={"comment"="postal_code"})
-     */
-    private $postal_code;
+        /**
+         * @var string
+         * @ORM\Column(name="postal_code", type="string", nullable=false, options={"comment"="postal_code"})
+         */
+        private $postal_code;
 
-    /**
-     * @var Date
-     * @ORM\Column(name="match_date", type="Date", nullable=false, options={"comment"="match_date"})
-     */
-    private $match_date;
+        /**
+         * @var Date
+         * @ORM\Column(name="match_date", type="date", nullable=false, options={"comment"="match_date"})
+         */
+        private $match_date;
 
-    /**
-     * @var Nomination
-     * @ORM\ManyToOne(targetEntity="Entity\Nomination")
-     * @ORM\JoinColumn(name="nomination_id", referencedColumnName="nomination_id", nullable=false)
-     */
-    private $nomination;
+        /**
+         * @var Nomination
+         * @ORM\ManyToOne(targetEntity="App\Entity\Nomination")
+         * @ORM\JoinColumn(name="nomination_id", referencedColumnName="id", nullable=false)
+         */
+        private $nomination;
 
-    /**
-     * @var integer
-     * @ORM\Column(name="nomination_id", type="integer", nullable=false, options={"comment"="Nomination_id"}
-     */
-    protected $nomination_id;
+        /**
+         * @var integer
+         * @ORM\Column(name="nomination_id", type="integer", nullable=false, options={"comment"="Nomination_id"})
+         */
+        protected $nomination_id;
 
-    /**
-     * @return string
-     */
-    public function getHomeTeam(): string
-    {
-        return $this->home_team;
-    }
+        /**
+         * @return int
+         */
+        public function getId(): int
+        {
+            return $this->id;
+        }
 
-    /**
-     * @param string $home_team
-     */
-    public function setHomeTeam(string $home_team): void
-    {
-        $this->home_team = $home_team;
-    }
+        /**
+         * @param int $id
+         */
+        public function setId(int $id): void
+        {
+            $this->id = $id;
+        }
 
-    /**
-     * @return string
-     */
-    public function getAwayTeam(): string
-    {
-        return $this->away_team;
-    }
+        /**
+         * @return string
+         */
+        public function getHomeTeam(): string
+        {
+            return $this->home_team;
+        }
 
-    /**
-     * @param string $away_team
-     */
-    public function setAwayTeam(string $away_team): void
-    {
-        $this->away_team = $away_team;
-    }
+        /**
+         * @param string $home_team
+         */
+        public function setHomeTeam(string $home_team): void
+        {
+            $this->home_team = $home_team;
+        }
 
-    /**
-     * @return DateTime
-     */
-    public function getMatchTime(): DateTime
-    {
-        return $this->match_time;
-    }
+        /**
+         * @return string
+         */
+        public function getAwayTeam(): string
+        {
+            return $this->away_team;
+        }
 
-    /**
-     * @param DateTime $match_time
-     */
-    public function setMatchTime(DateTime $match_time): void
-    {
-        $this->match_time = $match_time;
-    }
+        /**
+         * @param string $away_team
+         */
+        public function setAwayTeam(string $away_team): void
+        {
+            $this->away_team = $away_team;
+        }
 
-    /**
-     * @return string
-     */
-    public function getAddress(): string
-    {
-        return $this->address;
-    }
+        /**
+         * @return DateTime
+         */
+        public function getMatchTime(): DateTime
+        {
+            return $this->match_time;
+        }
 
-    /**
-     * @param string $address
-     */
-    public function setAddress(string $address): void
-    {
-        $this->address = $address;
-    }
+        /**
+         * @param DateTime $match_time
+         */
+        public function setMatchTime(DateTime $match_time): void
+        {
+            $this->match_time = $match_time;
+        }
 
-    /**
-     * @return string
-     */
-    public function getCity(): string
-    {
-        return $this->city;
-    }
+        /**
+         * @return string
+         */
+        public function getAddress(): string
+        {
+            return $this->address;
+        }
 
-    /**
-     * @param string $city
-     */
-    public function setCity(string $city): void
-    {
-        $this->city = $city;
-    }
+        /**
+         * @param string $address
+         */
+        public function setAddress(string $address): void
+        {
+            $this->address = $address;
+        }
 
-    /**
-     * @return string
-     */
-    public function getVenue(): string
-    {
-        return $this->venue;
-    }
+        /**
+         * @return string
+         */
+        public function getCity(): string
+        {
+            return $this->city;
+        }
 
-    /**
-     * @param string $venue
-     */
-    public function setVenue(string $venue): void
-    {
-        $this->venue = $venue;
-    }
+        /**
+         * @param string $city
+         */
+        public function setCity(string $city): void
+        {
+            $this->city = $city;
+        }
 
-    /**
-     * @return string
-     */
-    public function getPostalCode(): string
-    {
-        return $this->postal_code;
-    }
+        /**
+         * @return string
+         */
+        public function getVenue(): string
+        {
+            return $this->venue;
+        }
 
-    /**
-     * @param string $postal_code
-     */
-    public function setPostalCode(string $postal_code): void
-    {
-        $this->postal_code = $postal_code;
-    }
+        /**
+         * @param string $venue
+         */
+        public function setVenue(string $venue): void
+        {
+            $this->venue = $venue;
+        }
 
-    /**
-     * @return Date
-     */
-    public function getMatchDate(): Date
-    {
-        return $this->match_date;
-    }
+        /**
+         * @return string
+         */
+        public function getPostalCode(): string
+        {
+            return $this->postal_code;
+        }
 
-    /**
-     * @param Date $match_date
-     */
-    public function setMatchDate(Date $match_date): void
-    {
-        $this->match_date = $match_date;
-    }
+        /**
+         * @param string $postal_code
+         */
+        public function setPostalCode(string $postal_code): void
+        {
+            $this->postal_code = $postal_code;
+        }
 
-    /**
-     * @return Nomination
-     */
-    public function getNomination(): Nomination
-    {
-        return $this->nomination;
-    }
+        /**
+         * @return Date
+         */
+        public function getMatchDate(): Date
+        {
+            return $this->match_date;
+        }
 
-    /**
-     * @param Nomination $nomination
-     */
-    public function setNomination(Nomination $nomination): void
-    {
-        $this->nomination = $nomination;
-    }
+        /**
+         * @param Date $match_date
+         */
+        public function setMatchDate(Date $match_date): void
+        {
+            $this->match_date = $match_date;
+        }
 
+        /**
+         * @return Nomination
+         */
+        public function getNomination(): Nomination
+        {
+            return $this->nomination;
+        }
+
+        /**
+         * @param Nomination $nomination
+         */
+        public function setNomination(Nomination $nomination): void
+        {
+            $this->nomination = $nomination;
+        }
+
+        /**
+         * @return int
+         */
+        public function getNominationId(): int
+        {
+            return $this->nomination_id;
+        }
+
+        /**
+         * @param int $nomination_id
+         */
+        public function setNominationId(int $nomination_id): void
+        {
+            $this->nomination_id = $nomination_id;
+        }
 
 
 }

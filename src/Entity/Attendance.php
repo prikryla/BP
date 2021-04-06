@@ -10,89 +10,96 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  */
 class Attendance{
-    /**
-     * @var integer
-     * @ORM\Column(name="attendance_id", type"integer", nullable=false, options={"comment"="Attendance_id"})
-     * @ORM\Attendace_id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="seq_attendance_id", allocationSize=1, initialValue=1)
-     */
-    private $attendance_id;
+        /**
+         * @var integer
+         * @ORM\Column(name="id", type="integer", nullable=false, options={"comment"="ID"})
+         * @ORM\Id
+         * @ORM\GeneratedValue(strategy="SEQUENCE")
+         * @ORM\SequenceGenerator(sequenceName="seq_attendance_id", allocationSize=1, initialValue=1)
+         */
+        private $id;
 
-    /**
-     * @var boolean
-     * @ORM\Column(name="attendance_check", type="boolean", nullable=false, options={"comment"="Attendance_check"})
-     */
-    private $attendace_check;
+        /**
+         * @var boolean
+         * @ORM\Column(name="attendance_check", type="boolean", nullable=false, options={"comment"="Attendance_check"})
+         */
+        private $attendace_check;
 
-    /**
-     * @var User
-     * @ORM\ManyToOne(targetEntity="Entity\User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="user_id", nullable=false)
-     */
-    private $user;
+        /**
+         * @var User
+         * @ORM\ManyToOne(targetEntity="App\Entity\User")
+         * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+         */
+        private $user;
 
-    /**
-     * @var integer
-     * @ORM\Column(name="user_id", type="integer", nullable=false, options={"comment"="User"}
-     */
-    protected $userId;
+        /**
+         * @var integer
+         * @ORM\Column(name="user_id", type="integer", nullable=false, options={"comment"="User_id"})
+         */
+        protected $userId;
 
-    /**
-     * @param $attendance_check
-     * @return $this
-     */
-    public function setAttendance($attendance_check): Attendance
-    {
-        $this->attendace_check = $attendance_check;
+        /**
+         * @return int
+         */
+        public function getId(): int
+        {
+            return $this->id;
+        }
 
-        return $this;
-    }
+        /**
+         * @param int $id
+         */
+        public function setId(int $id): void
+        {
+            $this->id = $id;
+        }
 
-    /**
-     * @return bool
-     */
-    public function getAttendance() : bool
-    {
-        return $this->attendance_check;
-    }
+        /**
+         * @return bool
+         */
+        public function isAttendaceCheck(): bool
+        {
+            return $this->attendace_check;
+        }
 
-    /**
-     * @param Entity\User|null $user
-     * @return $this
-     */
-    public function setUser(Entity\User $user = null): Attendance
-    {
-        $this->user = $user;
-        $this->userId = $user->getId();
+        /**
+         * @param bool $attendace_check
+         */
+        public function setAttendaceCheck(bool $attendace_check): void
+        {
+            $this->attendace_check = $attendace_check;
+        }
 
-        return $this;
-    }
+        /**
+         * @return User
+         */
+        public function getUser(): User
+        {
+            return $this->user;
+        }
 
-    /**
-     * @return Entity\User
-     */
-    public function getUser(): Entity\User
-    {
-        return $this->user;
-    }
+        /**
+         * @param User $user
+         */
+        public function setUser(User $user): void
+        {
+            $this->user = $user;
+        }
 
-    /**
-     * @param $userId
-     */
-    public function setUserId($userId): Attendance
-    {
-        $this->userId = $userId;
+        /**
+         * @return int
+         */
+        public function getUserId(): int
+        {
+            return $this->userId;
+        }
 
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getUserId(): int
-    {
-        return $this->userId;
-    }
+        /**
+         * @param int $userId
+         */
+        public function setUserId(int $userId): void
+        {
+            $this->userId = $userId;
+        }
 
 }
