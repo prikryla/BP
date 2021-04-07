@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 
-use AppBundle\Form\UsersRegisterType;
+use App\Form\UserRegisterType;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,11 +15,12 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 use App\Entity\User;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class DefaultController extends AbstractController{
 
     /**
-     * @Route("/", name="default")
+     * @Route("/", name="homepage")
      * @param Request $request
      * @return Response
      */
@@ -52,13 +54,14 @@ class DefaultController extends AbstractController{
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return RedirectResponse|Response
+     * @throws Exception
      */
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
 
 // 1) build the form
         $user = new User();
-        $form = $this->createForm(UsersRegisterType::class, $user);
+        $form = $this->createForm(UserRegisterType::class, $user);
 
 // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
@@ -76,8 +79,7 @@ class DefaultController extends AbstractController{
             //      $user->setUsername($user->getEmail());
             //$user->setUsername($user->getEmail());
             $user->setAuthRole('ROLE_PLAYER');
-            //$user->setLastmodAt(new \DateTime());  // nevim proc ale nefunguje auto current
-            $user->setUser($user);
+            $user->setUsers($user);
 
 // 4) save the User!
             $em = $this->getDoctrine()->getManager();
@@ -94,11 +96,11 @@ class DefaultController extends AbstractController{
             //$session->set('user', $user);
 
 // autologin https://stackoverflow.com/questions/5886713/automatic-post-registration-user-authentication
-            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-            $this->get('security.token_storage')->setToken($token);
-            $this->get('session')->set('_security_main', serialize($token));
-
-            $this->get('session')->set('player_id', $user->getId());
+//            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+//            $this->get('security.token_storage')->setToken($token);
+//            $this->get('session')->set('_security_main', serialize($token));
+//
+//            $this->get('session')->set('player_id', $user->getId());
 
             return $this->redirectToRoute('homepage');
         }

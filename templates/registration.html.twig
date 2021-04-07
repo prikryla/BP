@@ -1,6 +1,5 @@
 {% block body %}
-    <div class="content">
-        <div class="grid-container">
+
 
             <h2>Registrace</h2>
 
@@ -30,13 +29,43 @@
                     {{ form_errors(form.plainPassword.first) }}
                     {{ form_errors(form.plainPassword.second) }}
 
+                    {{ form_label(form.address) }}
+                    {{ form_widget(form.address) }}
+                    {{ form_errors(form.address) }}
+
+                    {{ form_label(form.city) }}
+                    {{ form_widget(form.city) }}
+                    {{ form_errors(form.city) }}
+
+                    {{ form_label(form.postalCode) }}
+                    {{ form_widget(form.postalCode) }}
+                    {{ form_errors(form.postalCode) }}
+
+                    {{ form_label(form.school) }}
+                    {{ form_widget(form.school) }}
+                    {{ form_errors(form.school) }}
+
+                    {{ form_label(form.dateOfBirth) }}
+                    {{ form_widget(form.dateOfBirth) }}
+                    {{ form_errors(form.dateOfBirth) }}
+
+                    {{ form_label(form.phoneNumberPlayer) }}
+                    {{ form_widget(form.phoneNumberPlayer) }}
+                    {{ form_errors(form.phoneNumberPlayer) }}
+
+                    {{ form_label(form.phoneNumberMother) }}
+                    {{ form_widget(form.phoneNumberMother) }}
+                    {{ form_errors(form.phoneNumberMother) }}
+
+                    {{ form_label(form.phoneNumberFather) }}
+                    {{ form_widget(form.phoneNumberFather) }}
+                    {{ form_errors(form.phoneNumberFather) }}
+
                     <p class="text-center">
-                        {{ form_widget(form.save, {'attr': {'class': 'button primary login-button'}}) }}
+                        {{ form_widget(form.save)}}
                     </p>
 
                 </div>
             </div>
             {{ form_end(form) }}
-        </div>
-    </div>
 {% endblock %}

@@ -2,16 +2,19 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-    /**
+
+/**
      * Class User
      * @package App\Entity
      * @ORM\Entity
      */
-    class User
+    class User implements UserInterface, \Serializable
     {
 
         /**
@@ -25,33 +28,31 @@ use Symfony\Component\Validator\Constraints as Assert;
 
         /**
          * @var string
-         * @ORM\Column(name="first_name", type="string", nullable=false, options={"comment"="First_name"})
+         * @ORM\Column(name="first_name", type="string", nullable=true, options={"comment"="First name"})
          */
-        private $first_name;
+        private $firstName;
 
         /**
          * @var string
-         * @ORM\Column(name="last_name", type="string", nullable=false, options={"comment"="Last_name"})
+         * @ORM\Column(name="last_name", type="string", nullable=true, options={"comment"="Last name"})
          */
-        private $last_name;
+        private $lastName;
 
         /**
          * @var string
-         * @ORM\Column(name="email", type="string", nullable=false, options={"comment"="Email"})
+         * @ORM\Column(name="email", type="string", nullable=true, options={"comment"="Email"})
          */
         private $email;
 
         /**
          * @var string
-         * @Assert\NotBlank()
-         * @ORM\Column(name="username", type="string", nullable=false, options={"comment"="Username"})
+         * @ORM\Column(name="username", type="string", nullable=true, options={"comment"="Username"})
          */
         private $username;
 
         /**
          * @var string
-         * @Assert\NotBlank()
-         * @ORM\Column(name="password", type="string", nullable=false, options={"comment"="Password"})
+         * @ORM\Column(name="password", type="string", nullable=true, options={"comment"="Password"})
          */
         private $password;
 
@@ -63,33 +64,33 @@ use Symfony\Component\Validator\Constraints as Assert;
 
         /**
          * @var string
-         * @ORM\Column(name="address", type="string", nullable=false, options={"comment"="Address"})
+         * @ORM\Column(name="address", type="string", nullable=true, options={"comment"="Address"})
          */
         private $address;
 
         /**
          * @var string
-         * @ORM\Column(name="City", type="string", nullable=false, options={"comment"="City"})
+         * @ORM\Column(name="City", type="string", nullable=true, options={"comment"="City"})
          */
         private $city;
 
         /**
          * @var string
-         * @ORM\Column(name="postal_code", type="string", nullable=false, options={"comment"="Postal_code"})
+         * @ORM\Column(name="postal_code", type="string", nullable=true, options={"comment"="Postal code"})
          */
-        private $postal_code;
+        private $postalCode;
 
         /**
          * @var string
-         * @ORM\Column(name="school", type="string", nullable=false, options={"comment"="School"})
+         * @ORM\Column(name="school", type="string", nullable=true, options={"comment"="School"})
          */
         private $school;
 
         /**
          * @var Date
-         * @ORM\Column(name="date_of_birth", type="date", nullable=false, options={"comment"="Date_of_birth"})
+         * @ORM\Column(name="date_of_birth", type="date", nullable=true, options={"comment"="Date of birth"})
          */
-        private $date_of_birth;
+        private $dateOfBirth;
 
         /**
          * @var integer
@@ -99,33 +100,33 @@ use Symfony\Component\Validator\Constraints as Assert;
 
         /**
          * @var integer
-         * @ORM\Column(name="dress_number", type="integer", nullable=true, options={"comment"="Dress_number"})
+         * @ORM\Column(name="dress_number", type="integer", nullable=true, options={"comment"="Dress number"})
          */
-        private $dress_number;
+        private $dressNumber;
 
         /**
          * @var string
-         * @ORM\Column(name="auth_role", type="string", nullable=false, options={"comment"="Auth_role"})
+         * @ORM\Column(name="auth_role", type="string", nullable=false, options={"comment"="Auth role"})
          */
-        private $auth_role;
+        private $authRole;
 
         /**
          * @var string
-         * @ORM\Column(name="phone_number_player", type="string", nullable=true, options={"comment"="Phone_number_player"})
+         * @ORM\Column(name="phone_number_player", type="string", nullable=true, options={"comment"="Phone number player"})
          */
-        private $phone_number_player;
+        private $phoneNumberPlayer;
 
         /**
          * @var string
-         * @ORM\Column(name="phone_number_mother", type="string", nullable=true, options={"comment"="Phone_number_mother"})
+         * @ORM\Column(name="phone_number_mother", type="string", nullable=true, options={"comment"="Phone number mother"})
          */
-        private $phone_number_mother;
+        private $phoneNumberMother;
 
         /**
          * @var string
-         * @ORM\Column(name="phone_number_father", type="string", nullable=true, options={"comment"="Phone_number_father"})
+         * @ORM\Column(name="phone_number_father", type="string", nullable=true, options={"comment"="Phone number father"})
          */
-        private $phone_number_father;
+        private $phoneNumberFather;
 
         /**
          * @var Nomination
@@ -136,9 +137,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
         /**
          * @var integer
-         * @ORM\Column(name="nomination_id", type="integer", nullable=false, options={"comment"="Nomination_id"})
+         * @ORM\Column(name="nomination_id", type="integer", nullable=true, options={"comment"="Nomination id"})
          */
-        protected $nomination_id;
+        protected $nominationId;
 
         /**
          * @Assert\Length(min=7,
@@ -172,25 +173,9 @@ use Symfony\Component\Validator\Constraints as Assert;
         private $users;
 
         /**
-         * @return User
-         */
-        public function getUsers(): User
-        {
-            return $this->users;
-        }
-
-        /**
-         * @param User $users
-         */
-        public function setUsers(User $users): void
-        {
-            $this->users = $users;
-        }
-
-        /**
          * @return int
          */
-        public function getId(): int
+        public function getId()
         {
             return $this->id;
         }
@@ -206,39 +191,39 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return string
          */
-        public function getFirstName(): string
+        public function getFirstName()
         {
-            return $this->first_name;
+            return $this->firstName;
         }
 
         /**
-         * @param string $first_name
+         * @param string $firstName
          */
-        public function setFirstName(string $first_name): void
+        public function setFirstName(string $firstName): void
         {
-            $this->first_name = $first_name;
-        }
-
-        /**
-         * @return string
-         */
-        public function getLastName(): string
-        {
-            return $this->last_name;
-        }
-
-        /**
-         * @param string $last_name
-         */
-        public function setLastName(string $last_name): void
-        {
-            $this->last_name = $last_name;
+            $this->firstName = $firstName;
         }
 
         /**
          * @return string
          */
-        public function getEmail(): string
+        public function getLastName()
+        {
+            return $this->lastName;
+        }
+
+        /**
+         * @param string $lastName
+         */
+        public function setLastName(string $lastName): void
+        {
+            $this->lastName = $lastName;
+        }
+
+        /**
+         * @return string
+         */
+        public function getEmail()
         {
             return $this->email;
         }
@@ -254,7 +239,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return string
          */
-        public function getUsername(): string
+        public function getUsername()
         {
             return $this->username;
         }
@@ -270,7 +255,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return string
          */
-        public function getPassword(): string
+        public function getPassword()
         {
             return $this->password;
         }
@@ -286,7 +271,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return string
          */
-        public function getSalt(): string
+        public function getSalt()
         {
             return $this->salt;
         }
@@ -302,7 +287,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return string
          */
-        public function getAddress(): string
+        public function getAddress()
         {
             return $this->address;
         }
@@ -318,7 +303,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return string
          */
-        public function getCity(): string
+        public function getCity()
         {
             return $this->city;
         }
@@ -334,23 +319,23 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return string
          */
-        public function getPostalCode(): string
+        public function getPostalCode()
         {
-            return $this->postal_code;
+            return $this->postalCode;
         }
 
         /**
-         * @param string $postal_code
+         * @param string $postalCode
          */
-        public function setPostalCode(string $postal_code): void
+        public function setPostalCode(string $postalCode): void
         {
-            $this->postal_code = $postal_code;
+            $this->postalCode = $postalCode;
         }
 
         /**
          * @return string
          */
-        public function getSchool(): string
+        public function getSchool()
         {
             return $this->school;
         }
@@ -366,23 +351,23 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return Date
          */
-        public function getDateOfBirth(): Date
+        public function getDateOfBirth()
         {
-            return $this->date_of_birth;
+            return $this->dateOfBirth;
         }
 
         /**
-         * @param Date $date_of_birth
+         * @param Date $dateOfBirth
          */
-        public function setDateOfBirth(Date $date_of_birth): void
+        public function setDateOfBirth(Date $dateOfBirth)
         {
-            $this->date_of_birth = $date_of_birth;
+            $this->dateOfBirth = $dateOfBirth;
         }
 
         /**
          * @return int
          */
-        public function getFines(): int
+        public function getFines()
         {
             return $this->fines;
         }
@@ -398,113 +383,97 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return int
          */
-        public function getDressNumber(): int
+        public function getDressNumber()
         {
-            return $this->dress_number;
+            return $this->dressNumber;
         }
 
         /**
-         * @param int $dress_number
+         * @param int $dressNumber
          */
-        public function setDressNumber(int $dress_number): void
+        public function setDressNumber(int $dressNumber): void
         {
-            $this->dress_number = $dress_number;
-        }
-
-        /**
-         * @return string
-         */
-        public function getAuthRole(): string
-        {
-            return $this->auth_role;
-        }
-
-        /**
-         * @param string $auth_role
-         */
-        public function setAuthRole(string $auth_role): void
-        {
-            $this->auth_role = $auth_role;
+            $this->dressNumber = $dressNumber;
         }
 
         /**
          * @return string
          */
-        public function getPhoneNumberPlayer(): string
+        public function getAuthRole()
         {
-            return $this->phone_number_player;
+            return $this->authRole;
         }
 
         /**
-         * @param string $phone_number_player
+         * @param string $authRole
          */
-        public function setPhoneNumberPlayer(string $phone_number_player): void
+        public function setAuthRole(string $authRole): void
         {
-            $this->phone_number_player = $phone_number_player;
-        }
-
-        /**
-         * @return string
-         */
-        public function getPhoneNumberMother(): string
-        {
-            return $this->phone_number_mother;
-        }
-
-        /**
-         * @param string $phone_number_mother
-         */
-        public function setPhoneNumberMother(string $phone_number_mother): void
-        {
-            $this->phone_number_mother = $phone_number_mother;
+            $this->authRole = $authRole;
         }
 
         /**
          * @return string
          */
-        public function getPhoneNumberFather(): string
+        public function getPhoneNumberPlayer()
         {
-            return $this->phone_number_father;
+            return $this->phoneNumberPlayer;
         }
 
         /**
-         * @param string $phone_number_father
+         * @param string $phoneNumberPlayer
          */
-        public function setPhoneNumberFather(string $phone_number_father): void
+        public function setPhoneNumberPlayer(string $phoneNumberPlayer): void
         {
-            $this->phone_number_father = $phone_number_father;
+            $this->phoneNumberPlayer = $phoneNumberPlayer;
         }
 
         /**
-         * @return Nomination
+         * @return string
          */
-        public function getNomination(): Nomination
+        public function getPhoneNumberMother()
         {
-            return $this->nomination;
+            return $this->phoneNumberMother;
         }
 
         /**
-         * @param Nomination $nomination
+         * @param string $phoneNumberMother
          */
-        public function setNomination(Nomination $nomination): void
+        public function setPhoneNumberMother(string $phoneNumberMother): void
         {
-            $this->nomination = $nomination;
+            $this->phoneNumberMother = $phoneNumberMother;
         }
 
         /**
-         * @return int
+         * @return string
          */
-        public function getNominationId(): int
+        public function getPhoneNumberFather()
         {
-            return $this->nomination_id;
+            return $this->phoneNumberFather;
         }
 
         /**
-         * @param int $nomination_id
+         * @param string $phoneNumberFather
          */
-        public function setNominationId(int $nomination_id): void
+        public function setPhoneNumberFather(string $phoneNumberFather): void
         {
-            $this->nomination_id = $nomination_id;
+            $this->phoneNumberFather = $phoneNumberFather;
+        }
+
+        /**
+         * @return User
+         */
+        public function getUsers()
+        {
+            return $this->users;
+        }
+
+        /**
+         * @param User $users
+         */
+        public function setUsers(User $users): void
+        {
+            $this->users = $users;
         }
 
         /**
@@ -522,4 +491,42 @@ use Symfony\Component\Validator\Constraints as Assert;
         {
             $this->plainPassword = $plainPassword;
         }
+
+
+
+        public function getRoles()
+        {
+            return array($this->getAuthRole());
+        }
+
+        public function eraseCredentials()
+        {
+        }
+
+        /** @see \Serializable::serialize() */
+        public function serialize()
+        {
+            return serialize(array(
+                $this->id,
+                $this->username,
+                $this->password,
+                // see section on salt below
+                // $this->salt,
+            ));
+        }
+
+        /** @param $serialized
+         * @see \Serializable::unserialize()
+         */
+        public function unserialize($serialized)
+        {
+            list (
+                $this->id,
+                $this->username,
+                $this->password,
+                // see section on salt below
+                // $this->salt
+                ) = unserialize($serialized);
+        }
+
     }
