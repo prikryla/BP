@@ -1,0 +1,42 @@
+{% block body %}
+    <div class="content">
+        <div class="grid-container">
+
+            <h2>Registrace</h2>
+
+            {{ form_start(form) }}
+            <div class="grid-x grid-padding-x">
+                <div class="small-12 medium-8 medium-offset-2 large-6 large-offset-3 cell">
+                    {{ form_label(form.username) }}
+                    {{ form_widget(form.username) }}
+                    {{ form_errors(form.username) }}
+
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email) }}
+
+                    {{ form_label(form.firstName) }}
+                    {{ form_widget(form.firstName) }}
+                    {{ form_errors(form.firstName) }}
+
+                    {{ form_label(form.lastName) }}
+                    {{ form_widget(form.lastName) }}
+                    {{ form_errors(form.lastName) }}
+
+                    {{ form_label(form.plainPassword.first) }}
+                    {{ form_widget(form.plainPassword.first) }}
+                    {{ form_label(form.plainPassword.second) }}
+                    {{ form_widget(form.plainPassword.second) }}
+                    {{ form_errors(form.plainPassword.first) }}
+                    {{ form_errors(form.plainPassword.second) }}
+
+                    <p class="text-center">
+                        {{ form_widget(form.save, {'attr': {'class': 'button primary login-button'}}) }}
+                    </p>
+
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

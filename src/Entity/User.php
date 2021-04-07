@@ -93,13 +93,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 
         /**
          * @var integer
-         * @ORM\Column(name="fines", type="integer", nullable=false, options={"comment"="Fines"})
+         * @ORM\Column(name="fines", type="integer", nullable=true, options={"comment"="Fines"})
          */
         private $fines;
 
         /**
          * @var integer
-         * @ORM\Column(name="dress_number", type="integer", nullable=false, options={"comment"="Dress_number"})
+         * @ORM\Column(name="dress_number", type="integer", nullable=true, options={"comment"="Dress_number"})
          */
         private $dress_number;
 
@@ -162,6 +162,30 @@ use Symfony\Component\Validator\Constraints as Assert;
          * )
          */
         private $plainPassword;
+
+        /**
+         * @var User
+         *
+         * @ORM\ManyToOne(targetEntity="App\Entity\User")
+         * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
+         */
+        private $users;
+
+        /**
+         * @return User
+         */
+        public function getUsers(): User
+        {
+            return $this->users;
+        }
+
+        /**
+         * @param User $users
+         */
+        public function setUsers(User $users): void
+        {
+            $this->users = $users;
+        }
 
         /**
          * @return int
