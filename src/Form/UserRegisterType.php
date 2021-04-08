@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Users;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -40,7 +40,7 @@ class UserRegisterType extends AbstractType
             ->add('dateOfBirth', DateType::class, array(
                 'mapped' => false,
                 'label' => "Datum narození",
-                'format' => 'yyyy-MM-dd'))
+                'format' => 'dd-MM-yyy'))
             ->add('phoneNumberPlayer', TextType::class, array('label' => "Telefon na hráče"))
             ->add('phoneNumberMother', TextType::class, array('label' => "Telefon na matku"))
             ->add('phoneNumberFather', TextType::class, array('label' => "Telefon na otce"))
@@ -53,7 +53,7 @@ class UserRegisterType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => 'App\Entity\User'
+            'data_class' => 'App\Entity\Users'
         ]);
     }
 }

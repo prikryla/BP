@@ -10,11 +10,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
-     * Class User
+     * Class Users
      * @package App\Entity
      * @ORM\Entity
      */
-    class User implements UserInterface, \Serializable
+    class Users implements UserInterface, \Serializable
     {
 
         /**
@@ -165,9 +165,9 @@ use Symfony\Component\Validator\Constraints as Assert;
         private $plainPassword;
 
         /**
-         * @var User
+         * @var Users
          *
-         * @ORM\ManyToOne(targetEntity="App\Entity\User")
+         * @ORM\ManyToOne(targetEntity="App\Entity\Users")
          * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
          */
         private $users;
@@ -461,7 +461,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         }
 
         /**
-         * @return User
+         * @return Users
          */
         public function getUsers()
         {
@@ -469,9 +469,9 @@ use Symfony\Component\Validator\Constraints as Assert;
         }
 
         /**
-         * @param User $users
+         * @param Users $users
          */
-        public function setUsers(User $users): void
+        public function setUsers(Users $users): void
         {
             $this->users = $users;
         }

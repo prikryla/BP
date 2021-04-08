@@ -14,7 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-use App\Entity\User;
+use App\Entity\Users;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class DefaultController extends AbstractController{
@@ -26,27 +27,7 @@ class DefaultController extends AbstractController{
      */
     public function indexAction(Request $request): Response
     {
-        return $this->redirectToRoute('login');
-    }
-
-    /**
-     * @Route("/login", name="login")
-     * @param Request $request
-     * @return Response
-     */
-    public function loginAction(Request $request)
-    {
-        return $this->render('login.html.twig', array(
-        ));
-    }
-
-    /**
-     * @Route("/logout", name="logout")
-     * @param Request $request
-     */
-    public function logoutAction(Request $request)
-    {
-
+        return $this->render('homepage.html.twig');
     }
 
     /**
@@ -60,7 +41,7 @@ class DefaultController extends AbstractController{
     {
 
 // 1) build the form
-        $user = new User();
+        $user = new Users();
         $form = $this->createForm(UserRegisterType::class, $user);
 
 // 2) handle the submit (will only happen on POST)
@@ -81,7 +62,7 @@ class DefaultController extends AbstractController{
             $user->setAuthRole('ROLE_PLAYER');
             $user->setUsers($user);
 
-// 4) save the User!
+// 4) save the Users!
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();

@@ -21,8 +21,8 @@ class Nomination{
         private $id;
 
         /**
-         * @var User
-         * @ORM\ManyToOne(targetEntity="App\Entity\User")
+         * @var Users
+         * @ORM\ManyToOne(targetEntity="App\Entity\Users")
          * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
          */
         private $user;
@@ -64,17 +64,17 @@ class Nomination{
         }
 
         /**
-         * @return User
+         * @return Users
          */
-        public function getUser(): User
+        public function getUser(): Users
         {
             return $this->user;
         }
 
         /**
-         * @param User $user
+         * @param Users $user
          */
-        public function setUser(User $user): void
+        public function setUser(Users $user): void
         {
             $this->user = $user;
         }
