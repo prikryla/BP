@@ -74,34 +74,34 @@ final class Version20210406143132 extends AbstractMigration
         $this->addSql('COMMENT ON COLUMN player_statistics.three_points IS \'Three_points\'');
         $this->addSql('COMMENT ON COLUMN player_statistics.fouls IS \'Fouls\'');
         $this->addSql('COMMENT ON COLUMN player_statistics.points IS \'Points\'');
-        $this->addSql('CREATE TABLE "user" (id INT NOT NULL, nomination_id INT NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, salt VARCHAR(255) DEFAULT \'tmpSolution\' NOT NULL, address VARCHAR(255) NOT NULL, City VARCHAR(255) NOT NULL, postal_code VARCHAR(255) NOT NULL, school VARCHAR(255) NOT NULL, date_of_birth DATE NOT NULL, fines INT NOT NULL, dress_number INT NOT NULL, auth_role VARCHAR(255) NOT NULL, phone_number_player VARCHAR(255) DEFAULT NULL, phone_number_mother VARCHAR(255) DEFAULT NULL, phone_number_father VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE INDEX IDX_8D93D649F1B2BBA7 ON "user" (nomination_id)');
-        $this->addSql('COMMENT ON COLUMN "user".id IS \'Id\'');
-        $this->addSql('COMMENT ON COLUMN "user".nomination_id IS \'Nomination_id\'');
-        $this->addSql('COMMENT ON COLUMN "user".first_name IS \'First_name\'');
-        $this->addSql('COMMENT ON COLUMN "user".last_name IS \'Last_name\'');
-        $this->addSql('COMMENT ON COLUMN "user".email IS \'Email\'');
-        $this->addSql('COMMENT ON COLUMN "user".username IS \'Username\'');
-        $this->addSql('COMMENT ON COLUMN "user".password IS \'Password\'');
-        $this->addSql('COMMENT ON COLUMN "user".address IS \'Address\'');
-        $this->addSql('COMMENT ON COLUMN "user".City IS \'City\'');
-        $this->addSql('COMMENT ON COLUMN "user".postal_code IS \'Postal_code\'');
-        $this->addSql('COMMENT ON COLUMN "user".school IS \'School\'');
-        $this->addSql('COMMENT ON COLUMN "user".date_of_birth IS \'Date_of_birth\'');
-        $this->addSql('COMMENT ON COLUMN "user".fines IS \'Fines\'');
-        $this->addSql('COMMENT ON COLUMN "user".dress_number IS \'Dress_number\'');
-        $this->addSql('COMMENT ON COLUMN "user".auth_role IS \'Auth_role\'');
-        $this->addSql('COMMENT ON COLUMN "user".phone_number_player IS \'Phone_number_player\'');
-        $this->addSql('COMMENT ON COLUMN "user".phone_number_mother IS \'Phone_number_mother\'');
-        $this->addSql('COMMENT ON COLUMN "user".phone_number_father IS \'Phone_number_father\'');
-        $this->addSql('ALTER TABLE attendance ADD CONSTRAINT FK_6DE30D91A76ED395 FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('CREATE TABLE "users" (id INT NOT NULL, nomination_id INT NOT NULL, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, salt VARCHAR(255) DEFAULT \'tmpSolution\' NOT NULL, address VARCHAR(255) NOT NULL, City VARCHAR(255) NOT NULL, postal_code VARCHAR(255) NOT NULL, school VARCHAR(255) NOT NULL, date_of_birth DATE NOT NULL, fines INT NOT NULL, dress_number INT NOT NULL, auth_role VARCHAR(255) NOT NULL, phone_number_player VARCHAR(255) DEFAULT NULL, phone_number_mother VARCHAR(255) DEFAULT NULL, phone_number_father VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX IDX_8D93D649F1B2BBA7 ON "users" (nomination_id)');
+        $this->addSql('COMMENT ON COLUMN "users".id IS \'Id\'');
+        $this->addSql('COMMENT ON COLUMN "users".nomination_id IS \'Nomination_id\'');
+        $this->addSql('COMMENT ON COLUMN "users".first_name IS \'First_name\'');
+        $this->addSql('COMMENT ON COLUMN "users".last_name IS \'Last_name\'');
+        $this->addSql('COMMENT ON COLUMN "users".email IS \'Email\'');
+        $this->addSql('COMMENT ON COLUMN "users".username IS \'Username\'');
+        $this->addSql('COMMENT ON COLUMN "users".password IS \'Password\'');
+        $this->addSql('COMMENT ON COLUMN "users".address IS \'Address\'');
+        $this->addSql('COMMENT ON COLUMN "users".City IS \'City\'');
+        $this->addSql('COMMENT ON COLUMN "users".postal_code IS \'Postal_code\'');
+        $this->addSql('COMMENT ON COLUMN "users".school IS \'School\'');
+        $this->addSql('COMMENT ON COLUMN "users".date_of_birth IS \'Date_of_birth\'');
+        $this->addSql('COMMENT ON COLUMN "users".fines IS \'Fines\'');
+        $this->addSql('COMMENT ON COLUMN "users".dress_number IS \'Dress_number\'');
+        $this->addSql('COMMENT ON COLUMN "users".auth_role IS \'Auth_role\'');
+        $this->addSql('COMMENT ON COLUMN "users".phone_number_player IS \'Phone_number_player\'');
+        $this->addSql('COMMENT ON COLUMN "users".phone_number_mother IS \'Phone_number_mother\'');
+        $this->addSql('COMMENT ON COLUMN "users".phone_number_father IS \'Phone_number_father\'');
+        $this->addSql('ALTER TABLE attendance ADD CONSTRAINT FK_6DE30D91A76ED395 FOREIGN KEY (user_id) REFERENCES "users" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE matches ADD CONSTRAINT FK_62615BAF1B2BBA7 FOREIGN KEY (nomination_id) REFERENCES nomination (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE nomination ADD CONSTRAINT FK_87266218A76ED395 FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE nomination ADD CONSTRAINT FK_87266218A76ED395 FOREIGN KEY (user_id) REFERENCES "users" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE nomination ADD CONSTRAINT FK_872662184B30DD19 FOREIGN KEY (matches_id) REFERENCES matches (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE player_statistics ADD CONSTRAINT FK_BD760F1FA76ED395 FOREIGN KEY (user_id) REFERENCES "user" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE player_statistics ADD CONSTRAINT FK_BD760F1FA76ED395 FOREIGN KEY (user_id) REFERENCES "users" (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE player_statistics ADD CONSTRAINT FK_BD760F1F4B30DD19 FOREIGN KEY (matches_id) REFERENCES matches (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE player_statistics ADD CONSTRAINT FK_BD760F1F12469DE2 FOREIGN KEY (category_id) REFERENCES category (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE "user" ADD CONSTRAINT FK_8D93D649F1B2BBA7 FOREIGN KEY (nomination_id) REFERENCES nomination (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE "users" ADD CONSTRAINT FK_8D93D649F1B2BBA7 FOREIGN KEY (nomination_id) REFERENCES nomination (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
     }
 
     public function down(Schema $schema) : void
@@ -112,7 +112,7 @@ final class Version20210406143132 extends AbstractMigration
         $this->addSql('ALTER TABLE nomination DROP CONSTRAINT FK_872662184B30DD19');
         $this->addSql('ALTER TABLE player_statistics DROP CONSTRAINT FK_BD760F1F4B30DD19');
         $this->addSql('ALTER TABLE matches DROP CONSTRAINT FK_62615BAF1B2BBA7');
-        $this->addSql('ALTER TABLE "user" DROP CONSTRAINT FK_8D93D649F1B2BBA7');
+        $this->addSql('ALTER TABLE "users" DROP CONSTRAINT FK_8D93D649F1B2BBA7');
         $this->addSql('ALTER TABLE attendance DROP CONSTRAINT FK_6DE30D91A76ED395');
         $this->addSql('ALTER TABLE nomination DROP CONSTRAINT FK_87266218A76ED395');
         $this->addSql('ALTER TABLE player_statistics DROP CONSTRAINT FK_BD760F1FA76ED395');
@@ -129,6 +129,6 @@ final class Version20210406143132 extends AbstractMigration
         $this->addSql('DROP TABLE matches');
         $this->addSql('DROP TABLE nomination');
         $this->addSql('DROP TABLE player_statistics');
-        $this->addSql('DROP TABLE "user"');
+        $this->addSql('DROP TABLE "users"');
     }
 }
