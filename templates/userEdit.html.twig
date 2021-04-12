@@ -3,9 +3,8 @@
 {% block body %}
     <div class="container">
         <h2>Editace profilu</h2>
-        <div class="col-sm-12 my-auto">
+        <div class="col-sm-12">
             <form class="w-25" method="post">
-                <div class="col">
                     <label for="inputUsername">Uživatelské jméno</label>
                     <input type="text" value="hi" name="username" id="inputUsername" class="form-control" required autofocus>
 
@@ -16,8 +15,6 @@
                     <input type="text" value="hi" name="phone_number_player" id="inputPhoneNumberPlayer" class="form-control">
                     <label for="inputPhoneNumberMother">Telefon matka:</label>
                     <input type="text" value="hi" name="phone_number_mother" id="inputPhoneNumberMother" class="form-control">
-                </div>
-                <div class="col">
                     <label for="inputPhoneNUmberFather">Telefon otec:</label>
                     <input type="text" value="hi" name="phone_number_father" id="inputPhoneNUmberFather" class="form-control">
                     <label for="inputAddress">Adresa:</label>
@@ -26,7 +23,6 @@
                     <input type="text" value="hi" name="city" id="inputCity" class="form-control">
                     <label for="inputPostalCode">PSČ:</label>
                     <input type="text" value="hi" name="postal_code" id="inputPostalCode" class="form-control">
-                </div>
                 <button class="btn btn-lg btn-primary col-md-12 text-center" style="margin-top: 20px" type="submit">
                     Uložit změny
                 </button>

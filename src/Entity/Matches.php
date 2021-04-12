@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Date;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -82,6 +84,19 @@ class Matches{
          * @ORM\Column(name="nomination_id", type="integer", nullable=true, options={"comment"="Nomination_id"})
          */
         protected $nomination_id;
+
+        /**
+         * @var Category
+         * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+         * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+         */
+        private $category;
+
+        /**
+         * @var integer
+         * @ORM\Column(name="category_id", type="integer", nullable=true,options={"comment"="Category_id"})
+         */
+        protected $category_id;
 
         /**
          * @return int
@@ -259,5 +274,35 @@ class Matches{
             $this->nomination_id = $nomination_id;
         }
 
+        /**
+         * @return Category
+         */
+        public function getCategory(): Category
+        {
+            return $this->category;
+        }
 
+        /**
+         * @param Category $category
+         */
+        public function setCategory(Category $category): void
+        {
+            $this->category = $category;
+        }
+
+        /**
+         * @return int
+         */
+        public function getCategoryId(): int
+        {
+            return $this->category_id;
+        }
+
+        /**
+         * @param int $category_id
+         */
+        public function setCategoryId(int $category_id): void
+        {
+            $this->category_id = $category_id;
+        }
 }
