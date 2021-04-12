@@ -67,12 +67,6 @@ class Matches{
         private $postal_code;
 
         /**
-         * @var Date
-         * @ORM\Column(name="match_date", type="date", nullable=false, options={"comment"="match_date"})
-         */
-        private $match_date;
-
-        /**
          * @var Nomination
          * @ORM\ManyToOne(targetEntity="App\Entity\Nomination")
          * @ORM\JoinColumn(name="nomination_id", referencedColumnName="id", nullable=false)
@@ -224,22 +218,6 @@ class Matches{
         public function setPostalCode(string $postal_code): void
         {
             $this->postal_code = $postal_code;
-        }
-
-        /**
-         * @return Date
-         */
-        public function getMatchDate(): Date
-        {
-            return $this->match_date;
-        }
-
-        /**
-         * @param Date $match_date
-         */
-        public function setMatchDate(Date $match_date): void
-        {
-            $this->match_date = $match_date;
         }
 
         /**
