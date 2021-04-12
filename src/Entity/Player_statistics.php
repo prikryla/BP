@@ -59,9 +59,9 @@ class Player_statistics{
         /**
          * @var Users
          * @ORM\ManyToOne(targetEntity="App\Entity\Users")
-         * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+         * @ORM\JoinColumn(name="users_id", referencedColumnName="id", nullable=false)
          */
-        private $user;
+        private $users;
 
         /**
          * @var Matches
@@ -79,10 +79,10 @@ class Player_statistics{
 
         /**
          * @var integer
-         * @ORM\Column(name="user_id", type="integer", nullable=false, options={"comment"="User_id"})
+         * @ORM\Column(name="users_id", type="integer", nullable=false, options={"comment"="Users_id"})
 
          */
-        protected $user_id;
+        protected $users_id;
 
         /**
          * @var integer
@@ -212,17 +212,17 @@ class Player_statistics{
         /**
          * @return Users
          */
-        public function getUser(): Users
+        public function getUsers(): Users
         {
-            return $this->user;
+            return $this->users;
         }
 
         /**
-         * @param Users $user
+         * @param Users $users
          */
-        public function setUser(Users $user): void
+        public function setUsers(Users $users): void
         {
-            $this->user = $user;
+            $this->users = $users;
         }
 
         /**
@@ -260,17 +260,17 @@ class Player_statistics{
         /**
          * @return int
          */
-        public function getUserId(): int
+        public function getUsersId(): int
         {
-            return $this->user_id;
+            return $this->users_id;
         }
 
         /**
-         * @param int $user_id
+         * @param int $users_id
          */
-        public function setUserId(int $user_id): void
+        public function setUsersId(int $users_id): void
         {
-            $this->user_id = $user_id;
+            $this->users_id = $users_id;
         }
 
         /**

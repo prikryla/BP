@@ -28,15 +28,15 @@ class Attendance{
         /**
          * @var Users
          * @ORM\ManyToOne(targetEntity="App\Entity\Users")
-         * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
+         * @ORM\JoinColumn(name="users_id", referencedColumnName="id", nullable=false)
          */
-        private $user;
+        private $users;
 
         /**
          * @var integer
-         * @ORM\Column(name="user_id", type="integer", nullable=false, options={"comment"="User_id"})
+         * @ORM\Column(name="users_id", type="integer", nullable=false, options={"comment"="Users_id"})
          */
-        protected $userId;
+        protected $usersId;
 
         /**
          * @return int
@@ -70,36 +70,38 @@ class Attendance{
             $this->attendace_check = $attendace_check;
         }
 
-        /**
-         * @return Users
-         */
-        public function getUser(): Users
-        {
-            return $this->user;
-        }
+    /**
+     * @return Users
+     */
+    public function getUsers(): Users
+    {
+        return $this->users;
+    }
 
-        /**
-         * @param Users $user
-         */
-        public function setUser(Users $user): void
-        {
-            $this->user = $user;
-        }
+    /**
+     * @param Users $users
+     */
+    public function setUsers(Users $users): void
+    {
+        $this->users = $users;
+    }
 
-        /**
-         * @return int
-         */
-        public function getUserId(): int
-        {
-            return $this->userId;
-        }
+    /**
+     * @return int
+     */
+    public function getUsersId(): int
+    {
+        return $this->usersId;
+    }
 
-        /**
-         * @param int $userId
-         */
-        public function setUserId(int $userId): void
-        {
-            $this->userId = $userId;
-        }
+    /**
+     * @param int $usersId
+     */
+    public function setUsersId(int $usersId): void
+    {
+        $this->usersId = $usersId;
+    }
+
+
 
 }

@@ -2,29 +2,36 @@ security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     encoders:
         App\Entity\Users:
-            algorithm: auto
+            algorithm: sha512
     providers:
         users_in_memory: { memory: null }
-        users:
+        our_db_provider:
             entity:
-                class: 'App\Entity\Users'
-                property: 'username'
-
+                class: App\Entity\Users
+                property: username
+    session_fixation_strategy: none
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            anonymous: ~
+            stateless: ~
             lazy: true
-            provider: users_in_memory
+            provider: our_db_provider
+            pattern: ^/
+            http_basic: ~
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
+                target: login
                 # where to redirect after logout
                 # target: app_any_route
+            form_login:
+                login_path: login
+                check_path: login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -37,3 +44,5 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/home, roles: ROLE_ADMIN }

@@ -1,71 +1,99 @@
+<!DOCTYPE html>
+<html class="no-js" lang="cs">
+<head>
+    <title>{% block title %}{% endblock %}IS BBK Blansko</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+
 {% block body %}
-
-
-            <h2>Registrace</h2>
-
-            {{ form_start(form) }}
-            <div class="grid-x grid-padding-x">
-                <div class="small-12 medium-8 medium-offset-2 large-6 large-offset-3 cell">
-                    {{ form_label(form.username) }}
-                    {{ form_widget(form.username) }}
-                    {{ form_errors(form.username) }}
-
-                    {{ form_label(form.email) }}
-                    {{ form_widget(form.email) }}
-                    {{ form_errors(form.email) }}
-
-                    {{ form_label(form.firstName) }}
-                    {{ form_widget(form.firstName) }}
-                    {{ form_errors(form.firstName) }}
-
-                    {{ form_label(form.lastName) }}
-                    {{ form_widget(form.lastName) }}
-                    {{ form_errors(form.lastName) }}
-
-                    {{ form_label(form.plainPassword.first) }}
-                    {{ form_widget(form.plainPassword.first) }}
-                    {{ form_label(form.plainPassword.second) }}
-                    {{ form_widget(form.plainPassword.second) }}
-                    {{ form_errors(form.plainPassword.first) }}
-                    {{ form_errors(form.plainPassword.second) }}
-
-                    {{ form_label(form.address) }}
-                    {{ form_widget(form.address) }}
-                    {{ form_errors(form.address) }}
-
-                    {{ form_label(form.city) }}
-                    {{ form_widget(form.city) }}
-                    {{ form_errors(form.city) }}
-
-                    {{ form_label(form.postalCode) }}
-                    {{ form_widget(form.postalCode) }}
-                    {{ form_errors(form.postalCode) }}
-
-                    {{ form_label(form.school) }}
-                    {{ form_widget(form.school) }}
-                    {{ form_errors(form.school) }}
-
-                    {{ form_label(form.dateOfBirth) }}
-                    {{ form_widget(form.dateOfBirth) }}
-                    {{ form_errors(form.dateOfBirth) }}
-
-                    {{ form_label(form.phoneNumberPlayer) }}
-                    {{ form_widget(form.phoneNumberPlayer) }}
-                    {{ form_errors(form.phoneNumberPlayer) }}
-
-                    {{ form_label(form.phoneNumberMother) }}
-                    {{ form_widget(form.phoneNumberMother) }}
-                    {{ form_errors(form.phoneNumberMother) }}
-
-                    {{ form_label(form.phoneNumberFather) }}
-                    {{ form_widget(form.phoneNumberFather) }}
-                    {{ form_errors(form.phoneNumberFather) }}
-
-                    <p class="text-center">
-                        {{ form_widget(form.save)}}
-                    </p>
-
-                </div>
+    <div class="container">
+                <h2>Registrace</h2>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                    {{ form_start(form) }}
+                        <div class="col-sm-10">
+                            {{ form_label(form.username) }}
+                            {{ form_widget(form.username) }}
+                            {{ form_errors(form.username) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.firstName) }}
+                            {{ form_widget(form.firstName) }}
+                            {{ form_errors(form.firstName) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.lastName) }}
+                            {{ form_widget(form.lastName) }}
+                            {{ form_errors(form.lastName) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.plainPassword.first) }}
+                            {{ form_widget(form.plainPassword.first) }}
+                            {{ form_errors(form.plainPassword.first) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.plainPassword.second) }}
+                            {{ form_widget(form.plainPassword.second) }}
+                            {{ form_errors(form.plainPassword.second) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.address) }}
+                            {{ form_widget(form.address) }}
+                            {{ form_errors(form.address) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.city) }}
+                            {{ form_widget(form.city) }}
+                            {{ form_errors(form.city) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.postalCode) }}
+                            {{ form_widget(form.postalCode) }}
+                            {{ form_errors(form.postalCode) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.school) }}
+                            {{ form_widget(form.school) }}
+                            {{ form_errors(form.school) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.dateOfBirth) }}
+                            {{ form_widget(form.dateOfBirth) }}
+                            {{ form_errors(form.dateOfBirth) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.phoneNumberPlayer) }}
+                            {{ form_widget(form.phoneNumberPlayer) }}
+                            {{ form_errors(form.phoneNumberPlayer) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.phoneNumberMother) }}
+                            {{ form_widget(form.phoneNumberMother) }}
+                            {{ form_errors(form.phoneNumberMother) }}
+                        </div>
+                        <div class="col-sm-10">
+                            {{ form_label(form.phoneNumberFather) }}
+                            {{ form_widget(form.phoneNumberFather) }}
+                            {{ form_errors(form.phoneNumberFather) }}
+                        </div>
+                        <p class="text-center">
+                                {{ form_widget(form.save, {'attr': {'class': 'button primary login-button'}}) }}
+                        </p>
+                    {{ form_end(form) }}
             </div>
-            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Profil {% endblock %}
+
+{% block body %}
+    <div class="container">
+            <h2>Profil</h2>
+                    <table>
+                        <thead>
+                        <th class="text-right">Uživatelské jméno:</th>
+{#                        <th class="text-left">{{ user.getUsername }}</th>#}
+                        </thead>
+                        <tablebody>
+                            <tr>
+                                <td class="text-right">Jméno a příjmení:</td>
+{#                                <td class="text-left">{{ user.getFirstName() }} {{ user.getLastName() }}</td>#}
+                            </tr>
+                            <tr>
+                                <td class="text-right">E-mail:</td>
+{#                                <td class="text-left">{{ user.getEmail() }}</td>#}
+                            </tr>
+                            <tr>
+                                <td class="text-right">Telefon hráč:</td>
+{#                                <td class="text-left">{% if user.getPhone() %}{{ user.getPhone() }}{% else %}-{% endif %}</td>#}
+                            </tr>
+                            <tr>
+                                <td class="text-right">Telefon matka:</td>
+                                {#                                <td class="text-left">{% if user.getPhone() %}{{ user.getPhone() }}{% else %}-{% endif %}</td>#}
+                            </tr>
+                            <tr>
+                                <td class="text-right">Telefon otec:</td>
+                                {#                                <td class="text-left">{% if user.getPhone() %}{{ user.getPhone() }}{% else %}-{% endif %}</td>#}
+                            </tr>
+                            <tr>
+                                <td class="text-right">Adresa:</td>
+{#                                <td class="text-left">{% if user.getAddress() %}{{ user.getAddress() }}<br>#}
+{#                                        {{ user.getPostalCode() }} {{ user.getCity() }}{% else %}-{% endif %}</td>#}
+                            </tr>
+                            <tr>
+                                <td class="text-right">Pokuty:</td>
+                                {#                                <td class="text-left">{% if user.getAddress() %}{{ user.getAddress() }}<br>#}
+                                {#                                        {{ user.getPostalCode() }} {{ user.getCity() }}{% else %}-{% endif %}</td>#}
+                            </tr>
+                            <tr>
+                                <td class="text-right">Číslo dresu:</td>
+                                {#                                <td class="text-left">{% if user.getAddress() %}{{ user.getAddress() }}<br>#}
+                                {#                                        {{ user.getPostalCode() }} {{ user.getCity() }}{% else %}-{% endif %}</td>#}
+                            </tr>
+                        </tablebody>
+                    </table>
+
+                    <div class="text-center">
+                        <a href="{{ path('user-edit') }}" class="btn btn-primary">Upravit</a>
+                    </div>
+                <div class="cell large-3 medium-2"></div>
+    </div>
+{% endblock %}

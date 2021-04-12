@@ -79,7 +79,7 @@ class Matches{
 
         /**
          * @var integer
-         * @ORM\Column(name="nomination_id", type="integer", nullable=false, options={"comment"="Nomination_id"})
+         * @ORM\Column(name="nomination_id", type="integer", nullable=true, options={"comment"="Nomination_id"})
          */
         protected $nomination_id;
 

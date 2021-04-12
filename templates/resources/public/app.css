@@ -1,6 +1,4 @@
-body{
-    display: inline-block;
-}
+
 
 .container-login{
     margin: 0;
@@ -8,6 +6,5 @@ body{
 }
 
 .login-form{
-    margin-top: 20px;
-    margin-right: 5px;
+    width: 70%;
 }

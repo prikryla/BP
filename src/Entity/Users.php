@@ -239,7 +239,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         /**
          * @return string
          */
-        public function getUsername()
+        public function getUsername(): string
         {
             return $this->username;
         }
@@ -511,7 +511,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                 $this->username,
                 $this->password,
                 // see section on salt below
-                // $this->salt,
+                $this->salt,
             ));
         }
 
@@ -525,8 +525,7 @@ use Symfony\Component\Validator\Constraints as Assert;
                 $this->username,
                 $this->password,
                 // see section on salt below
-                // $this->salt
-                ) = unserialize($serialized);
+                $this->salt
+                ) = unserialize($serialized, array('allowed_classes' => false));
         }
-
     }

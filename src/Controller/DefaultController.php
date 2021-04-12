@@ -21,11 +21,21 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class DefaultController extends AbstractController{
 
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="default")
      * @param Request $request
      * @return Response
      */
     public function indexAction(Request $request): Response
+    {
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
+     * @Route("/home", name="homepage")
+     * @param Request $request
+     * @return Response
+     */
+    public function showAction(Request $request): Response
     {
         return $this->render('homepage.html.twig');
     }
@@ -91,4 +101,45 @@ class DefaultController extends AbstractController{
             array('form' => $form->createView())
         );
     }
+
+    /**
+     * @Route("/profil", name="user-detail")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return RedirectResponse|Response
+     */
+    public function detailAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+//        if(!$user = $this->getUser()) {
+//            return $this->redirectToRoute('login');
+//        }
+
+        $user = $this->getUser();
+
+        return $this->render('userProfile.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/profil/edit", name="user-edit")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return RedirectResponse|Response
+     */
+    public function detailEditAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+//        if(!$user = $this->getUser()) {
+//            return $this->redirectToRoute('login');
+//        }
+
+        $user = $this->getUser();
+
+        return $this->render('userEdit.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+
+
 }
