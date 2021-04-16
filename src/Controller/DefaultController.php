@@ -3,7 +3,11 @@
 namespace App\Controller;
 
 
+use App\Form\UserChangePasswordType;
+use App\Form\UserEditType;
 use App\Form\UserRegisterType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -122,24 +126,72 @@ class DefaultController extends AbstractController{
     }
 
     /**
-     * @Route("/profil/edit", name="user-edit")
+     * @Route("/profil/edit/{userId}", name="user-edit")
      * @param Request $request
+     * @param EntityManagerInterface $em
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return RedirectResponse|Response
+     * @return Response
      */
-    public function detailEditAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function detailEditAction(Request $request, EntityManagerInterface $em, $userId)
     {
-//        if(!$user = $this->getUser()) {
-//            return $this->redirectToRoute('login');
-//        }
+        $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
 
-        $user = $this->getUser();
+        $form = $this->createForm(UserEditType::class, $user);
 
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $user = $form->getData();
+            $user->setUsers($this->getUser());
+
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user-detail');
+        }
         return $this->render('userEdit.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'form' => $form->createView()
         ]);
     }
 
+    /**
+     * @Route ("/profil/changePassword/{userId}", name="user-changePassword")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param $userId
+     * @return Response
+     * @throws Exception
+     */
+    public function changePasswordAction(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, $userId){
+        $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
+
+        $form = $this->createForm(UserChangePasswordType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $user = $form->getData();
+            if ($user->getPlainPassword()) {
+                $randomBytes = random_bytes(32);
+                $user->setSalt(bin2hex($randomBytes));
+                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+                $user->setPassword($password);
+            }
+            $user->setUsers($this->getUser());
+
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user-detail');
+        }
+        return $this->render('userChangePassword.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+
+    }
 
 
 }
