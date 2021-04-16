@@ -3,55 +3,67 @@
 {% block title %} Profil {% endblock %}
 
 {% block body %}
-    <div class="container">
-            <h2>Profil</h2>
+    <div class="content">
+
+        <div class="grid-container margin-left-3">
+            <h2 class="mt-1">Profil</h2>
+
+            <div class="grid-x grid-padding-x">
+
+                <div class="cell"></div>
+                <div class="cell">
                     <table>
                         <thead>
-                        <th class="text-right">Uživatelské jméno:</th>
-{#                        <th class="text-left">{{ user.getUsername }}</th>#}
+                        <th class="text-left">Uživatelské jméno:</th>
+                        <th class="text-right">{{ user.getUsername() }}</th>
                         </thead>
                         <tablebody>
                             <tr>
-                                <td class="text-right">Jméno a příjmení:</td>
-{#                                <td class="text-left">{{ user.getFirstName() }} {{ user.getLastName() }}</td>#}
+                                <td class="text-left">Jméno a příjmení:</td>
+                                <td class="text-right">{{ user.getFirstName() }} {{ user.getLastName() }}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">E-mail:</td>
-{#                                <td class="text-left">{{ user.getEmail() }}</td>#}
+                                <td class="text-left">E-mail:</td>
+                                <td class="text-right">{{ user.getEmail() }}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Telefon hráč:</td>
-{#                                <td class="text-left">{% if user.getPhone() %}{{ user.getPhone() }}{% else %}-{% endif %}</td>#}
+                                <td class="text-left">Telefon hráč:</td>
+                                <td class="text-right">{% if user.getPhoneNumberPlayer() %}{{ user.getPhoneNumberPlayer() }}{% else %}-{% endif %}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Telefon matka:</td>
-                                {#                                <td class="text-left">{% if user.getPhone() %}{{ user.getPhone() }}{% else %}-{% endif %}</td>#}
+                                <td class="text-left">Telefon matka:</td>
+                                <td class="text-right">{% if user.getPhoneNumberMother() %}{{ user.getPhoneNumberMother() }}{% else %}-{% endif %}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Telefon otec:</td>
-                                {#                                <td class="text-left">{% if user.getPhone() %}{{ user.getPhone() }}{% else %}-{% endif %}</td>#}
+                                <td class="text-left">Telefon otec:</td>
+                                <td class="text-right">{% if user.getPhoneNumberFather() %}{{ user.getPhoneNumberFather() }}{% else %}-{% endif %}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Adresa:</td>
-{#                                <td class="text-left">{% if user.getAddress() %}{{ user.getAddress() }}<br>#}
-{#                                        {{ user.getPostalCode() }} {{ user.getCity() }}{% else %}-{% endif %}</td>#}
+                                <td class="text-left">Adresa:</td>
+                                <td class="text-right">{% if user.getAddress() %}{{ user.getAddress() }}<br>
+                                        {{ user.getPostalCode() }} {{ user.getCity() }}{% else %}-{% endif %}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Pokuty:</td>
-                                {#                                <td class="text-left">{% if user.getAddress() %}{{ user.getAddress() }}<br>#}
-                                {#                                        {{ user.getPostalCode() }} {{ user.getCity() }}{% else %}-{% endif %}</td>#}
+                                <td class="text-left">Pokuty:</td>
+                                <td class="text-right">{% if user.getFines() %}{{ user.getFines() }}<br>
+                                    {% else %}-{% endif %}</td>
                             </tr>
                             <tr>
-                                <td class="text-right">Číslo dresu:</td>
-                                {#                                <td class="text-left">{% if user.getAddress() %}{{ user.getAddress() }}<br>#}
-                                {#                                        {{ user.getPostalCode() }} {{ user.getCity() }}{% else %}-{% endif %}</td>#}
-                            </tr>
+                                <td class="text-left">Číslo dresu:</td>
+                                <td class="text-right">{% if user.getDressNumber() %}{{ user.getDressNumber() }}<br>
+                                    {% else %}-{% endif %}</td>
                         </tablebody>
                     </table>
 
                     <div class="text-center">
-                        <a href="{{ path('user-edit') }}" class="btn btn-primary">Upravit</a>
+                        <a href="{{ path('user-edit',{userId: user.getId()}) }}" class="btn btn-primary">Upravit</a>
+                        &nbsp;
+                        <a href="{{ path('user-changePassword',{userId: user.getId()}) }}" class="btn btn-danger">Změnit heslo</a>
                     </div>
+                    <div class="cell large-3 medium-2"></div>
+                </div>
                 <div class="cell large-3 medium-2"></div>
+            </div>
+        </div>
     </div>
 {% endblock %}

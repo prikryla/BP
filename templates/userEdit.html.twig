@@ -1,32 +1,50 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <h2>Editace profilu</h2>
-        <div class="col-sm-12">
-            <form class="w-25" method="post">
-                    <label for="inputUsername">Uživatelské jméno</label>
-                    <input type="text" value="hi" name="username" id="inputUsername" class="form-control" required autofocus>
+    <div class="content">
+        <div class="grid-container margin-left-3">
+        <h2 class="text-center">Upravit profil</h2>
+            <div class="grid-x grid-padding-x">
+                <div class="cell large-12">
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                </div>
 
-                    <label for="inputEmail">Email:</label>
-                    <input type="text" value="hi" name="email" id="inputEmail" class="form-control">
+                <div class="cell medium-6">
+                    {{ form_row(form.username, {'label': 'Uživatelské jméno'}) }}
 
-                    <label for="inputPhoneNumberPlayer">Telefon hráč:</label>
-                    <input type="text" value="hi" name="phone_number_player" id="inputPhoneNumberPlayer" class="form-control">
-                    <label for="inputPhoneNumberMother">Telefon matka:</label>
-                    <input type="text" value="hi" name="phone_number_mother" id="inputPhoneNumberMother" class="form-control">
-                    <label for="inputPhoneNUmberFather">Telefon otec:</label>
-                    <input type="text" value="hi" name="phone_number_father" id="inputPhoneNUmberFather" class="form-control">
-                    <label for="inputAddress">Adresa:</label>
-                    <input type="text" value="hi" name="address" id="inputAddress" class="form-control">
-                    <label for="inputCity">Město:</label>
-                    <input type="text" value="hi" name="city" id="inputCity" class="form-control">
-                    <label for="inputPostalCode">PSČ:</label>
-                    <input type="text" value="hi" name="postal_code" id="inputPostalCode" class="form-control">
-                <button class="btn btn-lg btn-primary col-md-12 text-center" style="margin-top: 20px" type="submit">
-                    Uložit změny
-                </button>
-            </form>
+                    {{ form_row(form.firstName, {'label': 'Jméno'}) }}
+
+                    {{ form_row(form.lastName, {'label': 'Příjmení'}) }}
+
+                    {{ form_row(form.email, {'label': 'Email'}) }}
+
+                    {{ form_row(form.address, {'label': 'Adresa'}) }}
+
+                    {{ form_row(form.city, {'label': 'Město'}) }}
+
+                </div>
+
+                <div class="cell medium-6">
+                    {{ form_row(form.postalCode, {'label': 'PSČ'}) }}
+
+                    {{ form_row(form.school, {'label': 'Škola'}) }}
+
+                    {{ form_row(form.phoneNumberPlayer, {'label': 'Telefon hráč'}) }}
+
+                    {{ form_row(form.phoneNumberMother, {'label': 'Telefon matka'} )}}
+
+                    {{ form_row(form.phoneNumberFather, {'label': 'Telefon otec'}) }}
+
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="{{ path('user-detail')}}" class="btn btn-warning">Zpět</a>
+                &nbsp;
+                {{ form_widget(form.save, { 'label': 'Uložit změny', 'attr': { 'class': 'btn btn-success' }}) }}
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
+
 {% endblock %}
