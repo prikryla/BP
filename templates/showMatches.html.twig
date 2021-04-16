@@ -5,59 +5,47 @@
 {% endblock %}
 
 {% block body %}
-
-
-<div class="container">
-
-    <div class="form-group">
-    <h3>Zápasy BBK Blansko</h3>
-
+    <div class="grid-container d-flex justify-content-center">
+    <div class="cell large-10">
+        <h3>Zápasy</h3>
         <a href="{{ path('show-matches-u11') }}" class="btn btn-primary btn-sm">U11</a>
         <a href="{{ path('show-matches-u13') }}" class="btn btn-primary btn-sm">U13</a>
         <a href="{{ path('show-matches-u15') }}" class="btn btn-primary btn-sm">U15</a>
         <a href="{{ path('show-matches-u19') }}" class="btn btn-primary btn-sm">U19</a>
 
-    <table class="table"  id="table_matches" style="margin-top: 3em">
-        <thead>
-        <tr class="row">
-            <th class="col-sm">Kategorie</th>
-            <th class="col-sm ">Domácí tým</th>
-            <th class="col-sm ">Hostující tým</th>
-            <th class="col-sm ">Čas</th>
-            <th class="col-sm ">Adresa</th>
-            <th class="col-sm "></th>
-{#            <th class="col-sm"></th>#}
-        </tr>
-        </thead>
-        <tbody id="table_matches">
-        {% for match in matches %}
+        <table class="table"  id="table_all_matches">
+            <thead>
             <tr class="row">
-                {% if match.categoryId == 1 %}
-                    <td class="col-sm ">U11</td>
-                {% elseif match.categoryId == 2 %}
-                    <td class="col-sm ">U13</td>
-                {% elseif match.categoryId == 3 %}
-                    <td class="col-sm ">U15</td>
-                {% elseif match.categoryId == 4 %}
-                    <td class="col-sm ">U19</td>
-                {% endif %}
-                <td class="col-sm ">{{ match.homeTeam }}</td>
-                <td class="col-sm ">{{ match.awayTeam }}</td>
-                <td class="col-sm ">{{ match.matchTime| date('H:i')}}</td>
-                <td class="col-sm ">{{ match.address }}, {{ match.city }}</td>
-                <th class="col-sm text-right">
-                    <a href="#">Nominace</a>
-                </th>
-{#                <td class="columns small-3 text-center">#}
-{#                    <a href="{{ path('module-scenario-edit', {'scenarioId': scenario.id, 'action': 'edit'}) }}">{{ siteMacros.awesomeIcon('edit') }}&nbsp;Editovat#}
-{#                    </a>&nbsp;<a href="#" onclick="deleteScenario('{{ path('module-scenario-delete', {'scenarioId': scenario.id}) }}')">{{ siteMacros.awesomeIcon('trash') }}&nbsp;Smazat</a>#}
-{#                    <br>#}
-{#                    <a href="{{ path('module-scenario-edit-state', {'scenarioId': scenario.id, 'state': 0}) }}">{{ siteMacros.awesomeIcon('ban') }}&nbsp;Nastavit jako neaktivní</a>#}
-{#                </td>#}
+                <th class="columns large-5 text-center">Kategorie</th>
+                <th class="columns large-2">Domácí tým</th>
+                <th class="columns large-5">Hostující tým</th>
+                <th class="columns large-5">Čas</th>
+                <th class="columns large-5">Adresa</th>
+                <th class="columns large-5 text-center"></th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="table_all_matches">
+            {% for match in matches %}
+                <tr class="row">
+                    {% if match.categoryId == 1 %}
+                        <td class="columns large-5 text-center ">U11</td>
+                    {% elseif match.categoryId == 2 %}
+                        <td class="columns large-5 text-center ">U13</td>
+                    {% elseif match.categoryId == 3 %}
+                        <td class="columns large-5 text-center ">U15</td>
+                    {% elseif match.categoryId == 4 %}
+                        <td class="columns large-5 text-center ">U19</td>
+                    {% endif %}
+                    <td class="columns large-2">{{ match.homeTeam }}</td>
+                    <td class="columns large-5">{{ match.awayTeam }}</td>
+                    <td class="columns large-5">{{ match.matchTime| date('H:i')}}</td>
+                    <td class="columns large-5">{{ match.address }}, {{ match.city }}</td>
+                    <th class="columns large-5 text-center"><a href="#">Nominace</a></th>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
-</div>
+    </div>
 {% endblock %}
