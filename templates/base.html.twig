@@ -21,15 +21,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-rtl.min.css" integrity="sha256-F+9Ns8Z/1ZISonBbojH743hsmF3x3AlQdJEeD8DhQsE=" crossorigin="anonymous">
 </head>
 <body>
+
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('homepage') }}">Informační systém BBK Blansko</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="{{ path('logout') }}">Odhlásit se</a>
+            <a class="nav-link" style="font-weight: bold; color: white">Jsi přihlášený jako {{ app.user.getUsername() }}</a>
+        </li>
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" style="text-align: center" href="{{ path('logout') }}">Odhlásit se</a>
         </li>
     </ul>
 </nav>
-
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
@@ -48,17 +51,25 @@
                         </a>
                     </li>
                     <li class="nav-item text-center">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ path('show-team', {'userId': app.user.getId()}) }}">
                             <span data-feather="shopping-cart"></span>
                             Tým
                         </a>
                     </li>
                     <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-statistics', {'usersId': 1}) }}">
+                        <a class="nav-link" href="{{ path('show-statistics', {'userId': app.user.getId()}) }}">
                             <span data-feather="users"></span>
                             Statistiky
                         </a>
                     </li>
+                        {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item text-center">
+                                <a class="nav-link" href="{{ path('show-cars') }}">
+                                    <span data-feather="users"></span>
+                                    Auta
+                                </a>
+                            </li>
+                        {% endif %}
                     <li class="nav-item text-center">
                         <a class="nav-link" href="{{ path('user-detail') }}">
                             <span data-feather="bar-chart-2"></span>
@@ -69,12 +80,16 @@
             </div>
         </nav>
 
-        <div class="app-dashboard-body-content off-canvas-content justify-content-center" data-off-canvas-content>
-            <div class="container d-flex justify-content-center">
+        <div class="width-75">
+            <div class="container">
                 {% block body %}{% endblock %}
             </div>
         </div>
     </div>
 </div>
+
+
+{% block scripts %}
+{% endblock %}
 </body>
 </html>

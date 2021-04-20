@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container-fluid " style="width: auto">
+
+        {#        <div class="form-group">#}
+        <h3>Tým</h3>
+        <a href="#" class="btn btn-primary btn-sm">Přidat hráče</a>
+
+        <table class="table margin-top-1" id="table_team" style="overflow: auto; ">
+            <thead>
+            <tr class="row">
+                <th class="column small-2 text-center">Kategorie</th>
+                <th class="column small-2 text-center">Jméno</th>
+                <th class="column small-2 text-center ">Příjmení</th>
+                <td class="column small-2 text-center">Datum narození</td>
+                <th class="column small-2 text-right"></th>
+            </tr>
+            </thead>
+            <tbody id="table_matches">
+            {% for user in members %}
+                <tr class="row">
+                    {% if user.categoryId == 1 %}
+                        <td class="columns small-2 text-center">U11</td>
+                    {% elseif user.categoryId == 2 %}
+                        <td class="columns small-2 text-center">U13</td>
+                    {% elseif user.categoryId == 3 %}
+                        <td class="columns small-2 text-center">U15</td>
+                    {% elseif user.categoryId == 4 %}
+                        <td class="columns small-2 text-center">U19</td>
+                    {% endif %}
+                    <td class="column small-2 text-center">{{ user.firstName }}</td>
+                    <td class="column small-2 text-center">{{ user.lastName }}</td>
+                    <td class="column small-2 text-center">{{ user.dateOfBirth|date("d-m-Y") }}</td>
+                    <th class="columns small-2 text-right" style="margin-left: 30px"><a href="{{ path('delete-user', {'userId' : user.id, 'usersId' : app.user.getId()}) }}">Odstranit</a></th>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

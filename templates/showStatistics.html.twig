@@ -2,33 +2,33 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="container-fluid">
 
-        <div class="form-group">
+{#        <div class="form-group">#}
             <h3>Tvoje statistiky</h3>
 
             <table class="table"  id="table_statistics" style="margin-top: 3em">
                 <thead>
-                <tr class="row justify-content-md-center">
-                    <th class="col-sm ">Úspěšné TH</th>
-                    <th class="col-sm ">Neúspěšné TH</th>
-                    <th class="col-sm text-center">Dva body</th>
-                    <th class="col-sm text-center">Tři body</th>
-                    <th class="col-sm text-center">Fauly</th>
-                    <th class="col-sm text-right">Body celkem</th>
-                    <th class="col-sm"></th>
+                <tr class="row ">
+                    <th class="column small-2 text-center">Úspěšné TH</th>
+                    <th class="column small-2 text-center ">Neúspěšné TH</th>
+                    <th class="column small-2 text-center">Dva body</th>
+                    <th class="column small-2 text-center">Tři body</th>
+                    <th class="column small-1 text-center">Fauly</th>
+                    <th class="column small-2 text-right">Body celkem</th>
+{#                    <th class="col-sm"></th>#}
                 </tr>
                 </thead>
                 <tbody id="table_matches">
                 {% for stats in statistics %}
                     <tr class="row">
-                        <td class="col-sm text-center">{{ stats.successfulFt }}</td>
-                        <td class="col-sm text-center">{{ stats.unsuccessfulFt }}</td>
-                        <td class="col-sm text-center">{{ stats.twoPoints}}</td>
-                        <td class="col-sm text-center">{{ stats.threePoints }}</td>
-                        <td class="col-sm text-center">{{ stats.fouls }}</td>
-                        <td class="col-sm text-center">{{ stats.points }}</td>
-                        <th class="col-sm text-right">
+                        <td class="column small-2 text-center">{{ stats.successfulFt }}</td>
+                        <td class="column small-2 text-center">{{ stats.unsuccessfulFt }}</td>
+                        <td class="column small-2 text-center">{{ stats.twoPoints}}</td>
+                        <td class="column small-2 text-center">{{ stats.threePoints }}</td>
+                        <td class="column small-1 text-center">{{ stats.fouls }}</td>
+                        <td class="column small-2 text-center">{{ stats.points }}</td>
+{#                        <th class="col-sm text-right">#}
 {#                            <a href="#">Nominace</a>#}
 {#                        </th>#}
                         {#                <td class="columns small-3 text-center">#}

@@ -65,6 +65,7 @@ class DefaultController extends AbstractController{
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+
             $randomBytes = random_bytes(32);
             $user->setSalt(bin2hex($randomBytes));
 
@@ -73,6 +74,7 @@ class DefaultController extends AbstractController{
             $user->setPassword($password);
             //      $user->setUsername($user->getEmail());
             //$user->setUsername($user->getEmail());
+            $user->setDateOfBirth($form['dateOfBirth']->getData());
             $user->setAuthRole('ROLE_PLAYER');
             $user->setUsers($user);
 
@@ -97,7 +99,7 @@ class DefaultController extends AbstractController{
 //
 //            $this->get('session')->set('player_id', $user->getId());
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('login');
         }
 
         return $this->render(
@@ -191,6 +193,28 @@ class DefaultController extends AbstractController{
             'form' => $form->createView()
         ]);
 
+    }
+
+    /**
+     * @Route ("/user/delete/{usersId}/{userId}", name="delete-user")
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param $userId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction(Request $request, EntityManagerInterface $em, $userId, $usersId){
+
+            $em = $this->getDoctrine()->getManager();
+
+            $user = $em->getRepository('App:Users')->find($userId);
+
+            $currentUser = $usersId;
+            $em->remove($user);
+            $em->flush();
+
+            return $this->redirectToRoute('show-team', [
+                'userId' => $currentUser
+            ]);
     }
 
 

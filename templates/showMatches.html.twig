@@ -13,34 +13,34 @@
         <a href="{{ path('show-matches-u15') }}" class="btn btn-primary btn-sm">U15</a>
         <a href="{{ path('show-matches-u19') }}" class="btn btn-primary btn-sm">U19</a>
 
-        <table class="table"  id="table_all_matches">
+        <table class="table margin-top-1"  id="table_all_matches">
             <thead>
             <tr class="row">
-                <th class="columns large-5 text-center">Kategorie</th>
-                <th class="columns large-2">Domácí tým</th>
-                <th class="columns large-5">Hostující tým</th>
-                <th class="columns large-5">Čas</th>
-                <th class="columns large-5">Adresa</th>
-                <th class="columns large-5 text-center"></th>
+                <th class="columns small-2 text-center">Kategorie</th>
+                <th class="columns small-2 text-center">Domácí tým</th>
+                <th class="columns small-2 text-center">Hostující tým</th>
+                <th class="columns small-2 text-center">Čas</th>
+                <th class="columns small-2 text-center">Adresa</th>
+                <th class="columns small-2 text-center"></th>
             </tr>
             </thead>
             <tbody id="table_all_matches">
             {% for match in matches %}
                 <tr class="row">
                     {% if match.categoryId == 1 %}
-                        <td class="columns large-5 text-center ">U11</td>
+                        <td class="columns small-2 text-center">U11</td>
                     {% elseif match.categoryId == 2 %}
-                        <td class="columns large-5 text-center ">U13</td>
+                        <td class="columns small-2 text-center">U13</td>
                     {% elseif match.categoryId == 3 %}
-                        <td class="columns large-5 text-center ">U15</td>
+                        <td class="columns small-2 text-center">U15</td>
                     {% elseif match.categoryId == 4 %}
-                        <td class="columns large-5 text-center ">U19</td>
+                        <td class="columns small-2 text-center">U19</td>
                     {% endif %}
-                    <td class="columns large-2">{{ match.homeTeam }}</td>
-                    <td class="columns large-5">{{ match.awayTeam }}</td>
-                    <td class="columns large-5">{{ match.matchTime| date('H:i')}}</td>
-                    <td class="columns large-5">{{ match.address }}, {{ match.city }}</td>
-                    <th class="columns large-5 text-center"><a href="#">Nominace</a></th>
+                    <td class="columns small-2 text-center">{{ match.homeTeam }}</td>
+                    <td class="columns small-2 text-center">{{ match.awayTeam }}</td>
+                    <td class="columns small-2 text-center">{{ match.matchTime| date('H:i')}}</td>
+                    <td class="columns small-2 text-center">{{ match.address }}, {{ match.city }}</td>
+                    <th class="columns small-2 text-center"><a href="#">Nominace</a></th>
 
                 </tr>
             {% endfor %}

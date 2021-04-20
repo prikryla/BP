@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="grid-container d-flex justify-content-center">
+        <div class="cell large-10">
+            <h3>Auta</h3>
+
+            <a href="{{ path('create-cars')}}" class="btn btn-primary btn-sm">Přidat auto</a>
+
+            <table class="table margin-top-1"  id="table_all_cars">
+                <thead>
+                <tr class="row">
+                    <th class="columns small-3 text-center">Vůz</th>
+                    <th class="columns small-3 text-center">SPZ</th>
+                    <th class="columns small-2 text-center">Počet míst</th>
+                    <th class="columns small-2 text-center">řidič</th>
+                    <th class="columns small-2 text-center"></th>
+                </tr>
+                </thead>
+                <tbody id="table_all_cars">
+                {% for car in cars %}
+                    <tr class="row">
+                        <td class="columns small-3 text-center">{{ car.carName }}</td>
+                        <td class="columns small-3 text-center">{{ car.spz }}</td>
+                        <td class="columns small-2 text-center">{{ car.numberOfSeats}}</td>
+                        <td class="columns small-2 text-center">{{ car.driverFirstName }} {{ car.driverLastName }}</td>
+                        <th class="columns small-2 text-center"><a href="{{ path('edit-cars', {'carsId': car.id}) }}">Editovat</a></th>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

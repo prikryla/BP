@@ -13,6 +13,9 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class UserRegisterType extends AbstractType
 {
@@ -38,9 +41,10 @@ class UserRegisterType extends AbstractType
             ->add('postalCode', TextType::class, array('label' => "PSČ"))
             ->add('school', TextType::class, array('label' => "Škola"))
             ->add('dateOfBirth', DateType::class, array(
-                'mapped' => false,
                 'label' => "Datum narození",
-                'format' => 'dd-MM-yyy'))
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd'
+                ))
             ->add('phoneNumberPlayer', TextType::class, array('label' => "Telefon na hráče"))
             ->add('phoneNumberMother', TextType::class, array('label' => "Telefon na matku"))
             ->add('phoneNumberFather', TextType::class, array('label' => "Telefon na otce"))

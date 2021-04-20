@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class PlayerStatisticsController extends AbstractController{
 
     /**
-     * @Route("/statistics/{usersId}", name="show-statistics")
+     * @Route("/statistics/{userId}", name="show-statistics")
      * @param Request $request
      * @param integer $usersId
      * @return Response
