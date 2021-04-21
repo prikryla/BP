@@ -27,6 +27,7 @@ class Category{
          */
         private $name;
 
+
         /**
          * @return int
          */
@@ -59,6 +60,9 @@ class Category{
             $this->name = $name;
         }
 
+        public function __toString(){
+            return $this->getName();
+        }
 
 
 

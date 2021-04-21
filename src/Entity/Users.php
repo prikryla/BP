@@ -173,7 +173,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
         private $users;
 
         /**
-         * @var Category
+         * @var \App\Entity\Category
          * @ORM\ManyToOne(targetEntity="App\Entity\Category")
          * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
          */
@@ -412,15 +412,15 @@ use Symfony\Component\Validator\Constraints\DateTime;
         /**
          * @return Category
          */
-        public function getCategory(): Category
+        public function getCategory(): ?Category
         {
             return $this->category;
         }
 
         /**
-         * @param Category $category
+         * @param \App\Entity\Category|null $category
          */
-        public function setCategory(Category $category): void
+        public function setCategory(Category $category = null): void
         {
             $this->category = $category;
         }
@@ -433,15 +433,13 @@ use Symfony\Component\Validator\Constraints\DateTime;
             return $this->category_id;
         }
 
-        /**
-         * @param int $category_id
-         */
-        public function setCategoryId(int $category_id): void
-        {
-            $this->category_id = $category_id;
-        }
-
-
+//        /**
+//         * @param int $category_id
+//         */
+//        public function setCategoryId(int $category_id): void
+//        {
+//            $this->category_id = $category_id;
+//        }
 
         /**
          * @return int
@@ -570,8 +568,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
         {
             $this->plainPassword = $plainPassword;
         }
-
-
 
         public function getRoles()
         {

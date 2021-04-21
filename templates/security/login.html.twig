@@ -12,11 +12,13 @@
 
 {% block body %}
     <div class="container">
-            <div class="col-sm-12 my-auto">
-                <form class="w-25 mx-auto" action="{{ path('login') }}" method="post" style="margin-top: 15em">
+            <div class="col-md-12 my-auto">
+                <form class=" mx-auto" action="{{ path('login') }}" method="post" style="margin-top: 15em; width: 35%">
                     {% if app.user %}
-                        <div class="mb-3">
-                            You are logged in as {{ app.user.username }}, <a href="{{ path('logout') }}">Logout</a>
+                        <div class="mb-3 text-center" style="border: 1px solid black; padding: 12px">
+                            Už jsi přihlášený pod uživatelským jménem {{ app.user.username }}<br><a href="{{ path('logout') }}">Odhlásit </a>
+{#                            <button class="btn btn-secondary" href="{{ path('homepage') }}">Přejít na domovskou stránku</button>#}
+
                         </div>
                     {% endif %}
 

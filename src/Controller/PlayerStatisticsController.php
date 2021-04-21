@@ -14,10 +14,10 @@ class PlayerStatisticsController extends AbstractController{
     /**
      * @Route("/statistics/{userId}", name="show-statistics")
      * @param Request $request
-     * @param integer $usersId
+     * @param integer $userId
      * @return Response
      */
-    public function showAction(Request $request, int $usersId): Response
+    public function showAction(Request $request, int $userId): Response
     {
         $statistics = $this->getDoctrine()->getRepository('App:Player_statistics')->findAll();
         $allStatistics = [];
