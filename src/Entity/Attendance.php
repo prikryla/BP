@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * Class Attendance
@@ -24,6 +25,12 @@ class Attendance{
          * @ORM\Column(name="attendance_check", type="boolean", nullable=false, options={"comment"="Attendance_check"})
          */
         private $attendace_check;
+
+        /**
+         * @var Date
+         * @ORM\Column(name="date", type="date", nullable=false, options={"comment"="Date"})
+         */
+        private $date;
 
         /**
          * @var Users
@@ -70,37 +77,53 @@ class Attendance{
             $this->attendace_check = $attendace_check;
         }
 
-    /**
-     * @return Users
-     */
-    public function getUsers(): Users
-    {
-        return $this->users;
-    }
+        /**
+         * @return Date
+         */
+        public function getDate(): Date
+        {
+            return $this->date;
+        }
 
-    /**
-     * @param Users $users
-     */
-    public function setUsers(Users $users): void
-    {
-        $this->users = $users;
-    }
+        /**
+         * @param Date $date
+         */
+        public function setDate(Date $date): void
+        {
+            $this->date = $date;
+        }
 
-    /**
-     * @return int
-     */
-    public function getUsersId(): int
-    {
-        return $this->usersId;
-    }
+        /**
+         * @return Users
+         */
+        public function getUsers(): Users
+        {
+            return $this->users;
+        }
 
-    /**
-     * @param int $usersId
-     */
-    public function setUsersId(int $usersId): void
-    {
-        $this->usersId = $usersId;
-    }
+        /**
+         * @param Users $users
+         */
+        public function setUsers(Users $users): void
+        {
+            $this->users = $users;
+        }
+
+        /**
+         * @return int
+         */
+        public function getUsersId(): int
+        {
+            return $this->usersId;
+        }
+
+        /**
+         * @param int $usersId
+         */
+        public function setUsersId(int $usersId): void
+        {
+            $this->usersId = $usersId;
+        }
 
 
 
