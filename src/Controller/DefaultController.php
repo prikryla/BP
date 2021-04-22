@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -74,7 +75,7 @@ class DefaultController extends AbstractController{
             $user->setPassword($password);
             //      $user->setUsername($user->getEmail());
             //$user->setUsername($user->getEmail());
-            $user->setDateOfBirth($form['dateOfBirth']->getData());
+//            $user->setDateOfBirth($form['dateOfBirth']->getData());
             $user->setAuthRole('ROLE_PLAYER');
             $user->setUsers($user);
 
@@ -166,7 +167,7 @@ class DefaultController extends AbstractController{
      * @return Response
      * @throws Exception
      */
-    public function changePasswordAction(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, $userId){
+    public function changePasswordAction(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, $userId, TokenStorageInterface $tokenStorage){
         $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
 
         $form = $this->createForm(UserChangePasswordType::class, $user);
@@ -182,11 +183,13 @@ class DefaultController extends AbstractController{
                 $user->setPassword($password);
             }
             $user->setUsers($this->getUser());
+            $tokenStorage->setToken();
 
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('user-detail');
+
+            return $this->redirectToRoute('login');
         }
         return $this->render('userChangePassword.html.twig', [
             'user' => $user,

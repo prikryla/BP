@@ -1,15 +1,13 @@
 {% extends 'base.html.twig' %}
 
+{% block header %}
+
+{% endblock %}
+
 {% block body %}
-
-    <div class="container">
-        <div class="form-group">
-            <h3>Zápasy U13</h3>
-            <a href="{{ path('show-matches-u11') }}" class="btn btn-primary btn-sm">U11</a>
-            <a href="{{ path('show-matches-u13') }}" class="btn btn-primary btn-sm">U13</a>
-            <a href="{{ path('show-matches-u15') }}" class="btn btn-primary btn-sm">U15</a>
-            <a href="{{ path('show-matches-u19') }}" class="btn btn-primary btn-sm">U19</a>
-
+    <div class="grid-container d-flex justify-content-center">
+        <div class="cell large-10">
+            <h3>Výjezdy - venkovní zápasy</h3>
             <table class="table margin-top-1"  id="table_all_matches">
                 <thead>
                 <tr class="row">

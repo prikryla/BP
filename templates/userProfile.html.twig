@@ -56,6 +56,8 @@
                     </table>
 
                     <div class="text-center">
+                        <a href="{{ path('user-detail') }}" class="btn btn-warning">Zpět</a>
+                        &nbsp;
                         <a href="{{ path('user-edit',{userId: user.getId()}) }}" class="btn btn-primary">Upravit</a>
                         &nbsp;
                         <a href="{{ path('user-changePassword',{userId: user.getId()}) }}" class="btn btn-danger">Změnit heslo</a>

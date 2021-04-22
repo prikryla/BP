@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Users;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -40,14 +42,21 @@ class UserRegisterType extends AbstractType
             ->add('city', TextType::class, array('label' => "Město"))
             ->add('postalCode', TextType::class, array('label' => "PSČ"))
             ->add('school', TextType::class, array('label' => "Škola"))
-            ->add('dateOfBirth', DateType::class, array(
-                'label' => "Datum narození",
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd'
-                ))
+//            ->add('dateOfBirth', DateType::class, array(
+//                'label' => "Datum narození",
+//                'widget' => 'single_text',
+//                'format' => 'yyyy-MM-dd'
+//                ))
             ->add('phoneNumberPlayer', TextType::class, array('label' => "Telefon na hráče"))
             ->add('phoneNumberMother', TextType::class, array('label' => "Telefon na matku"))
             ->add('phoneNumberFather', TextType::class, array('label' => "Telefon na otce"))
+            ->add('category', NULL, array(
+                'class' => Category::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->orderBy('c.id', 'ASC');
+                },
+            ))
             ->add('save', SubmitType::class, array(
                 'label' => 'Registrovat se',
                 'attr' => array('class'=>'button expanded')

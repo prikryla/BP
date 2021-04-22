@@ -113,5 +113,27 @@ class MatchesController extends AbstractController{
         ]);
     }
 
+    /**
+     * @Route("/matches/away", name="show-away-matches")
+     * @param Request $request
+     * @return Response
+     */
+    public function showAwayMatchesAction(Request $request): Response
+    {
+        $matches = $this->getDoctrine()->getRepository('App:Matches')->findAll();
+
+        $awayMatches = [];
+
+        foreach ($matches as $match){
+            if ($match->getHomeTeam() != 'BBK Blansko')
+            array_push($awayMatches, $match);
+        }
+
+        return $this->render('showAwayMatches.html.twig',[
+            'matches' => $awayMatches,
+        ]);
+    }
+
+
 
 }
