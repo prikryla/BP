@@ -4,23 +4,27 @@
 namespace App\Controller;
 
 
+use App\Entity\Nomination;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class NominationController extends AbstractController{
+
     /**
-     * @Route("/matches/nomination/create/{matchId}", name="show-away-matches")
+     * @Route("/matches/nomination/{matchId}", name="create-nomination")
      * @param Request $request
      * @param $matchId
      * @param UserInterface $user
      * @return Response
      */
-    public function showAwayMatchesAction(Request $request, $matchId, UserInterface $user): Response
+    public function createAction(Request $request, $matchId, UserInterface $user): Response
     {
         $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id' => $matchId));
         $players = $this->getDoctrine()->getRepository('App:Users')->findAll();
+        $nomination = $this->getDoctrine()->getRepository('App:Nomination')->findAll();
         $get = $this->get('security.token_storage')->getToken()->getUser();
         $user = $get->getCategoryId();
 
@@ -31,8 +35,63 @@ class NominationController extends AbstractController{
                 array_push($team, $player);
         }
 
-        return $this->render('showAwayMatches.html.twig',[
-            'matches' => $team,
+        return $this->render('createNomination.html.twig',[
+            'team' => $team,
+            'match' => $match,
+            'nomination' => $nomination
+        ]);
+    }
+
+    /**
+     * @Route("/matches/nomination/{matchId}/{userId}", name="submit-nomination")
+     * @param Request $request
+     * @param $matchId
+     * @param $userId
+     * @return Response
+     */
+    public function submitNominationAction(Request $request, $matchId, $userId): Response{
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
+        $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id' => $matchId));
+
+        $nomination = new Nomination();
+
+        $nomination->setMatchesId($matchId);
+        $nomination->setUsersId($userId);
+        $nomination->setMatches($match);
+        $nomination->setUsers($user);
+
+        $em->persist($nomination);
+        $em->flush();
+
+        return $this->redirectToRoute('create-nomination', array(
+            'matchId' => $matchId
+        ));
+    }
+
+    /**
+     * @Route("/matches/nomination/{matchId}/{userId}/delete", name="delete-nomination")
+     * @param Request $request
+     * @param $matchId
+     * @param $userId
+     * @return Response
+     */
+    public function deleteNominationAction(Request $request, $matchId, $userId): Response{
+
+        $em = $this->getDoctrine()->getManager();
+
+        $nomination = $em->getRepository('App:Nomination')->findOneBy(array(
+            'matches_id' => $matchId,
+            'users_id' => $userId
+        ));
+
+        $em->remove($nomination);
+        $em->flush();
+
+        return $this->redirectToRoute('create-nomination', [
+            'matchId' => $matchId
         ]);
     }
 }

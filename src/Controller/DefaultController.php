@@ -164,8 +164,9 @@ class DefaultController extends AbstractController{
      * @param EntityManagerInterface $em
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @param $userId
+     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
      * @return Response
-     * @throws Exception
+     * @throws \Exception
      */
     public function changePasswordAction(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, $userId, TokenStorageInterface $tokenStorage){
         $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));

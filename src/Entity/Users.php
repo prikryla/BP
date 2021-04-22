@@ -129,19 +129,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
         private $phoneNumberFather;
 
         /**
-         * @var Nomination
-         * @ORM\ManyToOne(targetEntity="App\Entity\Nomination")
-         * @ORM\JoinColumn(name="nomination_id", referencedColumnName="id")
-         */
-        private $nomination;
-
-        /**
-         * @var integer
-         * @ORM\Column(name="nomination_id", type="integer", nullable=true, options={"comment"="Nomination id"})
-         */
-        protected $nominationId;
-
-        /**
          * @Assert\Length(min=7,
          *     minMessage="Heslo musí obsahovat minimálně 7 znaků.")
          * @Assert\Length(max=4096,
@@ -375,38 +362,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
         public function setDateOfBirth(Date $dateOfBirth)
         {
             $this->dateOfBirth = $dateOfBirth;
-        }
-
-        /**
-         * @return Nomination
-         */
-        public function getNomination(): Nomination
-        {
-            return $this->nomination;
-        }
-
-        /**
-         * @param Nomination $nomination
-         */
-        public function setNomination(Nomination $nomination): void
-        {
-            $this->nomination = $nomination;
-        }
-
-        /**
-         * @return int
-         */
-        public function getNominationId(): int
-        {
-            return $this->nominationId;
-        }
-
-        /**
-         * @param int $nominationId
-         */
-        public function setNominationId(int $nominationId): void
-        {
-            $this->nominationId = $nominationId;
         }
 
         /**

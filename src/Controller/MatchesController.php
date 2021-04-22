@@ -17,7 +17,7 @@ class MatchesController extends AbstractController{
     public function showAction(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findAll();
-
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         $allMatches = [];
 
         foreach ($matches as $match){
@@ -26,6 +26,7 @@ class MatchesController extends AbstractController{
 
         return $this->render('showMatches.html.twig',[
             'matches' => $allMatches,
+            'user' => $user
         ]);
     }
 

@@ -14,6 +14,9 @@
         <a href="{{ path('show-matches-u19') }}" class="btn btn-primary btn-sm">U19</a>
         <br>
         <a href="{{ path('show-away-matches') }}" class="btn btn-secondary btn-sm" style="margin-top: 7px">Výjezdy</a>
+        {% if is_granted('ROLE_ADMIN') %}
+        <a href="#" class="btn btn-success btn-sm" style="margin-top: 7px">Přidat zápasy</a>
+        {% endif %}
 
         <table class="table margin-top-1"  id="table_all_matches">
             <thead>
@@ -42,8 +45,14 @@
                     <td class="columns small-2 text-center">{{ match.awayTeam }}</td>
                     <td class="columns small-2 text-center">{{ match.matchTime| date('H:i')}}</td>
                     <td class="columns small-2 text-center">{{ match.address }}, {{ match.city }}</td>
-                    <td class="columns small-2 text-center" ><a href="#" style="font-weight: bold">Nominace</a></td>
-
+                    <td class="columns small-2 text-center" >
+                        {% if match.getCategoryId == user.getCategoryId() %}
+                            <a href="{{ path('create-nomination', {'matchId': match.id}) }}" style="font-weight: bold">Nominace</a>
+                        {% else %}{% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('create-nomination', {'matchId': match.id}) }}" style="font-weight: bold">Nominace</a>
+                    {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

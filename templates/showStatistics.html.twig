@@ -4,7 +4,6 @@
 
     <div class="container-fluid">
 
-{#        <div class="form-group">#}
             <h3>Tvoje statistiky</h3>
 
             <table class="table"  id="table_statistics" style="margin-top: 3em">
@@ -16,7 +15,6 @@
                     <th class="column small-2 text-center">Tři body</th>
                     <th class="column small-1 text-center">Fauly</th>
                     <th class="column small-2 text-right">Body celkem</th>
-{#                    <th class="col-sm"></th>#}
                 </tr>
                 </thead>
                 <tbody id="table_matches">
@@ -28,15 +26,6 @@
                         <td class="column small-2 text-center">{{ stats.threePoints }}</td>
                         <td class="column small-1 text-center">{{ stats.fouls }}</td>
                         <td class="column small-2 text-center">{{ stats.points }}</td>
-{#                        <th class="col-sm text-right">#}
-{#                            <a href="#">Nominace</a>#}
-{#                        </th>#}
-                        {#                <td class="columns small-3 text-center">#}
-                        {#                    <a href="{{ path('module-scenario-edit', {'scenarioId': scenario.id, 'action': 'edit'}) }}">{{ siteMacros.awesomeIcon('edit') }}&nbsp;Editovat#}
-                        {#                    </a>&nbsp;<a href="#" onclick="deleteScenario('{{ path('module-scenario-delete', {'scenarioId': scenario.id}) }}')">{{ siteMacros.awesomeIcon('trash') }}&nbsp;Smazat</a>#}
-                        {#                    <br>#}
-                        {#                    <a href="{{ path('module-scenario-edit-state', {'scenarioId': scenario.id, 'state': 0}) }}">{{ siteMacros.awesomeIcon('ban') }}&nbsp;Nastavit jako neaktivní</a>#}
-                        {#                </td>#}
                     </tr>
                 {% endfor %}
                 </tbody>
