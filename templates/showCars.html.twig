@@ -28,7 +28,7 @@
                         <td class="columns small-3 text-center">{{ car.spz }}</td>
                         <td class="columns small-2 text-center">{{ car.numberOfSeats}}</td>
                         <td class="columns small-2 text-center">{{ car.driverFirstName }} {{ car.driverLastName }}</td>
-                        <th class="columns small-2 text-center"><a href="{{ path('edit-cars', {'carsId': car.id}) }}">Editovat</a></th>
+                        <td class="columns small-2 text-center"><a href="{{ path('edit-cars', {'carsId': car.id}) }}" style="font-weight: bold">Editovat</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

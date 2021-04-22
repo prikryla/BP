@@ -39,9 +39,9 @@
                         <td class="col-sm ">{{ match.awayTeam }}</td>
                         <td class="col-sm ">{{ match.matchTime| date('H:i')}}</td>
                         <td class="col-sm ">{{ match.address }}, {{ match.city }}</td>
-                        <th class="col-sm text-right">
-                            <a href="#">Nominace</a>
-                        </th>
+                        <td class="col-sm text-right">
+                            <a href="#" style="font-weight: bold">Nominace</a>
+                        </td>
                         {#                <td class="columns small-3 text-center">#}
                         {#                    <a href="{{ path('module-scenario-edit', {'scenarioId': scenario.id, 'action': 'edit'}) }}">{{ siteMacros.awesomeIcon('edit') }}&nbsp;Editovat#}
                         {#                    </a>&nbsp;<a href="#" onclick="deleteScenario('{{ path('module-scenario-delete', {'scenarioId': scenario.id}) }}')">{{ siteMacros.awesomeIcon('trash') }}&nbsp;Smazat</a>#}

@@ -6,7 +6,7 @@
     <div class="content">
 
         <div class="grid-container margin-left-3">
-            <h2 class="mt-1">Profil uživatele {{ user.getUsername() }}</h2>
+            <h2 class="mt-1">Profil hráče {{ user.getUsername() }}</h2>
 
             <div class="grid-x grid-padding-x">
 
@@ -14,8 +14,8 @@
                 <div class="cell">
                     <table>
                         <thead>
-                        <th class="text-left">Uživatelské jméno:</th>
-                        <th class="text-right">{{ user.getUsername() }}</th>
+                            <th class="text-left">Uživatelské jméno:</th>
+                            <th class="text-right">{{ user.getUsername() }}></th>
                         </thead>
                         <tablebody>
                             <tr>
@@ -52,13 +52,16 @@
                                 <td class="text-left">Číslo dresu:</td>
                                 <td class="text-right">{% if user.getDressNumber() %}{{ user.getDressNumber() }}<br>
                                     {% else %}-{% endif %}</td>
+                            </tr>
                         </tablebody>
                     </table>
 
                     <div class="text-center">
-                        <a href="{{ path('user-edit',{userId: user.getId()}) }}" class="btn btn-primary">Upravit</a>
-                        &nbsp;
-                        <a href="{{ path('user-changePassword',{userId: user.getId()}) }}" class="btn btn-danger">Změnit heslo</a>
+                        <a href="{{ path('show-team', {'userId': user.getId()}) }}" class="btn btn-warning">Zpět</a>
+                        &nbsp
+                        <a href="{{ path('user-edit',{'userId': user.getId()}) }}" class="btn btn-primary">Upravit</a>
+                        &nbsp
+                        <a href="{{ path('fine-user-team',{'userId': user.getId()}) }}" class="btn btn-danger">Pokutovat</a>
                     </div>
                     <div class="cell large-3 medium-2"></div>
                 </div>

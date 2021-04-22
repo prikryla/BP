@@ -112,7 +112,7 @@ class DefaultController extends AbstractController{
      * @Route("/profil", name="user-detail")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @return RedirectResponse|Response
+     * @return Response
      */
     public function detailAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -131,7 +131,7 @@ class DefaultController extends AbstractController{
      * @Route("/profil/edit/{userId}", name="user-edit")
      * @param Request $request
      * @param EntityManagerInterface $em
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param $userId
      * @return Response
      */
     public function detailEditAction(Request $request, EntityManagerInterface $em, $userId)
@@ -200,6 +200,7 @@ class DefaultController extends AbstractController{
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \Doctrine\ORM\EntityManagerInterface $em
      * @param $userId
+     * @param $usersId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, EntityManagerInterface $em, $userId, $usersId){
