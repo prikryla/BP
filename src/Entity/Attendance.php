@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Class Attendance
@@ -24,11 +25,11 @@ class Attendance{
          * @var boolean
          * @ORM\Column(name="attendance_check", type="boolean", nullable=false, options={"comment"="Attendance_check"})
          */
-        private $attendace_check;
+        private $attendance_check;
 
         /**
-         * @var Date
-         * @ORM\Column(name="date", type="date", nullable=false, options={"comment"="Date"})
+         * @var string
+         * @ORM\Column(name="date", type="string", nullable=false, options={"comment"="Date"})
          */
         private $date;
 
@@ -64,31 +65,28 @@ class Attendance{
         /**
          * @return bool
          */
-        public function isAttendaceCheck(): bool
+        public function isAttendanceCheck(): bool
         {
-            return $this->attendace_check;
+            return $this->attendance_check;
         }
 
         /**
-         * @param bool $attendace_check
+         * @param bool $attendance_check
          */
-        public function setAttendaceCheck(bool $attendace_check): void
+        public function setAttendanceCheck(bool $attendance_check): void
         {
-            $this->attendace_check = $attendace_check;
+            $this->attendance_check = $attendance_check;
         }
 
-        /**
-         * @return Date
-         */
-        public function getDate(): Date
+        public function getDate()
         {
             return $this->date;
         }
 
         /**
-         * @param Date $date
+         * @param string $date
          */
-        public function setDate(Date $date): void
+        public function setDate(string $date): void
         {
             $this->date = $date;
         }

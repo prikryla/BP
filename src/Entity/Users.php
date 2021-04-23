@@ -87,8 +87,8 @@ use Symfony\Component\Validator\Constraints\DateTime;
         private $school;
 
         /**
-         * @var Date
-         * @ORM\Column(name="date_of_birth", type="date", nullable=true, options={"comment"="Date of birth"})
+         * @var string
+         * @ORM\Column(name="date_of_birth", type="string", nullable=true, options={"comment"="Date of birth"})
          */
         private $dateOfBirth;
 
@@ -354,11 +354,11 @@ use Symfony\Component\Validator\Constraints\DateTime;
         }
 
         /**
-         * @param Date $dateOfBirth
+         * @param string $dateOfBirth
          */
-        public function setDateOfBirth(Date $dateOfBirth)
+        public function setDateOfBirth(string $dateOfBirth)
         {
-            $this->dateOfBirth = $dateOfBirth;
+            $this->dateOfBirth = $dateOfBirth ;
         }
 
         /**

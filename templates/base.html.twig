@@ -44,12 +44,22 @@
                             Zápasy <span class="matches"></span>
                         </a>
                     </li>
+                    {% if is_granted('ROLE_ADMIN') %}
                     <li class="nav-item text-center">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ path('show-attendance') }}">
                             <span data-feather="attendance"></span>
                             Docházka
                         </a>
                     </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_PLAYER') %}
+                        <li class="nav-item text-center">
+                            <a class="nav-link" href="{{ path('show-attendance-user', {'userId': app.user.getId()}) }}">
+                                <span data-feather="attendance"></span>
+                                Docházka
+                            </a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item text-center">
                         <a class="nav-link" href="{{ path('show-team', {'userId': app.user.getId()}) }}">
                             <span data-feather="team"></span>

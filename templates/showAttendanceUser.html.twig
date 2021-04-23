@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <h2>Docházka hráče</h2>
+        <table class="table margin-top-1" id="table_team">
+            <thead>
+            <tr class="row">
+                <th class="column small-2 text-center">Datum</th>
+                <th class="column small-2 text-center">Docházka</th>
+            </tr>
+            </thead>
+            <tbody id="table_matches">
+            {% for atd in attendance %}
+                <tr class="row" style="margin-top: 2px">
+                    <td class="column small-2 text-center">{{ atd.date }}</td>
+                    {% if atd.attendanceCheck == 1 %}
+                    <td class="column small-2 text-center">Přítomen</td>
+                    {% endif %}
+                    {% if atd.attendanceCheck == 0 %}
+                        <td class="column small-2 text-center">Nepřítomen</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

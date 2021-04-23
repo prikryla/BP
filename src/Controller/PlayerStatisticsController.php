@@ -57,7 +57,8 @@ class PlayerStatisticsController extends AbstractController {
 
         if ($form->isSubmitted() && $form->isValid()){
 
-            $user = $this->getUser();
+            $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
+//            $statistic->setUsersId($userId);
             $statistic->setUsers($user);
 
             $em = $this->getDoctrine()->getManager();
