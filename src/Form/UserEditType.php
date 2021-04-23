@@ -6,6 +6,7 @@ namespace App\Form;
 
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -30,6 +31,11 @@ class UserEditType extends AbstractType
             ->add('city', TextType::class, array('label' => "Město"))
             ->add('postalCode', TextType::class, array('label' => "PSČ"))
             ->add('school', TextType::class, array('label' => "Škola"))
+            ->add('dateOfBirth', DateType::class, array(
+                'label' => "Datum narození",
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd'
+            ))
             ->add('phoneNumberPlayer', TextType::class, array('label' => "Telefon na hráče", 'required' => false))
             ->add('phoneNumberMother', TextType::class, array('label' => "Telefon na matku", 'required' => false))
             ->add('phoneNumberFather', TextType::class, array('label' => "Telefon na otce", 'required' => false))

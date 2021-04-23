@@ -348,9 +348,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
             $this->school = $school;
         }
 
-        /**
-         * @return Date
-         */
         public function getDateOfBirth()
         {
             return $this->dateOfBirth;

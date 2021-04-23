@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="grid-container d-flex justify-content-center">
-    <div class="cell large-10">
+    <div class="cell large-12">
         <h3>Zápasy</h3>
         <a href="{{ path('show-matches-u11') }}" class="btn btn-primary btn-sm">U11</a>
         <a href="{{ path('show-matches-u13') }}" class="btn btn-primary btn-sm">U13</a>
@@ -14,8 +14,9 @@
         <a href="{{ path('show-matches-u19') }}" class="btn btn-primary btn-sm">U19</a>
         <br>
         <a href="{{ path('show-away-matches') }}" class="btn btn-secondary btn-sm" style="margin-top: 7px">Výjezdy</a>
+
         {% if is_granted('ROLE_ADMIN') %}
-        <a href="#" class="btn btn-success btn-sm" style="margin-top: 7px">Přidat zápasy</a>
+            <a href="{{ path('add-match') }}" class="btn btn-success btn-sm" style="margin-top: 7px">Přidat zápasy</a>
         {% endif %}
 
         <table class="table margin-top-1"  id="table_all_matches">
@@ -48,9 +49,12 @@
                     <td class="columns small-2 text-center" >
                         {% if match.getCategoryId == user.getCategoryId() %}
                             <a href="{{ path('create-nomination', {'matchId': match.id}) }}" style="font-weight: bold">Nominace</a>
-                        {% else %}{% endif %}
+                            <a href="{{ path('show-detail-match', {'matchId': match.id}) }}" style="font-weight: bold; color: green">Detail</a>
+                        {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('create-nomination', {'matchId': match.id}) }}" style="font-weight: bold">Nominace</a>
+                        <a href="{{ path('create-nomination', {'matchId': match.id}) }}" style="font-weight: bold; color: green">Nominace</a>
+                        <a href="{{ path('edit-match', {'matchId': match.id}) }}" style="font-weight: bold">Editovat</a>
+                        <a href="{{ path('delete-match', {'matchId': match.id}) }}" style="font-weight: bold; color: red">Smazat</a>
                     {% endif %}
                     </td>
                 </tr>

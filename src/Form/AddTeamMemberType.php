@@ -41,11 +41,11 @@ class AddTeamMemberType extends AbstractType {
             ->add('city', TextType::class, array('label' => "Město"))
             ->add('postalCode', TextType::class, array('label' => "PSČ"))
             ->add('school', TextType::class, array('label' => "Škola"))
-//            ->add('dateOfBirth', DateType::class, array(
-//                'label' => "Datum narození",
-//                'widget' => 'single_text',
-//                'format' => 'yyyy-MM-dd'
-//            ))
+            ->add('dateOfBirth', DateType::class, array(
+                'label' => "Datum narození",
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd'
+            ))
             ->add('phoneNumberPlayer', TextType::class, array('label' => "Telefon na hráče"))
             ->add('phoneNumberMother', TextType::class, array('label' => "Telefon na matku"))
             ->add('phoneNumberFather', TextType::class, array('label' => "Telefon na otce"))

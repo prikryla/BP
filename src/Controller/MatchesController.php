@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Matches;
+use App\Form\AddMatchFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -134,6 +136,99 @@ class MatchesController extends AbstractController{
             'matches' => $awayMatches,
         ]);
     }
+
+    /**
+     * @Route("/matches/add", name="add-match")
+     * @param Request $request
+     * @return Response
+     */
+    public function addMatchesAction(Request $request): Response
+    {
+        $match = new Matches();
+        $form = $this->createForm(AddMatchFormType::class, $match);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+
+//            $match->setMatchTime(new \DateTime());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($match);
+            $em->flush();
+
+            return $this->redirectToRoute('show-matches');
+        }
+
+        return $this->render('addMatch.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/matches/{matchId}/detail", name="show-detail-match")
+     * @param Request $request
+     * @param $matchId
+     * @return Response
+     */
+    public function showDetailMatchesAction(Request $request, $matchId): Response
+    {
+        $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id' => $matchId));
+
+        return $this->render('showMatchDetail.html.twig',[
+            'match' => $match
+        ]);
+    }
+
+    /**
+     * @Route("/matches/{matchId}/edit", name="edit-match")
+     * @param Request $request
+     * @param $matchId
+     * @return Response
+     */
+    public function editMatchesAction(Request $request, $matchId): Response
+    {
+
+        $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id'=> $matchId));
+        $form = $this->createForm(AddMatchFormType::class, $match);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $match = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($match);
+            $em->flush();
+
+            return $this->redirectToRoute('show-matches');
+        }
+
+        return $this->render('editMatch.html.twig',[
+            'match' => $match,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/matches/{matchId}/delete", name="delete-match")
+     * @param Request $request
+     * @param $matchId
+     * @return Response
+     */
+    public function deleteMatchesAction(Request $request, $matchId): Response
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $match = $em->getRepository('App:Matches')->find($matchId);
+
+        $em->remove($match);
+        $em->flush();
+
+        return $this->redirectToRoute('show-matches');
+    }
+
+
 
 
 

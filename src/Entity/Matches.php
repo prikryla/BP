@@ -140,10 +140,7 @@ class Matches{
             $this->away_team = $away_team;
         }
 
-        /**
-         * @return DateTime
-         */
-        public function getMatchTime(): DateTime
+        public function getMatchTime()
         {
             return $this->match_time;
         }
@@ -252,10 +249,7 @@ class Matches{
             $this->nomination_id = $nomination_id;
         }
 
-        /**
-         * @return Category
-         */
-        public function getCategory(): Category
+        public function getCategory()
         {
             return $this->category;
         }

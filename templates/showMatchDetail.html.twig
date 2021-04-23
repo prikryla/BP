@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Detail zápasu {% endblock %}
+
+{% block body %}
+    <div class="content">
+
+        <div class="grid-container margin-left-3">
+            <h2 class="mt-1">Detail zápasu</h2>
+
+            <div class="grid-x grid-padding-x">
+
+                <div class="cell"></div>
+                <div class="cell">
+                    <table>
+                        <thead>
+                        <th class="text-left">Zápas:</th>
+                        <th class="text-right">{{ match.getHomeTeam() }} - {{ match.getAwayTeam() }}</th>
+                        </thead>
+                        <tablebody>
+                            <tr>
+                                <td class="text-left">Domácí tým:</td>
+                                <td class="text-right">{{ match.getHomeTeam() }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Hostující tým:</td>
+                                <td class="text-right">{{ match.getAwayTeam() }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Datum utkání:</td>
+                                <td class="text-right">{{ match.getMatchTime() | format_datetime('long', 'none', locale='cs') }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Čas utkání:</td>
+                                <td class="text-right">{{ match.getMatchTime() | format_datetime('none', 'short', locale='cs') }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Adresa:</td>
+                                <td class="text-right">{{ match.getAddress() }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Město:</td>
+                                <td class="text-right">{{ match.getCity() }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">PSČ:</td>
+                                <td class="text-right">{{ match.getPostalCode() }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Hala:</td>
+                                <td class="text-right">{{ match.getVenue() }}</td>
+                        </tablebody>
+                    </table>
+
+                    <div class="text-center">
+                        <a href="{{ path('show-matches') }}" class="btn btn-warning">Zpět</a>
+                    </div>
+                    <div class="cell large-3 medium-2"></div>
+                </div>
+                <div class="cell large-3 medium-2"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

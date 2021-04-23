@@ -75,7 +75,6 @@ class DefaultController extends AbstractController{
             $user->setPassword($password);
             //      $user->setUsername($user->getEmail());
             //$user->setUsername($user->getEmail());
-//            $user->setDateOfBirth($form['dateOfBirth']->getData());
             $user->setAuthRole('ROLE_PLAYER');
             $user->setUsers($user);
 
