@@ -64,38 +64,11 @@ class Player_statistics{
         private $users;
 
         /**
-         * @var Matches
-         * @ORM\ManyToOne(targetEntity="App\Entity\Matches")
-         * @ORM\JoinColumn(name="matches_id", referencedColumnName="id", nullable=false)
-         */
-        private $matches;
-
-        /**
-         * @var Category
-         * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-         * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
-         */
-        private $category;
-
-        /**
          * @var integer
          * @ORM\Column(name="users_id", type="integer", nullable=false, options={"comment"="Users_id"})
 
          */
         protected $users_id;
-
-        /**
-         * @var integer
-         * @ORM\Column(name="matches_id", type="integer", nullable=false, options={"comment"="Matches_id"})
-
-         */
-        protected $matches_id;
-
-        /**
-         * @var integer
-         * @ORM\Column(name="category_id", type="integer", nullable=false, options={"comment"="Category_id"})
-         */
-        protected $category_id;
 
         /**
          * @return int
@@ -226,38 +199,6 @@ class Player_statistics{
         }
 
         /**
-         * @return Matches
-         */
-        public function getMatches(): Matches
-        {
-            return $this->matches;
-        }
-
-        /**
-         * @param Matches $matches
-         */
-        public function setMatches(Matches $matches): void
-        {
-            $this->matches = $matches;
-        }
-
-        /**
-         * @return Category
-         */
-        public function getCategory(): Category
-        {
-            return $this->category;
-        }
-
-        /**
-         * @param Category $category
-         */
-        public function setCategory(Category $category): void
-        {
-            $this->category = $category;
-        }
-
-        /**
          * @return int
          */
         public function getUsersId(): int
@@ -272,40 +213,6 @@ class Player_statistics{
         {
             $this->users_id = $users_id;
         }
-
-        /**
-         * @return int
-         */
-        public function getMatchesId(): int
-        {
-            return $this->matches_id;
-        }
-
-        /**
-         * @param int $matches_id
-         */
-        public function setMatchesId(int $matches_id): void
-        {
-            $this->matches_id = $matches_id;
-        }
-
-        /**
-         * @return int
-         */
-        public function getCategoryId(): int
-        {
-            return $this->category_id;
-        }
-
-        /**
-         * @param int $category_id
-         */
-        public function setCategoryId(int $category_id): void
-        {
-            $this->category_id = $category_id;
-        }
-
-
 }
 
 

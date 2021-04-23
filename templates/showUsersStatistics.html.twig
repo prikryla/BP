@@ -3,8 +3,7 @@
 {% block body %}
     <div class="grid-container d-flex justify-content-center">
         <div class="cell large-10">
-            <h3>Všechny statistiky</h3>
-                <a href="{{ path('create-statistics') }}" class="btn btn-primary btn-sm">Vytvořit novou statistiku</a>
+            <h3>Statistiky hráče {{ app.user.getFirstName() }} {{ app.user.getLastName() }}</h3>
             <table class="table"  id="table_statistics" style="margin-top: 3em">
                 <thead>
                 <tr class="row ">
