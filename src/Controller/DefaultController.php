@@ -128,6 +128,26 @@ class DefaultController extends AbstractController{
     }
 
     /**
+     * @Route("/profil/{userId}", name="user-profile")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param $userId
+     * @return Response
+     */
+    public function detailUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, $userId)
+    {
+//        if(!$user = $this->getUser()) {
+//            return $this->redirectToRoute('login');
+//        }
+
+        $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
+
+        return $this->render('userProfileTeam.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
      * @Route("/profil/edit/{userId}", name="user-edit")
      * @param Request $request
      * @param EntityManagerInterface $em

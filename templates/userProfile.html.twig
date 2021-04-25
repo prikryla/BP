@@ -5,7 +5,7 @@
 {% block body %}
     <div class="content">
         <div class="grid-container">
-            <h3 class="mt-1">Profil uživatele {{ user.getUsername() }}</h3>
+            <h3 class="mt-1">Profil uživatele {{ user.getFirstName() }} {{ user.getLastName() }}</h3>
             <div class="grid-x grid-padding-x">
                 <div class="cell" style="width: 60%;">
                     <table class="unstriped">
@@ -51,7 +51,6 @@
                             </tr>
                         </tablebody>
                     </table>
-
                     <div class="text-center">
                         <a href="{{ path('user-detail') }}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
                         &nbsp;

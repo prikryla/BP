@@ -35,7 +35,7 @@
                         {% endif %}
                         <td class="columns small-2 text-center">{{ match.homeTeam }}</td>
                         <td class="columns small-2 text-center">{{ match.awayTeam }}</td>
-                        <td class="columns small-2 text-center">{{ match.matchTime| date('H:i')}}</td>
+                        <td class="columns small-2 text-center">{{ match.matchTime| date('d.m.Y H:i')}}</td>
                         <td class="columns small-2 text-center">{{ match.address }}, {{ match.city }}</td>
                     </tr>
                 {% endfor %}

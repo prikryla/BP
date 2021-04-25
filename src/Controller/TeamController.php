@@ -82,7 +82,6 @@ class TeamController extends AbstractController{
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-//            $user->setDateOfBirth($form['dateOfBirth']->getData());
             $user->setAuthRole('ROLE_PLAYER');
             $user->setUsers($user);
 
@@ -94,7 +93,9 @@ class TeamController extends AbstractController{
             $session->getFlashBag()->add('notice', 'Profil vytvořen.');
             //$session->set('user', $user);
 
-//            return $this->redirectToRoute('show-team');
+            return $this->redirectToRoute('show-team', array(
+                'userId' => $userId
+            ));
         }
 
         return $this->render(
@@ -117,6 +118,36 @@ class TeamController extends AbstractController{
 
         return $this->render('showUserTeam.html.twig', [
             'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/team/player/{userId}/edit", name="team-user-edit")
+     * @param Request $request
+     * @param EntityManagerInterface $em
+     * @param $userId
+     * @return Response
+     */
+    public function detailEditAction(Request $request, EntityManagerInterface $em, $userId)
+    {
+        $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
+
+        $form = $this->createForm(UserEditType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $user = $form->getData();
+            $user->setUsers($this->getUser());
+
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('user-detail-team');
+        }
+        return $this->render('userEdit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
         ]);
     }
 
@@ -173,5 +204,29 @@ class TeamController extends AbstractController{
             'users' => $users
         ]);
     }
+
+    /**
+     * @Route ("/team/delete/{usersId}/{userId}", name="delete-user-team")
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param $userId
+     * @param $usersId
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction(Request $request, EntityManagerInterface $em, $userId, $usersId){
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('App:Users')->find($userId);
+
+        $currentUser = $usersId;
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('show-team', array(
+            'userId' => $userId
+        ));
+    }
+
 
 }

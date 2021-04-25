@@ -41,14 +41,21 @@ class AddTeamMemberType extends AbstractType {
             ->add('city', TextType::class, array('label' => "Město"))
             ->add('postalCode', TextType::class, array('label' => "PSČ"))
             ->add('school', TextType::class, array('label' => "Škola"))
-            ->add('dateOfBirth', DateType::class, array(
-                'label' => "Datum narození",
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd'
+            ->add('dateOfBirth', TextType::class, array(
+                'label' => 'Datum narození'
             ))
-            ->add('phoneNumberPlayer', TextType::class, array('label' => "Telefon na hráče"))
-            ->add('phoneNumberMother', TextType::class, array('label' => "Telefon na matku"))
-            ->add('phoneNumberFather', TextType::class, array('label' => "Telefon na otce"))
+            ->add('phoneNumberPlayer', TextType::class, array(
+                'label' => "Telefon na hráče",
+                'empty_data' => ''
+            ))
+            ->add('phoneNumberMother', TextType::class, array(
+                'label' => "Telefon na matku",
+                'empty_data' => ''
+            ))
+            ->add('phoneNumberFather', TextType::class, array(
+                'label' => "Telefon na otce",
+                'empty_data' => ''
+            ))
             ->add('category', NULL, array(
                 'class' => Category::class,
                 'query_builder' => function (EntityRepository $er) {

@@ -40,9 +40,18 @@ class UserRegisterType extends AbstractType
             ->add('dateOfBirth', TextType::class, array(
                 'label' => 'Datum narození'
             ))
-            ->add('phoneNumberPlayer', TextType::class, array('label' => "Telefon na hráče"))
-            ->add('phoneNumberMother', TextType::class, array('label' => "Telefon na matku"))
-            ->add('phoneNumberFather', TextType::class, array('label' => "Telefon na otce"))
+            ->add('phoneNumberPlayer', TextType::class, array(
+                'label' => "Telefon na hráče",
+                'empty_data' => ''
+            ))
+            ->add('phoneNumberMother', TextType::class, array(
+                'label' => "Telefon na matku",
+                'empty_data' => ''
+            ))
+            ->add('phoneNumberFather', TextType::class, array(
+                'label' => "Telefon na otce",
+                'empty_data' => ''
+            ))
             ->add('category', NULL, array(
                 'class' => Category::class,
                 'query_builder' => function (EntityRepository $er) {

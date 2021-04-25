@@ -24,16 +24,18 @@
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" style="font-weight: bold; color: white">
-                {% if app.user.getCategoryId() == 1 %}
-                    Jsi přihlášený jako {{ app.user.getUsername() }} (U11)
-                {% elseif app.user.getCategoryId() == 2 %}
-                    Jsi přihlášený jako {{ app.user.getUsername() }} (U13)
-                {% elseif app.user.getCategoryId() == 3 %}
-                    Jsi přihlášený jako {{ app.user.getUsername() }} (U15)
-                {% elseif app.user.getCategoryId() == 4 %}
-                    Jsi přihlášený jako {{ app.user.getUsername() }} (U19)
-                {% elseif app.user.getCategoryId() == 0 %}
-                    Jsi přihlášený jako Admin
+                {% if is_granted('ROLE_PLAYER') or is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN')  %}
+                    {% if app.user.getCategoryId() == 1 %}
+                        Jsi přihlášený jako {{ app.user.getUsername() }} (U11)
+                    {% elseif app.user.getCategoryId() == 2 %}
+                        Jsi přihlášený jako {{ app.user.getUsername() }} (U13)
+                    {% elseif app.user.getCategoryId() == 3 %}
+                        Jsi přihlášený jako {{ app.user.getUsername() }} (U15)
+                    {% elseif app.user.getCategoryId() == 4 %}
+                        Jsi přihlášený jako {{ app.user.getUsername() }} (U19)
+                    {% elseif app.user.getCategoryId() == 0 %}
+                        Jsi přihlášený jako Admin
+                    {% endif %}
                 {% endif %}
             </a>
         </li>
@@ -93,12 +95,14 @@
                         </a>
                     </li>
                     {% endif %}
+                    {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}
                     <li class="nav-item text-center">
                         <a class="nav-link" href="{{ path('show-statistics') }}" style="font-weight: bold">
                             <span data-feather="statistics"></span>
                             Statistiky
                         </a>
                     </li>
+                    {% endif %}
                     {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}
                         <li class="nav-item text-center">
                             <a class="nav-link" href="{{ path('show-cars') }}" style="font-weight: bold">

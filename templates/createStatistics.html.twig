@@ -27,7 +27,7 @@
                             <td class="columns small-2 text-center">U15</td>
                         {% elseif user.categoryId == 4 %}
                             <td class="columns small-2 text-center">U19</td>
-                        {% elseif user.categoryId == 'Admin' %}
+                        {% elseif user.categoryId == 0 %}
                             <td class="columns small-2 text-center">Admin</td>
                         {% endif %}
                         <td class="column small-2 text-center">{{ user.firstName }}</td>
@@ -40,7 +40,7 @@
                 </tbody>
             </table>
             <div class="text-center">
-                <a href="{{ path('show-team', {'userId': app.user.getId()}) }}" class="btn btn-warning">Zpět</a>
+                <a href="{{ path('show-team', {'userId': app.user.getId()}) }}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
             </div>
         </div>
     </div>
