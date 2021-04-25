@@ -67,19 +67,6 @@ class Matches{
         private $postal_code;
 
         /**
-         * @var Nomination
-         * @ORM\ManyToOne(targetEntity="App\Entity\Nomination")
-         * @ORM\JoinColumn(name="nomination_id", referencedColumnName="id", nullable=false)
-         */
-        private $nomination;
-
-        /**
-         * @var integer
-         * @ORM\Column(name="nomination_id", type="integer", nullable=true, options={"comment"="Nomination_id"})
-         */
-        protected $nomination_id;
-
-        /**
          * @var Category
          * @ORM\ManyToOne(targetEntity="App\Entity\Category")
          * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
@@ -215,38 +202,6 @@ class Matches{
         public function setPostalCode(string $postal_code): void
         {
             $this->postal_code = $postal_code;
-        }
-
-        /**
-         * @return Nomination
-         */
-        public function getNomination(): Nomination
-        {
-            return $this->nomination;
-        }
-
-        /**
-         * @param Nomination $nomination
-         */
-        public function setNomination(Nomination $nomination): void
-        {
-            $this->nomination = $nomination;
-        }
-
-        /**
-         * @return int
-         */
-        public function getNominationId(): int
-        {
-            return $this->nomination_id;
-        }
-
-        /**
-         * @param int $nomination_id
-         */
-        public function setNominationId(int $nomination_id): void
-        {
-            $this->nomination_id = $nomination_id;
         }
 
         public function getCategory()
