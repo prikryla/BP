@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} IS BBK - Pokuty {% endblock %}
+
 {% block body %}
-
     <div class="container-fluid">
-        <div class="row" style="width: 75%">
-            <h2>Nezaplacené pokuty</h2>
-
-            <table class="table margin-top-1" id="table_team">
+        <div class="row" style="width: 60%">
+            <h3>Nezaplacené pokuty</h3>
+            <table class="unstriped margin-top-1" id="table_fines">
                 <thead>
-                <tr class="row">
-                    <th class="column small-2 text-center">Kategorie</th>
-                    <th class="column small-2 text-center">Jméno</th>
-                    <th class="column small-2 text-center ">Příjmení</th>
-                    <th class="column small-2 text-center">Pokuty</th>
-                </tr>
+                    <tr class="row align-center">
+                        <th class="column small-2 text-center">Kategorie</th>
+                        <th class="column small-2 text-center">Jméno</th>
+                        <th class="column small-2 text-center ">Příjmení</th>
+                        <th class="column small-2 text-center">Pokuty</th>
+                    </tr>
                 </thead>
-                <tbody id="table_matches">
+                <tbody id="table_fines">
                 {% for user in users %}
-                    <tr class="row" style="margin-top: 2px">
+                    <tr class="row align-center" style="margin-top: 2px">
                         {% if user.categoryId == 1 %}
                             <td class="columns small-2 text-center">U11</td>
                         {% elseif user.categoryId == 2 %}
@@ -35,7 +35,11 @@
                 </tbody>
             </table>
             <div class="text-center">
-                <a href="{{ path('show-team', {'userId': app.user.getId()}) }}" class="btn btn-warning">Zpět</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('show-club', {'userId': app.user.getId()}) }}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
+                {% else %}
+                    <a href="{{ path('show-team', {'userId': app.user.getId()}) }}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
+                {% endif %}
             </div>
         </div>
     </div>

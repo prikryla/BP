@@ -26,10 +26,9 @@ class AddMatchFormType extends AbstractType{
             ->add('matchTime', DateTimeType::class, array(
                 'html5' => false,
                 'widget' => 'single_text',
-                'format' => 'dd-MM-yyyy  HH:mm',
-                'label' => "Čas utkání",
+                'format' => 'dd-MM-yyyy HH:mm',
+                'label' => "Datum a čas utkání (dd-MM-yyyy HH:mm)",
                 'years' => range(2021, 2025),
-                'placeholder' => 'dd-MM-yyyy  HH:mm'
             ))
             ->add('address', TextType::class, array('label' => "Adresa"))
             ->add('city', TextType::class, array('label' => "Město"))

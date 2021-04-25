@@ -1,26 +1,26 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} IS BBK - Statistiky hráče{% endblock %}
+
 {% block body %}
-    <div class="grid-container d-flex justify-content-center">
-        <div class="cell large-10">
+    <div class="grid-container">
+        <div class="cell">
             <h3>Statistiky hráče {{ app.user.getFirstName() }} {{ app.user.getLastName() }}</h3>
-            <table class="table"  id="table_statistics" style="margin-top: 3em">
+            <table class="unstriped"  id="table_user_statistics" style="margin-top: 2em">
                 <thead>
-                <tr class="row ">
-                    <th class="column small-2 text-center">Id uživatele</th>
-                    <th class="column small-2 text-center">Úspěšné TH</th>
-                    <th class="column small-2 text-center">Neúspěšné TH</th>
-                    <th class="column small-2 text-center">Dva body</th>
-                    <th class="column small-2 text-center">Tři body</th>
-                    <th class="column small-2 text-center">Body celkem</th>
-                </tr>
+                    <tr class="row align-center">
+                        <th class="column small-2 text-center">Úspěšné TH</th>
+                        <th class="column small-3 text-center">Neúspěšné TH</th>
+                        <th class="column small-2 text-center">Dva body</th>
+                        <th class="column small-2 text-center">Tři body</th>
+                        <th class="column small-2 text-center">Body celkem</th>
+                    </tr>
                 </thead>
-                <tbody id="table_matches">
+                <tbody id="table_user_statistics">
                 {% for stats in statistics %}
-                    <tr class="row">
-                        <td class="column small-2 text-center">{{ stats.usersId }}</td>
+                    <tr class="row align-center">
                         <td class="column small-2 text-center">{{ stats.successfulFt }}</td>
-                        <td class="column small-2 text-center">{{ stats.unsuccessfulFt }}</td>
+                        <td class="column small-3 text-center">{{ stats.unsuccessfulFt }}</td>
                         <td class="column small-2 text-center">{{ stats.twoPoints}}</td>
                         <td class="column small-2 text-center">{{ stats.threePoints }}</td>
                         <td class="column small-2 text-center">{{ stats.points }}</td>

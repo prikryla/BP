@@ -1,22 +1,19 @@
 <!DOCTYPE html>
 <html class="no-js" lang="cs">
 <head>
-    <title>{% block title %}{% endblock %}IS BBK Blansko</title>
+    <title>{% block title %}IS BBK Blansko{% endblock %}</title>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Compressed CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
-
     <!-- Compressed JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
     <!-- foundation-float.min.css: Compressed CSS with legacy Float Grid -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-float.min.css" integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous">
-
     <!-- foundation-prototype.min.css: Compressed CSS with prototyping classes -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-prototype.min.css" integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous">
-
     <!-- foundation-rtl.min.css: Compressed CSS with right-to-left reading direction -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-rtl.min.css" integrity="sha256-F+9Ns8Z/1ZISonBbojH743hsmF3x3AlQdJEeD8DhQsE=" crossorigin="anonymous">
 </head>
@@ -26,73 +23,92 @@
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('homepage') }}">Informační systém BBK Blansko</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" style="font-weight: bold; color: white">Jsi přihlášený jako {{ app.user.getUsername() }}</a>
+            <a class="nav-link" style="font-weight: bold; color: white">
+                {% if app.user.getCategoryId() == 1 %}
+                    Jsi přihlášený jako {{ app.user.getUsername() }} (U11)
+                {% elseif app.user.getCategoryId() == 2 %}
+                    Jsi přihlášený jako {{ app.user.getUsername() }} (U13)
+                {% elseif app.user.getCategoryId() == 3 %}
+                    Jsi přihlášený jako {{ app.user.getUsername() }} (U15)
+                {% elseif app.user.getCategoryId() == 4 %}
+                    Jsi přihlášený jako {{ app.user.getUsername() }} (U19)
+                {% elseif app.user.getCategoryId() == 0 %}
+                    Jsi přihlášený jako Admin
+                {% endif %}
+            </a>
         </li>
         <li class="nav-item text-nowrap">
             <a class="nav-link" style="text-align: center" href="{{ path('logout') }}">Odhlásit se</a>
         </li>
     </ul>
 </nav>
-<div class="container-fluid">
+{#<div class="container-fluid">#}
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item text-center">
-                        <a class="nav-link active" href="{{ path('show-matches') }}">
-                            <span data-feather="home"></span>
-                            Zápasy <span class="matches"></span>
+                        <a class="nav-link active" href="{{ path('show-matches') }}" style="font-weight: bold">
+                            <span data-feather="matches"></span>
+                            Zápasy
                         </a>
                     </li>
-                    {% if is_granted('ROLE_ADMIN') %}
+                    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COACH') %}
                     <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-attendance') }}">
+                        <a class="nav-link" href="{{ path('show-attendance') }}" style="font-weight: bold">
                             <span data-feather="attendance"></span>
                             Docházka
                         </a>
                     </li>
                     {% endif %}
                     {% if is_granted('ROLE_PLAYER') %}
-                        <li class="nav-item text-center">
-                            <a class="nav-link" href="{{ path('show-attendance-user', {'userId': app.user.getId()}) }}">
-                                <span data-feather="attendance"></span>
-                                Docházka
-                            </a>
-                        </li>
-                    {% endif %}
                     <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-team', {'userId': app.user.getId()}) }}">
+                        <a class="nav-link" href="{{ path('show-attendance-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">
+                            <span data-feather="attendance"></span>
+                            Docházka
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="{{ path('show-club') }}" style="font-weight: bold">
+                            <span data-feather="club"></span>
+                            Klub
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_PLAYER') or is_granted('ROLE_COACH') %}
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="{{ path('show-team', {'userId': app.user.getId()}) }}" style="font-weight: bold">
                             <span data-feather="team"></span>
                             Tým
                         </a>
                     </li>
+                    {% endif %}
                     {% if is_granted('ROLE_PLAYER') %}
                     <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-statistics-user', {'userId': app.user.getId()}) }}">
+                        <a class="nav-link" href="{{ path('show-statistics-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">
                             <span data-feather="statistics"></span>
                             Statistiky
                         </a>
                     </li>
                     {% endif %}
-                    {% if is_granted('ROLE_ADMIN')  %}
+                    <li class="nav-item text-center">
+                        <a class="nav-link" href="{{ path('show-statistics') }}" style="font-weight: bold">
+                            <span data-feather="statistics"></span>
+                            Statistiky
+                        </a>
+                    </li>
+                    {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}
                         <li class="nav-item text-center">
-                            <a class="nav-link" href="{{ path('show-statistics') }}">
-                                <span data-feather="statistics"></span>
-                                Statistiky
+                            <a class="nav-link" href="{{ path('show-cars') }}" style="font-weight: bold">
+                                <span data-feather="cars"></span>
+                                Auta
                             </a>
                         </li>
                     {% endif %}
-
-                        {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item text-center">
-                                <a class="nav-link" href="{{ path('show-cars') }}">
-                                    <span data-feather="cars"></span>
-                                    Auta
-                                </a>
-                            </li>
-                        {% endif %}
                     <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('user-detail') }}">
+                        <a class="nav-link" href="{{ path('user-detail') }}" style="font-weight: bold">
                             <span data-feather="profile"></span>
                             Profil
                         </a>
@@ -100,7 +116,6 @@
                 </ul>
             </div>
         </nav>
-
         <div class="width-75">
             <div class="container">
                 {% block body %}{% endblock %}
@@ -108,10 +123,7 @@
         </div>
     </div>
 </div>
-
 <footer class="bg-light text-center text-lg-start" style="bottom: 0; width: 100%; position: fixed">
-
-
     <!-- Copyright -->
     <div class=" bg-dark text-center p-3" style="color: white">
         © 2021 Copyright:
@@ -120,8 +132,6 @@
     <!-- Copyright -->
 </footer>
 <!-- Footer -->
-
-
 {% block scripts %}
 {% endblock %}
 </body>

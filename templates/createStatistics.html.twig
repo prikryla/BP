@@ -1,23 +1,24 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} IS BBK - Statistiky hráči{% endblock %}
+
 {% block body %}
 
     <div class="container-fluid">
         <div class="row" style="width: 75%">
             <h2>Statistiky - hráči</h2>
-
-            <table class="table margin-top-1" id="table_team">
+            <table class="unstriped margin-top-1" id="table_statistics">
                 <thead>
-                <tr class="row">
-                    <th class="column small-2 text-center">Kategorie</th>
-                    <th class="column small-2 text-center">Jméno</th>
-                    <th class="column small-2 text-center">Příjmení</th>
-                    <th class="column small-2 text-center">Možnosti</th>
-                </tr>
+                    <tr class="row align-center">
+                        <th class="column small-2 text-center">Kategorie</th>
+                        <th class="column small-2 text-center">Jméno</th>
+                        <th class="column small-2 text-center">Příjmení</th>
+                        <th class="column small-2 text-center">Možnosti</th>
+                    </tr>
                 </thead>
-                <tbody id="table_matches">
+                <tbody id="table_statistics">
                 {% for user in users %}
-                    <tr class="row" style="margin-top: 2px">
+                    <tr class="row align-center" style="margin-top: 2px">
                         {% if user.categoryId == 1 %}
                             <td class="columns small-2 text-center">U11</td>
                         {% elseif user.categoryId == 2 %}

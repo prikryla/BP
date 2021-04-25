@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} IS BBK - Přidat hráče {% endblock %}
+
 {% block body %}
     <div class="content">
-        <div class="grid-container margin-left-3">
-            <h2 class="text-center">Přidat nového hráče</h2>
+        <div class="grid-container">
+            <h3>Přidat nového hráče</h3>
             <div class="grid-x grid-padding-x">
                 <div class="cell large-12">
                     {{ form_start(form) }}
                     {{ form_errors(form) }}
                 </div>
-
                 <div class="cell medium-6">
                     {{ form_row(form.username, {'label': 'Uživatelské jméno'}) }}
 
@@ -24,15 +25,13 @@
                     {{ form_row(form.city, {'label': 'Město'}) }}
 
                     {{ form_row(form.postalCode, {'label': 'PSČ'}) }}
-
                 </div>
-
                 <div class="cell medium-6">
                     {{ form_row(form.plainPassword.first, {'label': 'Heslo'}) }}
 
                     {{ form_row(form.plainPassword.second, {'label': 'Heslo znovu'}) }}
 
-{#                    {{ form_row(form.dateOfBirth, {'label': 'Datum narození'}) }}#}
+                    {{ form_row(form.dateOfBirth, {'label': 'Datum narození'}) }}
 
                     {{ form_row(form.school, {'label': 'Škola'}) }}
 
@@ -43,13 +42,16 @@
                     {{ form_row(form.phoneNumberFather, {'label': 'Telefon otec'}) }}
 
                     {{ form_row(form.category, {'label': 'Kategorie'}) }}
-
                 </div>
             </div>
             <div class="text-center">
-                <a href="{{ path('show-team', {'userId': app.user.getId()})}}" class="btn btn-warning">Zpět</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('show-club', {'userId': app.user.getId()})}}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
+                    &nbsp;
+                {% endif %}
+                <a href="{{ path('show-team', {'userId': app.user.getId()})}}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
                 &nbsp;
-                {{ form_widget(form.save, { 'label': 'Uložit změny', 'attr': { 'class': 'btn btn-success' }}) }}
+                {{ form_widget(form.save, { 'label': 'Uložit změny', 'attr': { 'class': 'btn btn-success', 'style': 'font-weight: bold' }}) }}
             </div>
             {{ form_end(form) }}
         </div>

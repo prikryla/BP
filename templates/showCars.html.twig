@@ -1,29 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block header %}
-
-{% endblock %}
+{% block title %} IS BBK - Auta {% endblock %}
 
 {% block body %}
-    <div class="grid-container d-flex justify-content-center">
+    <div class="grid-container">
         <div class="cell large-10">
             <h3>Auta</h3>
-
-            <a href="{{ path('create-cars')}}" class="btn btn-primary btn-sm">Přidat auto</a>
-
-            <table class="table margin-top-1"  id="table_all_cars">
+            <a href="{{ path('create-cars')}}" class="btn btn-primary btn-sm" style="font-weight: bold">Přidat auto</a>
+            <table class="unstriped margin-top-1"  id="table_cars">
                 <thead>
-                <tr class="row">
-                    <th class="columns small-3 text-center">Vůz</th>
-                    <th class="columns small-3 text-center">SPZ</th>
-                    <th class="columns small-2 text-center">Počet míst</th>
-                    <th class="columns small-2 text-center">řidič</th>
-                    <th class="columns small-2 text-center"></th>
-                </tr>
+                    <tr class="row align-center">
+                        <th class="columns small-3 text-center">Vůz</th>
+                        <th class="columns small-3 text-center">SPZ</th>
+                        <th class="columns small-2 text-center">Počet míst</th>
+                        <th class="columns small-2 text-center">řidič</th>
+                        <th class="columns small-2 text-center"></th>
+                    </tr>
                 </thead>
-                <tbody id="table_all_cars">
+                <tbody id="table_cars">
                 {% for car in cars %}
-                    <tr class="row">
+                    <tr class="row align-center">
                         <td class="columns small-3 text-center">{{ car.carName }}</td>
                         <td class="columns small-3 text-center">{{ car.spz }}</td>
                         <td class="columns small-2 text-center">{{ car.numberOfSeats}}</td>

@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} IS BBK - Vytvořit statistiku{% endblock %}
+
 {% block body %}
     <div class="content">
-        <div class="grid-container margin-left-3">
-            <h2 class="text-center">Vytvořit statistiku</h2>
+        <div class="grid-container">
+            <h2>Vytvořit statistiku</h2>
             <div class="grid-x grid-padding-x">
                 <div class="cell large-12">
                     {{ form_start(form) }}
                     {{ form_errors(form) }}
                 </div>
-
                 <div class="cell medium-6">
                     {{ form_row(form.successfulFt) }}
 
@@ -23,7 +24,6 @@
                     {{ form_row(form.fouls) }}
 
                     {{ form_row(form.points) }}
-
                 </div>
             </div>
             <div class="text-center">

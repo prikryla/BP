@@ -216,9 +216,7 @@ class DefaultController extends AbstractController{
             $em->remove($user);
             $em->flush();
 
-            return $this->redirectToRoute('show-team', [
-                'userId' => $currentUser
-            ]);
+            return $this->redirectToRoute('show-club');
     }
 
 

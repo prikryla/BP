@@ -22,6 +22,20 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class TeamController extends AbstractController{
 
     /**
+     * @Route("/team", name="show-club")
+     * @param Request $request
+     * @return Response
+     */
+    public function showAllAction(Request $request): Response
+    {
+        $users = $this->getDoctrine()->getRepository('App:Users')->findAll();
+
+        return $this->render('showAllClub.html.twig', [
+            'members' => $users
+        ]);
+    }
+
+    /**
      * @Route("/team/{userId}", name="show-team")
      * @param Request $request
      * @param $userId

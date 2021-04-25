@@ -1,29 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block title %} IS BBK - Zápasy U19 {% endblock %}
 
+{% block body %}
     <div class="container">
         <div class="form-group">
             <h3>Zápasy U19</h3>
-            <a href="{{ path('show-matches-u11') }}" class="btn btn-primary btn-sm">U11</a>
-            <a href="{{ path('show-matches-u13') }}" class="btn btn-primary btn-sm">U13</a>
-            <a href="{{ path('show-matches-u15') }}" class="btn btn-primary btn-sm">U15</a>
-            <a href="{{ path('show-matches-u19') }}" class="btn btn-primary btn-sm">U19</a>
-
-            <table class="table margin-top-1"  id="table_all_matches">
+            <a href="{{ path('show-matches-u11') }}" class="btn btn-primary btn-sm" style="font-weight: bold">U11</a>
+            <a href="{{ path('show-matches-u13') }}" class="btn btn-primary btn-sm" style="font-weight: bold">U13</a>
+            <a href="{{ path('show-matches-u15') }}" class="btn btn-primary btn-sm" style="font-weight: bold">U15</a>
+            <a href="{{ path('show-matches-u19') }}" class="btn btn-primary btn-sm" style="font-weight: bold">U19</a>
+            <table class="unstriped margin-top-1" id="table_matches_U19">
                 <thead>
-                <tr class="row">
-                    <th class="columns small-2 text-center">Kategorie</th>
-                    <th class="columns small-2 text-center">Domácí tým</th>
-                    <th class="columns small-2 text-center">Hostující tým</th>
-                    <th class="columns small-2 text-center">Čas</th>
-                    <th class="columns small-2 text-center">Adresa</th>
-                    <th class="columns small-2 text-center"></th>
-                </tr>
+                    <tr class="row align-center">
+                        <th class="columns small-2 text-center">Kategorie</th>
+                        <th class="columns small-2 text-center">Domácí tým</th>
+                        <th class="columns small-2 text-center">Hostující tým</th>
+                        <th class="columns small-2 text-center">Čas</th>
+                        <th class="columns small-2 text-center">Adresa</th>
+                    </tr>
                 </thead>
-                <tbody id="table_all_matches">
+                <tbody id="table_matches_U19">
                 {% for match in matches %}
-                    <tr class="row">
+                    <tr class="row align-center">
                         {% if match.categoryId == 1 %}
                             <td class="columns small-2 text-center">U11</td>
                         {% elseif match.categoryId == 2 %}
@@ -37,14 +36,12 @@
                         <td class="columns small-2 text-center">{{ match.awayTeam }}</td>
                         <td class="columns small-2 text-center">{{ match.matchTime| date('H:i')}}</td>
                         <td class="columns small-2 text-center">{{ match.address }}, {{ match.city }}</td>
-                        <td class="columns small-2 text-center" ><a href="#" style="font-weight: bold">Nominace</a></td>
-
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
             <div class="text-center">
-                <a href="{{ path('show-matches') }}" class="btn btn-warning">Zpět</a>
+                <a href="{{ path('show-matches') }}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
             </div>
         </div>
     </div>

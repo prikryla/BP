@@ -1,27 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block header %}
-
-{% endblock %}
+{% block title %} IS BBK - Výjezdy{% endblock %}
 
 {% block body %}
-    <div class="grid-container d-flex justify-content-center">
+    <div class="grid-container">
         <div class="cell large-10">
             <h3>Výjezdy - venkovní zápasy</h3>
-            <table class="table margin-top-1"  id="table_all_matches">
+            <table class=" unstriped margin-top-1"  id="table_away_matches">
                 <thead>
-                <tr class="row">
-                    <th class="columns small-2 text-center">Kategorie</th>
-                    <th class="columns small-2 text-center">Domácí tým</th>
-                    <th class="columns small-2 text-center">Hostující tým</th>
-                    <th class="columns small-2 text-center">Čas</th>
-                    <th class="columns small-2 text-center">Adresa</th>
-                    <th class="columns small-2 text-center"></th>
-                </tr>
+                    <tr class="row align-center">
+                        <th class="columns small-2 text-center">Kategorie</th>
+                        <th class="columns small-2 text-center">Domácí tým</th>
+                        <th class="columns small-2 text-center">Hostující tým</th>
+                        <th class="columns small-2 text-center">Čas</th>
+                        <th class="columns small-2 text-center">Adresa</th>
+                        <th class="columns small-2 text-center"></th>
+                    </tr>
                 </thead>
-                <tbody id="table_all_matches">
+                <tbody id="table_away_matches">
                 {% for match in matches %}
-                    <tr class="row">
+                    <tr class="row align-center">
                         {% if match.categoryId == 1 %}
                             <td class="columns small-2 text-center">U11</td>
                         {% elseif match.categoryId == 2 %}
@@ -42,7 +40,7 @@
                 </tbody>
             </table>
             <div class="text-center">
-                <a href="{{ path('show-matches') }}" class="btn btn-warning">Zpět</a>
+                <a href="{{ path('show-matches') }}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
             </div>
         </div>
     </div>
