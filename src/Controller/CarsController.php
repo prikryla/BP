@@ -54,6 +54,11 @@ class CarsController extends AbstractController {
             $em->persist($car);
             $em->flush();
 
+            $this->addFlash(
+                'notice',
+                'Nové auto bylo úspěšně přidáno!'
+            );
+
             return $this->redirectToRoute('show-cars');
         }
 
@@ -83,6 +88,11 @@ class CarsController extends AbstractController {
 
             $em->persist($car);
             $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Změny byly uloženy!'
+            );
 
             return $this->redirectToRoute('show-cars');
         }

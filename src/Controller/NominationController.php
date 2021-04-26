@@ -66,6 +66,11 @@ class NominationController extends AbstractController{
         $em->persist($nomination);
         $em->flush();
 
+        $this->addFlash(
+            'notice',
+            'Nominace byla potvrzena!'
+        );
+
         return $this->redirectToRoute('create-nomination', array(
             'matchId' => $matchId
         ));
@@ -89,6 +94,11 @@ class NominationController extends AbstractController{
 
         $em->remove($nomination);
         $em->flush();
+
+        $this->addFlash(
+            'warning',
+            'Nominace byla odstraněna!'
+        );
 
         return $this->redirectToRoute('create-nomination', [
             'matchId' => $matchId

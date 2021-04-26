@@ -156,6 +156,11 @@ class MatchesController extends AbstractController{
             $em->persist($match);
             $em->flush();
 
+            $this->addFlash(
+                'notice',
+                'Byl přidán nový zápas!'
+            );
+
             return $this->redirectToRoute('show-matches');
         }
 
@@ -200,6 +205,11 @@ class MatchesController extends AbstractController{
             $em->persist($match);
             $em->flush();
 
+            $this->addFlash(
+                'notice',
+                'Změny byly uloženy!'
+            );
+
             return $this->redirectToRoute('show-matches');
         }
 
@@ -222,6 +232,10 @@ class MatchesController extends AbstractController{
 
         $match = $em->getRepository('App:Matches')->find($matchId);
 
+        $this->addFlash(
+            'warning',
+            'Zápas byl odstraněn!'
+        );
         $em->remove($match);
         $em->flush();
 

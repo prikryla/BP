@@ -65,6 +65,11 @@ class PlayerStatisticsController extends AbstractController {
             $em->persist($statistic);
             $em->flush();
 
+            $this->addFlash(
+                'notice',
+                'Statistika byla uložena!'
+            );
+
             return $this->redirectToRoute('show-statistics');
         }
 

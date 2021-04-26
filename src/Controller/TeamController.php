@@ -93,6 +93,11 @@ class TeamController extends AbstractController{
             $session->getFlashBag()->add('notice', 'Profil vytvořen.');
             //$session->set('user', $user);
 
+            $this->addFlash(
+                'notice',
+                'Nový hráč byl přidán do týmu!'
+            );
+
             return $this->redirectToRoute('show-team', array(
                 'userId' => $userId
             ));
@@ -143,6 +148,11 @@ class TeamController extends AbstractController{
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash(
+                'notice',
+                'Změny byly uloženy!'
+            );
+
             return $this->redirectToRoute('user-detail-team');
         }
         return $this->render('userEdit.html.twig', [
@@ -173,6 +183,11 @@ class TeamController extends AbstractController{
 
             $em->persist($user);
             $em->flush();
+
+            $this->addFlash(
+                'notice',
+                'Hráč byl pokutován!'
+            );
 
             return $this->redirectToRoute('user-detail-team', array(
                 'userId' => $userId
@@ -222,6 +237,11 @@ class TeamController extends AbstractController{
         $currentUser = $usersId;
         $em->remove($user);
         $em->flush();
+
+        $this->addFlash(
+            'warning',
+            'Hráč byl odstraněn z týmu!'
+        );
 
         return $this->redirectToRoute('show-team', array(
             'userId' => $userId

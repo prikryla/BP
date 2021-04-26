@@ -122,6 +122,26 @@
         </nav>
         <div class="width-75">
             <div class="container">
+                <div class="grid-x grid-padding-x">
+                    <div class="cell" data-sticky-container>
+                        {% for flash_message in app.session.flashBag.get('notice') %}
+                            <div class="callout success" data-closable style="width: 50%">
+                                {{ flash_message }}
+                                <button class="close-button" aria-label="Dismiss" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                        {% for flash_message in app.session.flashBag.get('error') %}
+                            <div class="callout alert" data-closable style="width: 50%">
+                                {{ flash_message }}
+                                <button class="close-button" aria-label="Dismiss" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
                 {% block body %}{% endblock %}
             </div>
         </div>

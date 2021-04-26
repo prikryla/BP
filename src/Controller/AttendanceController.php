@@ -73,6 +73,11 @@ class AttendanceController extends AbstractController{
             $em->persist($attendance);
             $em->flush();
 
+            $this->addFlash(
+                'notice',
+                'Docházka byla uložena!'
+            );
+
             return $this->redirectToRoute('show-attendance');
         }
 

@@ -99,6 +99,11 @@ class DefaultController extends AbstractController{
 //
 //            $this->get('session')->set('player_id', $user->getId());
 
+            $this->addFlash(
+                'notice',
+                'Uživatel byl úspěšně zaregistrován! Nyní se můžete přihlásit'
+            );
+
             return $this->redirectToRoute('login');
         }
 
@@ -169,6 +174,11 @@ class DefaultController extends AbstractController{
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash(
+                'notice',
+                'Změny byly uloženy!'
+            );
+
             return $this->redirectToRoute('user-detail');
         }
         return $this->render('userEdit.html.twig', [
@@ -208,6 +218,11 @@ class DefaultController extends AbstractController{
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash(
+                'notice',
+                'Nové heslo bylo uloženo!'
+            );
+
 
             return $this->redirectToRoute('login');
         }
@@ -215,7 +230,6 @@ class DefaultController extends AbstractController{
             'user' => $user,
             'form' => $form->createView()
         ]);
-
     }
 
     /**
@@ -235,6 +249,11 @@ class DefaultController extends AbstractController{
             $currentUser = $usersId;
             $em->remove($user);
             $em->flush();
+
+            $this->addFlash(
+                'warning',
+                'Uživatel byl odstraněn!'
+            );
 
             return $this->redirectToRoute('show-club');
     }
