@@ -19,7 +19,7 @@ class AttendanceController extends AbstractController{
      * @param Request $request
      * @return Response
      */
-    public function showAction(Request $request): Response
+    public function showAttendance(Request $request): Response
     {
         $usr = $this->getUser();
         $users = $this->getDoctrine()->getRepository('App:Users')->findAll();
@@ -43,7 +43,7 @@ class AttendanceController extends AbstractController{
      * @param $userId
      * @return Response
      */
-    public function showUserAction(Request $request, $userId): Response
+    public function showUserAttendance(Request $request, $userId): Response
     {
         $attendance = $this->getDoctrine()->getRepository('App:Attendance')->findBy(array('usersId' => $userId));
 
@@ -58,7 +58,7 @@ class AttendanceController extends AbstractController{
      * @param $userId
      * @return Response
      */
-    public function addAction(Request $request, $userId): Response
+    public function addAttendance(Request $request, $userId): Response
     {
         $attendance = new Attendance();
 

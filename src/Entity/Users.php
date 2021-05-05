@@ -19,22 +19,33 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
         /**
          * @var integer
-         * @ORM\Column(name="id", type="integer", nullable=false, options={"comment"="Id"})
+         * @ORM\Column(name="id",
+         *             type="integer",
+         *             nullable=false,
+         *             options={"comment"="Id"})
          * @ORM\Id
          * @ORM\GeneratedValue(strategy="SEQUENCE")
-         * @ORM\SequenceGenerator(sequenceName="seq_user_id", allocationSize=1, initialValue=1)
+         * @ORM\SequenceGenerator(sequenceName="seq_user_id",
+         *                        allocationSize=1,
+         *                        initialValue=1)
          */
         private $id;
 
         /**
          * @var string
-         * @ORM\Column(name="first_name", type="string", nullable=true, options={"comment"="First name"})
+         * @ORM\Column(name="first_name",
+         *             type="string",
+         *             nullable=true,
+         *             options={"comment"="First name"})
          */
         private $firstName;
 
         /**
          * @var string
-         * @ORM\Column(name="last_name", type="string", nullable=true, options={"comment"="Last name"})
+         * @ORM\Column(name="last_name",
+         *             type="string",
+         *             nullable=true,
+         *             options={"comment"="Last name"})
          */
         private $lastName;
 
@@ -162,13 +173,18 @@ use Symfony\Component\Validator\Constraints\DateTime;
         /**
          * @var \App\Entity\Category
          * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-         * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=true)
+         * @ORM\JoinColumn(name="category_id",
+         *                 referencedColumnName="id",
+         *                 nullable=true)
          */
         private $category;
 
         /**
          * @var integer
-         * @ORM\Column(name="category_id", type="integer", nullable=true,options={"comment"="Category_id"})
+         * @ORM\Column(name="category_id",
+         *             type="integer",
+         *             nullable=true,
+         *             options={"comment"="Category_id"})
          */
         protected $category_id;
 

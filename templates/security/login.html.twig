@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js" lang="cs">
 <head>
-    <title>{% block title %}IS BBK - Úvod {% endblock %}</title>
+    <title>{% block title %}IS BBK - Úvod  {% endblock %}</title>
+    <link rel="icon" sizes="32x32" type="image/png" href="{{ asset('favicon-32.png') }}"/>
+    <link rel="shortcut icon" sizes="32x32" type="image/png" href="{{ asset('favicon-32.png') }}"/>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -16,7 +18,8 @@
                 <img src="https://www.bbkblansko.cz/_files/200000274-f3f9ff3fa3/450/logo.jpg" alt="Logo BBK Blansko" width="320px" height="250px" style="margin-bottom: 50px; align-self: center">
                 {% if app.user %}
                     <div class="mb-3 text-center" style="border: 1px solid black; padding: 12px">
-                        Už jsi přihlášený pod uživatelským jménem {{ app.user.username }}<br><a href="{{ path('logout') }}">Odhlásit </a>
+                        Už jsi přihlášený pod uživatelským jménem {{ app.user.username }}<br><br><a href="{{ path('homepage') }}" style="font-weight: bold">Přejít na hlavní stranu</a><br>
+                        <a href="{{ path('logout') }}" style="font-weight: bold; color: red">Odhlásit </a>
                     </div>
                 {% endif %}
 

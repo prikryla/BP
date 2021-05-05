@@ -20,7 +20,7 @@ class NominationController extends AbstractController{
      * @param UserInterface $user
      * @return Response
      */
-    public function createAction(Request $request, $matchId, UserInterface $user): Response
+    public function createNomination(Request $request, $matchId, UserInterface $user): Response
     {
         $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id' => $matchId));
         $players = $this->getDoctrine()->getRepository('App:Users')->findAll();
@@ -49,7 +49,7 @@ class NominationController extends AbstractController{
      * @param $userId
      * @return Response
      */
-    public function submitNominationAction(Request $request, $matchId, $userId): Response{
+    public function submitCreateNomination(Request $request, $matchId, $userId): Response{
 
         $em = $this->getDoctrine()->getManager();
 
@@ -83,7 +83,7 @@ class NominationController extends AbstractController{
      * @param $userId
      * @return Response
      */
-    public function deleteNominationAction(Request $request, $matchId, $userId): Response{
+    public function deleteNomination(Request $request, $matchId, $userId): Response{
 
         $em = $this->getDoctrine()->getManager();
 

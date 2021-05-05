@@ -14,18 +14,15 @@ class SecurityController extends AbstractController
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
      */
-    public function loginAction(AuthenticationUtils $authenticationUtils): Response
+    public function loginUsers(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
-
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $user = $this->getUser();
+        $this->addFlash(
+            'notice',
+            'Přihlášení proběhlo úspěšně!'
+        );
 
 
         return $this->render('security/login.html.twig', [
@@ -37,7 +34,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/logout", name="logout")
      */
-    public function logoutAction()
+    public function logoutUsers()
     {
+        $this->addFlash(
+            'warning',
+            'Byl jsi úspěšně odhlášen ze systému!'
+        );
     }
 }

@@ -24,6 +24,7 @@ class UserChangePasswordType extends AbstractType{
                 'first_options' => array('label' => 'Heslo'),
                 'second_options' => array('label' => 'Heslo znovu'),
                 'required' => true,
+                'invalid_message' => 'Zadaná hesla nejsou stejná!'
             ))
             ->add('save', SubmitType::class, array(
                 'label' => 'label_save',

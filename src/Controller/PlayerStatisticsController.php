@@ -18,7 +18,7 @@ class PlayerStatisticsController extends AbstractController {
      * @param Request $request
      * @return Response
      */
-    public function showAction(Request $request): Response
+    public function showStatistics(Request $request): Response
     {
         $statistics = $this->getDoctrine()->getRepository('App:Player_statistics')->findAll();
 
@@ -32,7 +32,7 @@ class PlayerStatisticsController extends AbstractController {
      * @param Request $request
      * @return Response
      */
-    public function createAction(Request $request): Response
+    public function createStatistics(Request $request): Response
     {
         $users = $this->getDoctrine()->getRepository('App:Users')->findAll();
 
@@ -47,7 +47,7 @@ class PlayerStatisticsController extends AbstractController {
      * @param $userId
      * @return Response
      */
-    public function createStatisticsAction(Request $request, $userId): Response
+    public function createUsersStatistics(Request $request, $userId): Response
     {
         $statistic = new Player_statistics();
 
@@ -84,7 +84,7 @@ class PlayerStatisticsController extends AbstractController {
      * @param $userId
      * @return Response
      */
-    public function showStatisticsAction(Request $request, $userId): Response
+    public function showUsersStatistics(Request $request, $userId): Response
     {
         $statistics = $this->getDoctrine()->getRepository('App:Player_statistics')->findBy(array('users_id' => $userId));
 

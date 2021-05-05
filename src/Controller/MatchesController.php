@@ -16,7 +16,7 @@ class MatchesController extends AbstractController{
      * @param Request $request
      * @return Response
      */
-    public function showAction(Request $request): Response
+    public function showMatches(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findAll();
         $user = $this->get('security.token_storage')->getToken()->getUser();
@@ -38,7 +38,7 @@ class MatchesController extends AbstractController{
      * @return Response
      */
 
-    public function showU11Action(Request $request): Response
+    public function showMatchesU11(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 1));
 
@@ -59,7 +59,7 @@ class MatchesController extends AbstractController{
      * @return Response
      */
 
-    public function showU13Action(Request $request): Response
+    public function showMatchesU13(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 2));
 
@@ -80,7 +80,7 @@ class MatchesController extends AbstractController{
      * @return Response
      */
 
-    public function showU15Action(Request $request): Response
+    public function showMatchesU15(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 3));
 
@@ -101,7 +101,7 @@ class MatchesController extends AbstractController{
      * @return Response
      */
 
-    public function showU19Action(Request $request): Response
+    public function showMatchesU19(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 4));
 
@@ -121,7 +121,7 @@ class MatchesController extends AbstractController{
      * @param Request $request
      * @return Response
      */
-    public function showAwayMatchesAction(Request $request): Response
+    public function showAwayMatches(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findAll();
 
@@ -142,7 +142,7 @@ class MatchesController extends AbstractController{
      * @param Request $request
      * @return Response
      */
-    public function addMatchesAction(Request $request): Response
+    public function addMatches(Request $request): Response
     {
         $match = new Matches();
         $form = $this->createForm(AddMatchFormType::class, $match);
@@ -175,7 +175,7 @@ class MatchesController extends AbstractController{
      * @param $matchId
      * @return Response
      */
-    public function showDetailMatchesAction(Request $request, $matchId): Response
+    public function showMatchesDetail(Request $request, $matchId): Response
     {
         $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id' => $matchId));
 
@@ -190,7 +190,7 @@ class MatchesController extends AbstractController{
      * @param $matchId
      * @return Response
      */
-    public function editMatchesAction(Request $request, $matchId): Response
+    public function editMatches(Request $request, $matchId): Response
     {
 
         $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id'=> $matchId));
@@ -225,7 +225,7 @@ class MatchesController extends AbstractController{
      * @param $matchId
      * @return Response
      */
-    public function deleteMatchesAction(Request $request, $matchId): Response
+    public function deleteMatches(Request $request, $matchId): Response
     {
 
         $em = $this->getDoctrine()->getManager();

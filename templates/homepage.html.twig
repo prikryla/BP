@@ -1,6 +1,11 @@
 {% extends 'base.html.twig'%}
 
-{% block title %} IS BBK Blansko - Úvod{% endblock %}
+{% block title %} IS BBK Blansko - Homepage{% endblock %}
+
+{% block head %}
+    <link rel="icon" sizes="32x32" href="{{ asset('favicon-32.png') }}" type="image/x-icon" />
+    <link rel="shortcut icon" sizes="32x32" href="{{ asset('favicon-32.png') }}" type="image/x-icon" />
+{% endblock %}
 
 {% block body %}
     <div class="container-fluid" style="text-align: center">

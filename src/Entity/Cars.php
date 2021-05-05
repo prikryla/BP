@@ -12,22 +12,26 @@ use Doctrine\ORM\Mapping as ORM;
 class Cars{
         /**
          * @var integer
-         * @ORM\Column(name="id", type="integer", nullable=false, options={"comment"="ID"})
+         * @ORM\Column(name="id", type="integer", nullable=false,
+         *             options={"comment"="ID"})
          * @ORM\Id
          * @ORM\GeneratedValue(strategy="SEQUENCE")
-         * @ORM\SequenceGenerator(sequenceName="seq_cars_id", allocationSize=1, initialValue=1)
+         * @ORM\SequenceGenerator(sequenceName="seq_cars_id",
+         *                        allocationSize=1, initialValue=1)
          */
         private $id;
 
         /**
          * @var string
-         * @ORM\Column(name="car_name", type="string", nullable=false, options={"comment"="Car_name"})
+         * @ORM\Column(name="car_name", type="string", nullable=false,
+         *             options={"comment"="Car_name"})
          */
         private $car_name;
 
         /**
          * @var string
-         * @ORM\Column(name="spz", type="string", nullable=false, options={"comment"="Spz"})
+         * @ORM\Column(name="spz", type="string", nullable=false,
+         *             options={"comment"="Spz"})
          */
         private $spz;
 

@@ -20,7 +20,7 @@ class CarsController extends AbstractController {
      * @param Request $request
      * @return Response
      */
-    public function showAction(Request $request): Response
+    public function showCars(Request $request): Response
     {
         $cars = $this->getDoctrine()->getRepository('App:Cars')->findAll();
 
@@ -40,7 +40,7 @@ class CarsController extends AbstractController {
      * @param Request $request
      * @return Response
      */
-    public function addAction(Request $request): Response
+    public function addCars(Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -75,7 +75,7 @@ class CarsController extends AbstractController {
      * @param $carsId
      * @return Response
      */
-    public function editAction(Request $request, $carsId, EntityManagerInterface $em): Response
+    public function editCars(Request $request, $carsId, EntityManagerInterface $em): Response
     {
         $car = $this->getDoctrine()->getRepository('App:Cars')->findOneBy(array('id' => $carsId));
 

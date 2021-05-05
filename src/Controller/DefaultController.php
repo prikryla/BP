@@ -32,7 +32,7 @@ class DefaultController extends AbstractController{
      */
     public function indexAction(Request $request): Response
     {
-        return $this->redirectToRoute('homepage');
+        return $this->redirectToRoute('login');
     }
 
     /**
@@ -40,7 +40,7 @@ class DefaultController extends AbstractController{
      * @param Request $request
      * @return Response
      */
-    public function showAction(Request $request): Response
+    public function showHomepage(Request $request): Response
     {
         return $this->render('homepage.html.twig');
     }
@@ -52,7 +52,7 @@ class DefaultController extends AbstractController{
      * @return RedirectResponse|Response
      * @throws Exception
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function usersRegistration(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
 
 // 1) build the form
@@ -62,15 +62,11 @@ class DefaultController extends AbstractController{
 // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
 
-        // dump($form);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
 
             $randomBytes = random_bytes(32);
             $user->setSalt(bin2hex($randomBytes));
 
-// 3) Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
             //      $user->setUsername($user->getEmail());
@@ -78,26 +74,14 @@ class DefaultController extends AbstractController{
             $user->setAuthRole('ROLE_PLAYER');
             $user->setUsers($user);
 
-// 4) save the Users!
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
             // dump($user);
 
-
-// ... do any other work - like sending them an email, etc
-// maybe set a "flash" success message for the user
             $session = new Session();
             $session->getFlashBag()->add('notice', 'Profil vytvořen.');
-            //$session->set('user', $user);
-
-// autologin https://stackoverflow.com/questions/5886713/automatic-post-registration-user-authentication
-//            $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
-//            $this->get('security.token_storage')->setToken($token);
-//            $this->get('session')->set('_security_main', serialize($token));
-//
-//            $this->get('session')->set('player_id', $user->getId());
 
             $this->addFlash(
                 'notice',
@@ -119,7 +103,7 @@ class DefaultController extends AbstractController{
      * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
      */
-    public function detailAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function showUsersProfile(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
 //        if(!$user = $this->getUser()) {
 //            return $this->redirectToRoute('login');
@@ -139,7 +123,7 @@ class DefaultController extends AbstractController{
      * @param $userId
      * @return Response
      */
-    public function detailUserAction(Request $request, UserPasswordEncoderInterface $passwordEncoder, $userId)
+    public function showUsersProfileDetail(Request $request, UserPasswordEncoderInterface $passwordEncoder, $userId)
     {
 //        if(!$user = $this->getUser()) {
 //            return $this->redirectToRoute('login');
@@ -159,7 +143,7 @@ class DefaultController extends AbstractController{
      * @param $userId
      * @return Response
      */
-    public function detailEditAction(Request $request, EntityManagerInterface $em, $userId)
+    public function editUsersProfile(Request $request, EntityManagerInterface $em, $userId)
     {
         $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
 
@@ -197,7 +181,7 @@ class DefaultController extends AbstractController{
      * @return Response
      * @throws \Exception
      */
-    public function changePasswordAction(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, $userId, TokenStorageInterface $tokenStorage){
+    public function changeUsersPassword(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, $userId, TokenStorageInterface $tokenStorage){
         $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
 
         $form = $this->createForm(UserChangePasswordType::class, $user);
@@ -240,7 +224,7 @@ class DefaultController extends AbstractController{
      * @param $usersId
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction(Request $request, EntityManagerInterface $em, $userId, $usersId){
+    public function deleteUsers(Request $request, EntityManagerInterface $em, $userId, $usersId){
 
             $em = $this->getDoctrine()->getManager();
 
