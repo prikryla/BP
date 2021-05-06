@@ -38,6 +38,22 @@ class AttendanceController extends AbstractController{
     }
 
     /**
+     * @Route("/attendance/all", name="show-all-attendance")
+     * @param Request $request
+     * @return Response
+     */
+    public function showAllAttendance(Request $request): Response
+    {
+        $attendance = $this->getDoctrine()->getRepository('App:Attendance')->findAll();
+
+
+
+        return $this->render('showAllAttendance.html.twig', [
+            'attendance' => $attendance
+        ]);
+    }
+
+    /**
      * @Route("/attendance/{userId}", name="show-attendance-user")
      * @param Request $request
      * @param $userId

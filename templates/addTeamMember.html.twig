@@ -25,6 +25,8 @@
                     {{ form_row(form.city, {'label': 'Město'}) }}
 
                     {{ form_row(form.postalCode, {'label': 'PSČ'}) }}
+
+                    {{ form_row(form.school, {'label': 'Škola'}) }}
                 </div>
                 <div class="cell medium-6">
                     {{ form_row(form.plainPassword.first, {'label': 'Heslo'}) }}
@@ -32,8 +34,6 @@
                     {{ form_row(form.plainPassword.second, {'label': 'Heslo znovu'}) }}
 
                     {{ form_row(form.dateOfBirth, {'label': 'Datum narození'}) }}
-
-                    {{ form_row(form.school, {'label': 'Škola'}) }}
 
                     {{ form_row(form.phoneNumberPlayer, {'label': 'Telefon hráč'}) }}
 
@@ -49,8 +49,10 @@
                     <a href="{{ path('show-club', {'userId': app.user.getId()})}}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
                     &nbsp;
                 {% endif %}
-                <a href="{{ path('show-team', {'userId': app.user.getId()})}}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
-                &nbsp;
+                {% if is_granted('ROLE_COACH') or is_granted('ROLE_PLAYER') %}
+                    <a href="{{ path('show-team', {'userId': app.user.getId()})}}" class="btn btn-warning" style="font-weight: bold">Zpět</a>
+                    &nbsp;
+                {% endif %}
                 {{ form_widget(form.save, { 'label': 'Uložit změny', 'attr': { 'class': 'btn btn-success', 'style': 'font-weight: bold' }}) }}
             </div>
             {{ form_end(form) }}

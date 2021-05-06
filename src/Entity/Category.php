@@ -44,13 +44,13 @@ class Category{
             $this->id = $id;
         }
 
-//        /**
-//         * @return string
-//         */
-//        public function getName(): string
-//        {
-//            return $this->name;
-//        }
+        /**
+         * @return string
+         */
+        public function getName(): string
+        {
+            return $this->name;
+        }
 
         public function __toString(){
             return $this->getName();

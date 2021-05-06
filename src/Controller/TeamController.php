@@ -195,6 +195,7 @@ class TeamController extends AbstractController{
         }
         return $this->render('finePlayer.html.twig', [
             'userId' => $userId,
+            'user' => $user,
             'form' => $form->createView()
         ]);
     }
