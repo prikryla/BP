@@ -48,7 +48,7 @@
                                 <a href="{{ path('show-detail-match', {'matchId': match.id}) }}" style="font-weight: bold; color: green">Detail</a>
                             {% endif %}
                         {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('create-nomination', {'matchId': match.id}) }}" style="font-weight: bold; color: green">Nominace</a>
+{#                            <a href="{{ path('create-nomination', {'matchId': match.id}) }}" style="font-weight: bold; color: green">Nominace</a>#}
                             <a href="{{ path('edit-match', {'matchId': match.id}) }}" style="font-weight: bold">Editovat</a>
                             <a href="{{ path('delete-match', {'matchId': match.id}) }}" style="font-weight: bold; color: red">Smazat</a>
                         {% endif %}
