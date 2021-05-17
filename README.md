@@ -26,6 +26,6 @@ First of all you need to update your composer dependencies
 
 After that u should be able to run symfony server (or Xampp or something,..) and use the application
 
-<pre><code>symfony server:start</code></pre>
+<pre><code>php -S localhost:8000 -t public/
+</code></pre>
 
->>>>>>> b63501b97d922e55054c8e5ea2fec6003cbe60e3
