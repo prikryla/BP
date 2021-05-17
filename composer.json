@@ -100,7 +100,10 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.2.*"
+            "require": "5.2.*",
+        },
+        "incenteev-parameters": {
+            "file": "app/config/packages/doctrine.yml"
         }
     }
 }
