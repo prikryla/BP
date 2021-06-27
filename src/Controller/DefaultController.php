@@ -72,7 +72,6 @@ class DefaultController extends AbstractController{
             //      $user->setUsername($user->getEmail());
             //$user->setUsername($user->getEmail());
             $user->setAuthRole('ROLE_PLAYER');
-            $user->setUsers($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -153,7 +152,6 @@ class DefaultController extends AbstractController{
 
         if ($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();
-            $user->setUsers($this->getUser());
 
             $em->persist($user);
             $em->flush();
@@ -196,7 +194,6 @@ class DefaultController extends AbstractController{
                 $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($password);
             }
-            $user->setUsers($this->getUser());
             $tokenStorage->setToken();
 
             $em->persist($user);

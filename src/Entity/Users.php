@@ -162,13 +162,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
          */
         private $plainPassword;
 
-        /**
-         * @var Users
-         *
-         * @ORM\ManyToOne(targetEntity="App\Entity\Users")
-         * @ORM\JoinColumn(name="users_id", referencedColumnName="id")
-         */
-        private $users;
 
         /**
          * @var \App\Entity\Category
@@ -503,22 +496,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
         public function setPhoneNumberFather(string $phoneNumberFather): void
         {
             $this->phoneNumberFather = $phoneNumberFather;
-        }
-
-        /**
-         * @return Users
-         */
-        public function getUsers()
-        {
-            return $this->users;
-        }
-
-        /**
-         * @param Users $users
-         */
-        public function setUsers(Users $users): void
-        {
-            $this->users = $users;
         }
 
         /**
