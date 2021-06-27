@@ -1,13 +1,19 @@
 # Informační systém BBK Blansko (Bakalářská práce)
 
-**How to install app**
+**Start app**
+- command **symfony server:start**
+  
+**Login**
+- admin 
+  - username - Admin 
+  - pass - Heslo12345
+  
 
-- Install all composer dependencies
+- trener (kategorie U15)
+  - username - Trener
+  - pass - Trener12345
+  
 
-  <pre><code>composer install</code></pre>
-
-- Setup your database (set db name, user, password)
-- Run application
-  <pre><code>php -S localhost:8000 -t public/
-  </code></pre>
-
+- hráč
+  - username - Hráč U19
+  - pass - Heslo12345
