@@ -24,7 +24,7 @@ class NominationController extends AbstractController{
     {
         $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id' => $matchId));
         $players = $this->getDoctrine()->getRepository('App:Users')->findAll();
-        $nomination = $this->getDoctrine()->getRepository('App:Nomination')->findAll();
+        $nomination = $this->getDoctrine()->getRepository('App:Nomination')->findBy(array('matches_id' => $matchId));
         $get = $this->get('security.token_storage')->getToken()->getUser();
         $user = $get->getCategoryId();
 
