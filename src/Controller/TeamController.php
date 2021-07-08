@@ -83,7 +83,6 @@ class TeamController extends AbstractController{
             $user->setPassword($password);
 
             $user->setAuthRole('ROLE_PLAYER');
-            $user->setUsers($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -143,7 +142,6 @@ class TeamController extends AbstractController{
 
         if ($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();
-            $user->setUsers($this->getUser());
 
             $em->persist($user);
             $em->flush();
@@ -179,7 +177,6 @@ class TeamController extends AbstractController{
 
         if ($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();
-            $user->setUsers($this->getUser());
 
             $em->persist($user);
             $em->flush();
