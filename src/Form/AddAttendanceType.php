@@ -24,7 +24,10 @@ class AddAttendanceType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('attendanceCheck', CheckBoxType::class, array('label' => "Přítomen"))
+            ->add('attendanceCheck', CheckBoxType::class, array(
+                'label' => "Přítomen",
+                'required' => false
+            ))
             ->add('date', TextType::class, array(
                 'label' => "Datum"
             ))
