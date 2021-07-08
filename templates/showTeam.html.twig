@@ -4,15 +4,15 @@
 
 {% block body %}
     <div class="container-fluid ">
-                {% if app.user.getCategoryId == 1 %}
+                {% if app.user.getCategoryId == 2 %}
                     <h3>Tým U11</h3>
-                {% elseif app.user.getCategoryId == 2 %}
-                    <h3>Tým U13</h3>
                 {% elseif app.user.getCategoryId == 3 %}
-                    <h3>Tým U15</h3>
+                    <h3>Tým U14</h3>
                 {% elseif app.user.getCategoryId == 4 %}
-                    <h3>Tým U19</h3>
-                {% elseif app.user.getCategoryId == 0 %}
+                    <h3>Tým U17</h3>
+                {% elseif app.user.getCategoryId == 5 %}
+                    <h3>Tým U19/U20</h3>
+                {% elseif app.user.getCategoryId == 1 %}
                     <h3>Tým</h3>
                 {% endif %}
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COACH') %}
@@ -32,15 +32,15 @@
             <tbody id="table_team">
             {% for user in members %}
                 <tr class="row align-center" style="margin-top: 2px">
-                        {% if user.categoryId == 1 %}
+                        {% if user.categoryId == 2 %}
                             <td class="column small-2 text-center">U11</td>
-                        {% elseif user.categoryId == 2 %}
-                            <td class="column small-2 text-center">U13</td>
                         {% elseif user.categoryId == 3 %}
-                            <td class="column small-2 text-center">U15</td>
+                            <td class="column small-2 text-center">U14</td>
                         {% elseif user.categoryId == 4 %}
-                            <td class="column small-2 text-center">U19</td>
-                        {% elseif user.categoryId == 0 %}
+                            <td class="column small-2 text-center">U17</td>
+                        {% elseif user.categoryId == 5 %}
+                            <td class="column small-2 text-center">U19/U20</td>
+                        {% elseif user.categoryId == 1 %}
                             <td class="column small-2 text-center">Admin</td>
                         {% endif %}
                     <td class="column small-2 text-center">{{ user.firstName }}</td>

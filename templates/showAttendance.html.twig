@@ -22,15 +22,15 @@
             <tbody id="table_attendance">
             {% for user in members %}
                 <tr class="row align-center" style="margin-top: 2px">
-                    {% if user.categoryId == 1 %}
+                    {% if user.categoryId == 2 %}
                         <td class="columns small-2 text-center">U11</td>
-                    {% elseif user.categoryId == 2 %}
-                        <td class="columns small-2 text-center">U13</td>
                     {% elseif user.categoryId == 3 %}
-                        <td class="columns small-2 text-center">U15</td>
+                        <td class="columns small-2 text-center">U14</td>
                     {% elseif user.categoryId == 4 %}
-                        <td class="columns small-2 text-center">U19</td>
-                    {% elseif user.categoryId == 0 %}
+                        <td class="columns small-2 text-center">U17</td>
+                    {% elseif user.categoryId == 5 %}
+                        <td class="columns small-2 text-center">U19/U20</td>
+                    {% elseif user.categoryId == 1 %}
                         <td class="columns small-2 text-center">Admin</td>
                     {% endif %}
                     <td class="column small-2 text-center">{{ user.firstName }}</td>

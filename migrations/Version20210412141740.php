@@ -43,7 +43,6 @@ final class Version20210412141740 extends AbstractMigration
         $this->addSql('ALTER TABLE player_statistics ADD CONSTRAINT FK_BD760F1F67B3B43D FOREIGN KEY (users_id) REFERENCES users (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('CREATE INDEX IDX_BD760F1F67B3B43D ON player_statistics (users_id)');
         $this->addSql('ALTER INDEX idx_8d93d649f1b2bba7 RENAME TO IDX_1483A5E9F1B2BBA7');
-        $this->addSql('ALTER INDEX idx_8d93d64967b3b43d RENAME TO IDX_1483A5E967B3B43D');
     }
 
     public function down(Schema $schema) : void

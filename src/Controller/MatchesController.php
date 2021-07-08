@@ -54,7 +54,7 @@ class MatchesController extends AbstractController{
     }
 
     /**
-     * @Route("/matches/U13", name="show-matches-u13")
+     * @Route("/matches/U14", name="show-matches-u14")
      * @param Request $request
      * @return Response
      */
@@ -69,13 +69,13 @@ class MatchesController extends AbstractController{
             array_push($allMatches, $match);
         }
 
-        return $this->render('showMatchesU13.html.twig',[
+        return $this->render('showMatchesU14.html.twig',[
             'matches' => $allMatches,
         ]);
     }
 
     /**
-     * @Route("/matches/U15", name="show-matches-u15")
+     * @Route("/matches/U17", name="show-matches-u17")
      * @param Request $request
      * @return Response
      */
@@ -90,13 +90,13 @@ class MatchesController extends AbstractController{
             array_push($allMatches, $match);
         }
 
-        return $this->render('showMatchesU15.html.twig',[
+        return $this->render('showMatchesU17.html.twig',[
             'matches' => $allMatches,
         ]);
     }
 
     /**
-     * @Route("/matches/U19", name="show-matches-u19")
+     * @Route("/matches/U19-U20", name="show-matches-u19/u20")
      * @param Request $request
      * @return Response
      */
@@ -111,7 +111,7 @@ class MatchesController extends AbstractController{
             array_push($allMatches, $match);
         }
 
-        return $this->render('showMatchesU19.html.twig',[
+        return $this->render('showMatchesU19U20.html.twig',[
             'matches' => $allMatches,
         ]);
     }

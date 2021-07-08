@@ -72,6 +72,8 @@ class DefaultController extends AbstractController{
             //      $user->setUsername($user->getEmail());
             //$user->setUsername($user->getEmail());
             $user->setAuthRole('ROLE_PLAYER');
+            $user->setFines(0);
+            $user->setDressNumber(0);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
