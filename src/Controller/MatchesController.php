@@ -40,7 +40,7 @@ class MatchesController extends AbstractController{
 
     public function showMatchesU11(Request $request): Response
     {
-        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 1));
+        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 2));
 
         $allMatches = [];
 
@@ -61,7 +61,7 @@ class MatchesController extends AbstractController{
 
     public function showMatchesU13(Request $request): Response
     {
-        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 2));
+        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 3));
 
         $allMatches = [];
 
@@ -82,7 +82,7 @@ class MatchesController extends AbstractController{
 
     public function showMatchesU15(Request $request): Response
     {
-        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 3));
+        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 4));
 
         $allMatches = [];
 
@@ -103,7 +103,7 @@ class MatchesController extends AbstractController{
 
     public function showMatchesU19(Request $request): Response
     {
-        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 4));
+        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 5));
 
         $allMatches = [];
 
