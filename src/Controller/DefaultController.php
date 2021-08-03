@@ -86,15 +86,14 @@ class DefaultController extends AbstractController{
 
             $this->addFlash(
                 'notice',
-                'Uživatel byl úspěšně zaregistrován! Nyní se můžete přihlásit'
+                'Uživatel byl úspěšně zaregistrován! Nyní se můžete přihlásit!'
             );
 
             return $this->redirectToRoute('login');
         }
 
         return $this->render(
-            'registration.html.twig',
-            array('form' => $form->createView())
+            'registration.html.twig', array('form' => $form->createView())
         );
     }
 

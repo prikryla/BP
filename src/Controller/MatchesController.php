@@ -33,12 +33,12 @@ class MatchesController extends AbstractController{
     }
 
     /**
-     * @Route("/matches/U11", name="show-matches-u11")
+     * @Route("/matches/U12", name="show-matches-u12")
      * @param Request $request
      * @return Response
      */
 
-    public function showMatchesU11(Request $request): Response
+    public function showMatchesU12(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 2));
 
@@ -48,18 +48,18 @@ class MatchesController extends AbstractController{
             array_push($allMatches, $match);
         }
 
-        return $this->render('showMatchesU11.html.twig',[
+        return $this->render('showMatchesU12.html.twig',[
             'matches' => $allMatches,
         ]);
     }
 
     /**
-     * @Route("/matches/U14", name="show-matches-u14")
+     * @Route("/matches/U15", name="show-matches-u15")
      * @param Request $request
      * @return Response
      */
 
-    public function showMatchesU13(Request $request): Response
+    public function showMatchesU15(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 3));
 
@@ -69,7 +69,7 @@ class MatchesController extends AbstractController{
             array_push($allMatches, $match);
         }
 
-        return $this->render('showMatchesU14.html.twig',[
+        return $this->render('showMatchesU15.html.twig',[
             'matches' => $allMatches,
         ]);
     }
@@ -80,7 +80,7 @@ class MatchesController extends AbstractController{
      * @return Response
      */
 
-    public function showMatchesU15(Request $request): Response
+    public function showMatchesU17(Request $request): Response
     {
         $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 4));
 

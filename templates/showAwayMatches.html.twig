@@ -21,9 +21,9 @@
                 {% for match in matches %}
                     <tr class="row align-center">
                         {% if match.categoryId == 2 %}
-                            <td class="columns small-2 text-center">U11</td>
+                            <td class="columns small-2 text-center">U12</td>
                         {% elseif match.categoryId == 3 %}
-                            <td class="columns small-2 text-center">U14</td>
+                            <td class="columns small-2 text-center">U15</td>
                         {% elseif match.categoryId == 4 %}
                             <td class="columns small-2 text-center">U17</td>
                         {% elseif match.categoryId == 5 %}
@@ -33,7 +33,7 @@
                         <td class="columns small-2 text-center">{{ match.awayTeam }}</td>
                         <td class="columns small-2 text-center">{{ match.matchTime| date('H:i')}}</td>
                         <td class="columns small-2 text-center">{{ match.address }}, {{ match.city }}</td>
-                        <td class="columns small-2 text-center" ><a href="#" style="font-weight: bold">Nominace</a></td>
+                        <td class="columns small-2 text-center" ><a href="{{ path('create-nomination', {'matchId': match.id}) }}" style="font-weight: bold">Nominace</a></td>
 
                     </tr>
                 {% endfor %}
