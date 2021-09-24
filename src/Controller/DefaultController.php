@@ -216,11 +216,11 @@ class DefaultController extends AbstractController{
 
     /**
      * @Route ("/user/delete/{usersId}/{userId}", name="delete-user")
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param Request $request
+     * @param EntityManagerInterface $em
      * @param $userId
      * @param $usersId
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteUsers(Request $request, EntityManagerInterface $em, $userId, $usersId){
 

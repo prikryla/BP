@@ -45,11 +45,12 @@
         </li>
     </ul>
 </nav>
-{#<div class="container-fluid">#}
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
+<div class="app-dashboard shrink-medium">
+    <div class="app-dashboard-body off-canvas-wrapper">
+        <div id="app-dashboard-sidebar"
+             class="app-dashboard-sidebar position-left off-canvas off-canvas-absolute reveal-for-medium" data-off-canvas>
+            <div class="app-dashboard-sidebar-inner">
+                <ul class="menu vertical">
                     <li class="nav-item text-center">
                         <a class="nav-link active" href="{{ path('show-matches') }}" style="font-weight: bold">
                             <span data-feather="matches"></span>
@@ -57,52 +58,52 @@
                         </a>
                     </li>
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COACH') %}
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-attendance') }}" style="font-weight: bold">
-                            <span data-feather="attendance"></span>
-                            Docházka
-                        </a>
-                    </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link" href="{{ path('show-attendance') }}" style="font-weight: bold">
+                                <span data-feather="attendance"></span>
+                                Docházka
+                            </a>
+                        </li>
                     {% endif %}
                     {% if is_granted('ROLE_PLAYER') %}
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-attendance-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">
-                            <span data-feather="attendance"></span>
-                            Docházka
-                        </a>
-                    </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link" href="{{ path('show-attendance-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">
+                                <span data-feather="attendance"></span>
+                                Docházka
+                            </a>
+                        </li>
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-club') }}" style="font-weight: bold">
-                            <span data-feather="club"></span>
-                            Klub
-                        </a>
-                    </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link" href="{{ path('show-club') }}" style="font-weight: bold">
+                                <span data-feather="club"></span>
+                                Klub
+                            </a>
+                        </li>
                     {% endif %}
                     {% if is_granted('ROLE_PLAYER') or is_granted('ROLE_COACH') %}
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-team', {'userId': app.user.getId()}) }}" style="font-weight: bold">
-                            <span data-feather="team"></span>
-                            Tým
-                        </a>
-                    </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link" href="{{ path('show-team', {'userId': app.user.getId()}) }}" style="font-weight: bold">
+                                <span data-feather="team"></span>
+                                Tým
+                            </a>
+                        </li>
                     {% endif %}
                     {% if is_granted('ROLE_PLAYER') %}
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-statistics-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">
-                            <span data-feather="statistics"></span>
-                            Statistiky
-                        </a>
-                    </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link" href="{{ path('show-statistics-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">
+                                <span data-feather="statistics"></span>
+                                Statistiky
+                            </a>
+                        </li>
                     {% endif %}
                     {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}
-                    <li class="nav-item text-center">
-                        <a class="nav-link" href="{{ path('show-statistics') }}" style="font-weight: bold">
-                            <span data-feather="statistics"></span>
-                            Statistiky
-                        </a>
-                    </li>
+                        <li class="nav-item text-center">
+                            <a class="nav-link" href="{{ path('show-statistics') }}" style="font-weight: bold">
+                                <span data-feather="statistics"></span>
+                                Statistiky
+                            </a>
+                        </li>
                     {% endif %}
                     {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}
                         <li class="nav-item text-center">
@@ -120,32 +121,45 @@
                     </li>
                 </ul>
             </div>
-        </nav>
-        <div class="width-75">
-            <div class="container">
-                <div class="grid-x grid-padding-x">
-                    <div class="cell" data-sticky-container>
-                        {% for flash_message in app.session.flashBag.get('notice') %}
-                            <div class="callout success" data-closable style="width: 50%">
-                                {{ flash_message }}
-                                <button class="close-button" aria-label="Dismiss" type="button" data-close>
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        {% endfor %}
-                        {% for flash_message in app.session.flashBag.get('error') %}
-                            <div class="callout alert" data-closable style="width: 50%">
-                                {{ flash_message }}
-                                <button class="close-button" aria-label="Dismiss" type="button" data-close>
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        {% endfor %}
+        </div>
+
+        <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+            <div class="section-header">
+                <div class="row align-left">
+                    <div class="cell small-12 text-left">
+                        <h1>
+                            {% block header %}{% endblock %}
+                        </h1>
                     </div>
                 </div>
+            </div>
+
+            <div class="grid-container">
                 {% block body %}{% endblock %}
             </div>
         </div>
+
+    </div>
+</div>
+
+<div class="grid-x grid-padding-x">
+    <div class="cell" data-sticky-container>
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="callout success" data-closable>
+                {{ flash_message }}
+                <button class="close-button" aria-label="Dismiss" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        {% for flash_message in app.session.flashBag.get('error') %}
+            <div class="callout alert" data-closable>
+                {{ flash_message }}
+                <button class="close-button" aria-label="Dismiss" type="button" data-close>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
     </div>
 </div>
 <footer class="bg-light text-center text-lg-start" style="bottom: 0; width: 100%; position: fixed">
