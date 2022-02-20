@@ -1,0 +1,12 @@
+trasovat uživatele, který provedl změnu/úpravu
+úprava ID uživatele za jméno
+opravy designu tabulek
+opravit flash messages
+nominaci přidat k detailu zápasu (pokud je už k dispozici)
+vyřešit trenéry (upravit zobrazování)
+přidat get/post metody do rout
+VYŘEŠIT DOCHÁZKU
+Zapomenuté heslo - na email
+Roztřídit Twig templates
+Nastavení doby přihlášení při neaktivitě
+DataTables - do tabulek pro kvalitnější práci

@@ -6,6 +6,8 @@ use App\Entity\Category;
 use App\Entity\Users;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -13,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class UserRegisterType extends AbstractType
 {
@@ -37,8 +40,9 @@ class UserRegisterType extends AbstractType
             ->add('city', TextType::class, array('label' => "Město"))
             ->add('postalCode', TextType::class, array('label' => "PSČ"))
             ->add('school', TextType::class, array('label' => "Škola"))
-            ->add('dateOfBirth', TextType::class, array(
-                'label' => 'Datum narození'
+            ->add('dateOfBirth', DateType::class, array(
+                'label' => "Datum narození",
+                'widget' => 'single_text',
             ))
             ->add('phoneNumberPlayer', TextType::class, array(
                 'label' => "Telefon na hráče",

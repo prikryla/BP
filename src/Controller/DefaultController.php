@@ -74,6 +74,7 @@ class DefaultController extends AbstractController{
             $user->setAuthRole('ROLE_PLAYER');
             $user->setFines(0);
             $user->setDressNumber(0);
+            $user->setDateOfBirth($request->request->get('dateOfBirth'));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -216,11 +217,11 @@ class DefaultController extends AbstractController{
 
     /**
      * @Route ("/user/delete/{usersId}/{userId}", name="delete-user")
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \Doctrine\ORM\EntityManagerInterface $em
+     * @param Request $request
+     * @param EntityManagerInterface $em
      * @param $userId
      * @param $usersId
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteUsers(Request $request, EntityManagerInterface $em, $userId, $usersId){
 
