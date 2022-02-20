@@ -74,6 +74,7 @@ class DefaultController extends AbstractController{
             $user->setAuthRole('ROLE_PLAYER');
             $user->setFines(0);
             $user->setDressNumber(0);
+            $user->setDateOfBirth($request->request->get('dateOfBirth'));
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

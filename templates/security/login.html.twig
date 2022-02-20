@@ -13,18 +13,13 @@
     <div class="container">
         <div class="col-md-12 my-auto">
             <form class=" mx-auto" action="{{ path('login') }}" method="post" style="margin-top: 5em; width: 35%">
-                <img src="https://www.bbkblansko.cz/_files/200000274-f3f9ff3fa3/450/logo.jpg" alt="Logo BBK Blansko" width="320px" height="250px" style="margin-bottom: 50px; align-self: center">
                 {% if app.user %}
                     <div class="mb-3 text-center" style="border: 1px solid black; padding: 12px">
                         Už jsi přihlášený pod uživatelským jménem {{ app.user.username }}<br><br><a href="{{ path('homepage') }}" style="font-weight: bold">Přejít na hlavní stranu</a><br>
                         <a href="{{ path('logout') }}" style="font-weight: bold; color: red">Odhlásit </a>
                     </div>
                 {% endif %}
-                {% include 'flashes.html.twig' %}
                 <h1 class="h3 mb-3 font-weight-normal">IS BBK BLANSKO</h1>
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
                 <label for="inputUsername">Uživatelské jméno</label>
                 <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" required autofocus>
 
