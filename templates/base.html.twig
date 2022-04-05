@@ -3,422 +3,255 @@
     <head>
         <title>{% block title %}IS BBK Blansko{% endblock %}</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- Compressed CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
-        <!-- Compressed JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-        <!-- foundation-float.min.css: Compressed CSS with legacy Float Grid -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-float.min.css" integrity="sha256-4ldVyEvC86/kae2IBWw+eJrTiwNEbUUTmN0zkP4luL4=" crossorigin="anonymous">
-        <!-- foundation-prototype.min.css: Compressed CSS with prototyping classes -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-prototype.min.css" integrity="sha256-BiKflOunI0SIxlTOOUCQ0HgwXrRrRwBkIYppEllPIok=" crossorigin="anonymous">
-        <!-- foundation-rtl.min.css: Compressed CSS with right-to-left reading direction -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation-rtl.min.css" integrity="sha256-F+9Ns8Z/1ZISonBbojH743hsmF3x3AlQdJEeD8DhQsE=" crossorigin="anonymous">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <title>IS-BBK Blansko</title>
 
         {% block stylesheets %}
+
             {{ encore_entry_link_tags('main_css') }}
+            {{ encore_entry_link_tags('css') }}
+
         {% endblock %}
 
-        <style>
-
-            .app-dashboard {
-                height: 100vh;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-flex-direction: column;
-                -ms-flex-direction: column;
-                flex-direction: column;
-            }
-
-            .app-dashboard-body {
-                -webkit-flex: 1 1 auto;
-                -ms-flex: 1 1 auto;
-                flex: 1 1 auto;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-            }
-
-            .app-dashboard-top-nav-bar {
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-align-items: center;
-                -ms-flex-align: center;
-                align-items: center;
-                -webkit-justify-content: center;
-                -ms-flex-pack: center;
-                justify-content: center;
-                background: #2c3840;
-                height: 55px;
-                width: 100%;
-                -webkit-flex: 0 0 55px;
-                -ms-flex: 0 0 55px;
-                flex: 0 0 55px;
-            }
-
-            .app-dashboard-top-nav-bar .menu-icon {
-                vertical-align: text-bottom;
-            }
-
-            .app-dashboard-logo {
-                color: #fefefe;
-                text-transform: uppercase;
-                font-weight: bold;
-            }
-
-            .app-dashboard-search-bar-container {
-                position: relative;
-            }
-
-            .app-dashboard-search {
-                background: #41525e;
-                border: 0;
-                margin-bottom: 0;
-                color: #fefefe;
-            }
-
-            .app-dashboard-search:active, .app-dashboard-search:focus {
-                background: #222b31;
-            }
-
-            .app-dashboard-search-icon {
-                position: absolute;
-                color: #fefefe;
-                right: 1rem;
-                top: 50%;
-                -webkit-transform: translateY(-50%);
-                -ms-transform: translateY(-50%);
-                transform: translateY(-50%);
-            }
-
-            .app-dashboard-top-bar-actions {
-                -webkit-align-items: center;
-                -ms-flex-align: center;
-                align-items: center;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-            }
-
-            .app-dashboard-top-bar-actions button {
-                margin-bottom: 0;
-                margin-right: 2rem;
-            }
-
-            .app-dashboard-top-bar-actions button.hollow {
-                border-color: #fefefe;
-                color: #fefefe;
-            }
-
-            .app-dashboard-top-bar-actions button.hollow:hover {
-                background: #fefefe;
-                color: #1779ba;
-            }
-
-            .app-dashboard-top-bar-actions .fa-info-circle {
-                color: #fefefe;
-                font-size: 1.5rem;
-            }
-
-            .app-dashboard-sidebar {
-                background-color: #eebb6e;
-                height: 100%;
-                overflow-x: visible;
-                overflow-y: auto;
-                z-index: 1;
-                transition: all 0.5s ease;
-            }
-
-            .app-dashboard-sidebar .app-dashboard-open-sidebar, .app-dashboard-sidebar .app-dashboard-close-sidebar {
-                -webkit-align-items: baseline;
-                -ms-flex-align: baseline;
-                align-items: baseline;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-justify-content: space-between;
-                -ms-flex-pack: justify;
-                justify-content: space-between;
-                padding: 2rem 1rem;
-            }
-
-            .app-dashboard-sidebar .app-dashboard-sidebar-close-button {
-                font-size: 14px;
-            }
-
-            .app-dashboard-sidebar .app-dashboard-sidebar-inner {
-                height: 100%;
-                overflow-x: hidden;
-                overflow-y: auto;
-            }
-
-            .app-dashboard-sidebar .app-dashboard-sidebar-inner .menu > li > a {
-                -webkit-align-items: center;
-                -ms-flex-align: center;
-                align-items: center;
-            }
-
-            .app-dashboard-sidebar .fa.large {
-                font-size: 1.5rem;
-                width: 40px;
-            }
-
-            .reveal-for-medium .app-dashboard-open-sidebar {
-                display: none;
-            }
-
-            .app-dashboard-sidebar-footer {
-                background: rgba(42, 57, 79, 0.8);
-                bottom: 0;
-                left: 0;
-                padding: 1rem;
-                position: absolute;
-                width: 100%;
-            }
-
-            .app-dashboard-open-sidebar {
-                text-align: center;
-            }
-
-            .app-dashboard-body-content {
-                transition: all 0.5s ease;
-                overflow-y: auto;
-                -webkit-flex: 1 1 0;
-                -ms-flex: 1 1 0px;
-                flex: 1 1 0;
-                padding: 20px;
-                background-color: #fefefe;
-            }
-
-            @media screen and (min-width: 40em) and (max-width: 63.9375em) {
-                .app-dashboard.shrink-medium .app-dashboard-close-sidebar, .app-dashboard.shrink-medium .app-dashboard-sidebar-text {
-                    display: none;
-                }
-                .app-dashboard.shrink-medium .app-dashboard-open-sidebar {
-                    display: block;
-                }
-                .app-dashboard.shrink-medium .app-dashboard-sidebar {
-                    width: 80px;
-                }
-                .app-dashboard.shrink-medium .app-dashboard-sidebar .fa.large {
-                    width: auto;
-                }
-                .app-dashboard.shrink-medium .off-canvas-content {
-                    margin-left: 80px;
-                    width: calc(100% - 80px);
-                }
-                .app-dashboard.shrink-medium .navigation {
-                    margin-top: 2rem;
-                    text-align: center;
-                }
-                .app-dashboard.shrink-medium .menu.vertical > li > a {
-                    -webkit-justify-content: center;
-                    -ms-flex-pack: center;
-                    justify-content: center;
-                }
-                .app-dashboard.shrink-medium .menu li::after {
-                    display: none;
-                    opacity: 0;
-                    transition: opacity 0.5s ease-in-out;
-                }
-                .app-dashboard.shrink-medium .menu li a {
-                    padding: 0.75rem;
-                }
-                .app-dashboard.shrink-medium .menu li a svg {
-                    margin: 0;
-                }
-                .app-dashboard.shrink-medium .menu li a span {
-                    display: none;
-                    opacity: 0;
-                    transition: opacity 0.5s ease-in-out;
-                }
-            }
-
-            @media print, screen and (min-width: 64em) {
-                .app-dashboard.shrink-large .app-dashboard-close-sidebar, .app-dashboard.shrink-large .app-dashboard-sidebar-text {
-                    display: none;
-                }
-                .app-dashboard.shrink-large .app-dashboard-open-sidebar {
-                    display: block;
-                }
-                .app-dashboard.shrink-large .app-dashboard-sidebar {
-                    width: 80px;
-                }
-                .app-dashboard.shrink-large .app-dashboard-sidebar .fa.large {
-                    width: auto;
-                }
-                .app-dashboard.shrink-large .off-canvas-content {
-                    margin-left: 80px;
-                    width: calc(100% - 80px);
-                }
-                .app-dashboard.shrink-large .navigation {
-                    margin-top: 2rem;
-                    text-align: center;
-                }
-                .app-dashboard.shrink-large .menu.vertical > li > a {
-                    -webkit-justify-content: center;
-                    -ms-flex-pack: center;
-                    justify-content: center;
-                }
-                .app-dashboard.shrink-large .menu li::after {
-                    display: none;
-                    opacity: 0;
-                    transition: opacity 0.5s ease-in-out;
-                }
-                .app-dashboard.shrink-large .menu li a {
-                    padding: 0.75rem;
-                }
-                .app-dashboard.shrink-large .menu li a svg {
-                    margin: 0;
-                }
-                .app-dashboard.shrink-large .menu li a span {
-                    display: none;
-                    opacity: 0;
-                    transition: opacity 0.5s ease-in-out;
-                }
-            }
-
-
-        </style>
-
+        {{ encore_entry_script_tags('scripts') }}
 
     </head>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('homepage') }}">Informační systém BBK Blansko</a>
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" style="font-weight: bold; color: white">
-                    {% if is_granted('ROLE_PLAYER') or is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN')  %}
-                        {% if app.user.getCategoryId() == 1 %}
-                            Jsi přihlášený jako Admin
-                        {% elseif app.user.getCategoryId() == 2 %}
-                            Jsi přihlášený jako {{ app.user.getUsername() }}
-                        {% elseif app.user.getCategoryId() == 3 %}
-                            Jsi přihlášený jako {{ app.user.getUsername() }}
-                        {% elseif app.user.getCategoryId() == 4 %}
-                            Jsi přihlášený jako {{ app.user.getUsername() }}
-                        {% elseif app.user.getCategoryId() == 5 %}
-                            Jsi přihlášený jako {{ app.user.getUsername() }}
-                        {% endif %}
-                    {% endif %}
-                </a>
-            </li>
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" style="text-align: center" href="{{ path('logout') }}">Odhlásit se</a>
-            </li>
-        </ul>
-    </nav>
-    <div class="app-dashboard shrink-medium">
-        <div class="app-dashboard-body off-canvas-wrapper">
-            <div id="app-dashboard-sidebar"
-                 class="app-dashboard-sidebar position-left off-canvas off-canvas-absolute reveal-for-medium" data-off-canvas>
-                <div class="app-dashboard-sidebar-inner">
-                    <ul class="menu vertical">
-                        <li class="nav-item text-center">
-                            <a class="nav-link active" href="{{ path('show-matches') }}" style="font-weight: bold">
-                                <span data-feather="matches"></span>
-                                Zápasy
-                            </a>
-                        </li>
-                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COACH') %}
-                            <li class="nav-item text-center">
-                                <a class="nav-link" href="{{ path('show-attendance') }}" style="font-weight: bold">
-                                    <span data-feather="attendance"></span>
-                                    Docházka
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_PLAYER') %}
-                            <li class="nav-item text-center">
-                                <a class="nav-link" href="{{ path('show-attendance-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">
-                                    <span data-feather="attendance"></span>
-                                    Docházka
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item text-center">
-                                <a class="nav-link" href="{{ path('show-club') }}" style="font-weight: bold">
-                                    <span data-feather="club"></span>
-                                    Klub
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_PLAYER') or is_granted('ROLE_COACH') %}
-                            <li class="nav-item text-center">
-                                <a class="nav-link" href="{{ path('show-team', {'userId': app.user.getId()}) }}" style="font-weight: bold">
-                                    <span data-feather="team"></span>
-                                    Tým
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_PLAYER') %}
-                            <li class="nav-item text-center">
-                                <a class="nav-link" href="{{ path('show-statistics-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">
-                                    <span data-feather="statistics"></span>
-                                    Statistiky
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item text-center">
-                                <a class="nav-link" href="{{ path('show-statistics') }}" style="font-weight: bold">
-                                    <span data-feather="statistics"></span>
-                                    Statistiky
-                                </a>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item text-center">
-                                <a class="nav-link" href="{{ path('show-cars') }}" style="font-weight: bold">
-                                    <span data-feather="cars"></span>
-                                    Auta
-                                </a>
-                            </li>
-                        {% endif %}
-                        <li class="nav-item text-center">
-                            <a class="nav-link" href="{{ path('user-detail') }}" style="font-weight: bold">
-                                <span data-feather="profile"></span>
-                                Profil
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
-                <div class="section-header">
-                    <div class="row align-left">
-                        <div class="cell small-12 text-left">
-                            <h1>
-                                {% block header %}{% endblock %}
-                            </h1>
+    <body>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="{{ path('homepage') }}">BBK Blansko</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm me-5 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+{#                        <div class="sb-sidenav-menu-heading">Core</div>#}
+                        <a class="nav-link" href="{{ path('show-club') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Tým
+                        </a>
+{#                        <div class="sb-sidenav-menu-heading">Interface</div>#}
+                        <a class="nav-link" href="{{ path('show-matches') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Zápasy
+{#                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>#}
+                        </a>
+{#                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">#}
+{#                            <nav class="sb-sidenav-menu-nested nav">#}
+{#                                <a class="nav-link" href="layout-static.html">Static Navigation</a>#}
+{#                                <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>#}
+{#                            </nav>#}
+{#                        </div>#}
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Docházka
+{#                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>#}
+                        </a>
+{#                        <div class="sb-sidenav-menu-heading">Addons</div>#}
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Klub
+                        </a>
+                        <a class="nav-link" href="tables.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Statistiky
+                        </a>
+                        <a class="nav-link" href="tables.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Auta
+                        </a>
+                        <a class="nav-link" href="tables.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Profil
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    {{ app.user.getUsername() }}
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-5 mt-4">
+                    {% block body %}
+                    {% endblock %}
+{#                    <h1 class="mt-4">Static Navigation</h1>#}
+{#                    <ol class="breadcrumb mb-4">#}
+{#                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>#}
+{#                        <li class="breadcrumb-item active">Static Navigation</li>#}
+{#                    </ol>#}
+{#                    <div class="card mb-4">#}
+{#                        <div class="card-body">#}
+{#                            <p class="mb-0">#}
+{#                                This page is an example of using static navigation. By removing the#}
+{#                                <code>.sb-nav-fixed</code>#}
+{#                                class from the#}
+{#                                <code>body</code>#}
+{#                                , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.#}
+{#                            </p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div style="height: 100vh"></div>#}
+{#                    <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div>#}
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="grid-container">
-                    {% block body %}{% endblock %}
-                </div>
-            </div>
-
+            </footer>
         </div>
     </div>
-
-    <footer class="bg-light text-center text-lg-start" style="bottom: 0; width: 100%; position: fixed">
-        <!-- Copyright -->
-        <div class=" bg-dark text-center p-3" style="color: white">
-            © 2021 Copyright:
-            <a style="color: white" href="https://www.bbkblansko.cz/">BBK Blansko</a>
-        </div>
-        <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
-    {% block scripts %}
-    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
     </body>
 </html>
+
+{#    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">#}
+{#        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ path('homepage') }}">Informační systém BBK Blansko</a>#}
+{#        <ul class="navbar-nav px-3">#}
+{#            <li class="nav-item text-nowrap">#}
+{#                <a class="nav-link" style="font-weight: bold; color: white">#}
+{#                    {% if is_granted('ROLE_PLAYER') or is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN')  %}#}
+{#                        {% if app.user.getCategoryId() == 1 %}#}
+{#                            Jsi přihlášený jako Admin#}
+{#                        {% elseif app.user.getCategoryId() == 2 %}#}
+{#                            Jsi přihlášený jako {{ app.user.getUsername() }}#}
+{#                        {% elseif app.user.getCategoryId() == 3 %}#}
+{#                            Jsi přihlášený jako {{ app.user.getUsername() }}#}
+{#                        {% elseif app.user.getCategoryId() == 4 %}#}
+{#                            Jsi přihlášený jako {{ app.user.getUsername() }}#}
+{#                        {% elseif app.user.getCategoryId() == 5 %}#}
+{#                            Jsi přihlášený jako {{ app.user.getUsername() }}#}
+{#                        {% endif %}#}
+{#                    {% endif %}#}
+{#                </a>#}
+{#            </li>#}
+{#            <li class="nav-item text-nowrap">#}
+{#                <a class="nav-link" style="text-align: center" href="{{ path('logout') }}">Odhlásit se</a>#}
+{#            </li>#}
+{#        </ul>#}
+{#    </nav>#}
+{#    <div class="app-dashboard shrink-medium">#}
+{#        <div class="app-dashboard-body off-canvas-wrapper">#}
+{#            <div id="app-dashboard-sidebar"#}
+{#                 class="app-dashboard-sidebar position-left off-canvas off-canvas-absolute reveal-for-medium" data-off-canvas>#}
+{#                <div class="app-dashboard-sidebar-inner">#}
+{#                    <ul class="menu vertical">#}
+{#                        <li class="nav-item text-center">#}
+{#                            <a class="nav-link active" href="{{ path('show-matches') }}" style="font-weight: bold">#}
+{#                                <span data-feather="matches"></span>#}
+{#                                Zápasy#}
+{#                            </a>#}
+{#                        </li>#}
+{#                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COACH') %}#}
+{#                            <li class="nav-item text-center">#}
+{#                                <a class="nav-link" href="{{ path('show-attendance') }}" style="font-weight: bold">#}
+{#                                    <span data-feather="attendance"></span>#}
+{#                                    Docházka#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                        {% if is_granted('ROLE_PLAYER') %}#}
+{#                            <li class="nav-item text-center">#}
+{#                                <a class="nav-link" href="{{ path('show-attendance-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">#}
+{#                                    <span data-feather="attendance"></span>#}
+{#                                    Docházka#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                        {% if is_granted('ROLE_ADMIN') %}#}
+{#                            <li class="nav-item text-center">#}
+{#                                <a class="nav-link" href="{{ path('show-club') }}" style="font-weight: bold">#}
+{#                                    <span data-feather="club"></span>#}
+{#                                    Klub#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                        {% if is_granted('ROLE_PLAYER') or is_granted('ROLE_COACH') %}#}
+{#                            <li class="nav-item text-center">#}
+{#                                <a class="nav-link" href="{{ path('show-team', {'userId': app.user.getId()}) }}" style="font-weight: bold">#}
+{#                                    <span data-feather="team"></span>#}
+{#                                    Tým#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                        {% if is_granted('ROLE_PLAYER') %}#}
+{#                            <li class="nav-item text-center">#}
+{#                                <a class="nav-link" href="{{ path('show-statistics-user', {'userId': app.user.getId()}) }}" style="font-weight: bold">#}
+{#                                    <span data-feather="statistics"></span>#}
+{#                                    Statistiky#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                        {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}#}
+{#                            <li class="nav-item text-center">#}
+{#                                <a class="nav-link" href="{{ path('show-statistics') }}" style="font-weight: bold">#}
+{#                                    <span data-feather="statistics"></span>#}
+{#                                    Statistiky#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                        {% if is_granted('ROLE_COACH') or is_granted('ROLE_ADMIN') %}#}
+{#                            <li class="nav-item text-center">#}
+{#                                <a class="nav-link" href="{{ path('show-cars') }}" style="font-weight: bold">#}
+{#                                    <span data-feather="cars"></span>#}
+{#                                    Auta#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        {% endif %}#}
+{#                        <li class="nav-item text-center">#}
+{#                            <a class="nav-link" href="{{ path('user-detail') }}" style="font-weight: bold">#}
+{#                                <span data-feather="profile"></span>#}
+{#                                Profil#}
+{#                            </a>#}
+{#                        </li>#}
+{#                    </ul>#}
+{#                </div>#}
+{#            </div>#}
+
+{#            <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>#}
+{#                <div class="section-header">#}
+{#                    <div class="row align-left">#}
+{#                        <div class="cell small-12 text-left">#}
+{#                            <h1>#}
+{#                                {% block header %}{% endblock %}#}
+{#                            </h1>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                    {% block body %}{% endblock %}#}
+{#            </div>#}
+
+{#        </div>#}
+{#    </div>#}
+
+{#    <footer class="bg-light text-center text-lg-start" style="bottom: 0; width: 100%; position: fixed">#}
+{#        <!-- Copyright -->#}
+{#        <div class=" bg-dark text-center p-3" style="color: white">#}
+{#            © 2021 Copyright:#}
+{#            <a style="color: white" href="https://www.bbkblansko.cz/">BBK Blansko</a>#}
+{#        </div>#}
+{#        <!-- Copyright -->#}
+{#    </footer>#}
+{#    <!-- Footer -->#}
+{#    {% block scripts %}#}
+{#    {% endblock %}#}

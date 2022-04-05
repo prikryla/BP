@@ -6,7 +6,7 @@
     <div class="container-fluid ">
         <h3>Klub</h3>
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COACH') %}
-            <a href="{{ path('add-user-team', {'userId': app.user.getId()}) }}" class="btn btn-primary btn-sm" style="font-weight: bold">Přidat hráče</a>
+            <a href="{{ path('add-user-team', {'userId': app.user.getId()}) }}" class="btn btn-primary" style="font-weight: bold">Přidat hráče</a>
             <a href="{{ path('show-all-fines') }}" class="btn btn-danger btn-sm" style="font-weight: bold">Nezaplacené pokuty</a>
         {% endif %}
         <table class="unstriped margin-top-1" id="table_club">

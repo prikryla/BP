@@ -23,8 +23,10 @@ Encore
     .addEntry('app', './assets/app.js')
 
     .addEntry('main_css', [
-        './assets/styles/app.css',
+        './public/css/styles.css'
     ])
+    .addEntry('css', './assets/styles/styles.css')
+    .addEntry('scripts', './assets/js/scripts.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -76,4 +78,14 @@ Encore
     //.autoProvidejQuery()
 ;
 
+const config = Encore.getWebpackConfig();
+//config.resolve.alias = { /* ... */ };
+// config.externals = {
+//     Selectize: 'Selectize', // nefunguje
+// };
+// module.exports = config;
+
 module.exports = Encore.getWebpackConfig();
+
+
+
