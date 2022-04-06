@@ -14,7 +14,7 @@
     {% elseif app.user.getCategoryId == 1 %}
         <h3>Tým</h3>
     {% endif %}
-    <div class="container-fluid mt-4">
+    <div>
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COACH') %}
             <a href="{{ path('add-user-team', {'userId': app.user.getId()}) }}" class="btn btn-primary btn-sm" style="font-weight: bold">Přidat hráče</a>
             <a href="{{ path('show-all-fines') }}" class="btn btn-danger btn-sm" style="font-weight: bold">Nezaplacené pokuty</a>
@@ -22,12 +22,12 @@
         <table class="table">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>Kategorie</th>
-                <th>Jméno</th>
-                <th>Příjmení</th>
-                <th>Datum narození</th>
-                <th>Možnosti</th>
+                <th class="col">ID</th>
+                <th class="col">Kategorie</th>
+                <th class="col">Jméno</th>
+                <th class="col">Příjmení</th>
+                <th class="col">Datum narození</th>
+                <th class="col">Možnosti</th>
             </tr>
             </thead>
             <tbody>
@@ -53,9 +53,9 @@
                             <a href="{{ path('user-profile', {'userId' : user.id}) }}" style="font-weight: bold">Detail hráče</a>
                         {% endif %}
                         {% if is_granted('ROLE_PLAYER') %}
-                            <a href="{{ path('user-detail-team', {'userId' : user.id}) }}" style="font-weight: bold">Detail hráče</a>
+                            <a class="btn btn-primary" href="{{ path('user-detail-team', {'userId' : user.id}) }}" style="font-weight: bold">Detail hráče</a>
                         {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
+                        {% if is_granted('ROLE_ADMIN') and app.user.getId() != app.getUser().getId() %}
                             <a href="{{ path('delete-user', {'userId' : user.id, 'usersId' : app.user.getId()}) }}" style="color: red; font-weight: bold">Odstranit</a>
                         {% endif %}
                         {% if is_granted('ROLE_COACH') %}

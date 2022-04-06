@@ -12,9 +12,7 @@
             <a href="{{ path('show-matches-u19/u20') }}" class="btn btn-primary btn-sm" style="font-weight: bold">U19/U20</a>
             <br>
             <a href="{{ path('show-away-matches') }}" class="btn btn-secondary btn-sm" style="margin-top: 7px; font-weight: bold">Výjezdy</a>
-            {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ path('add-match') }}" class="btn btn-success btn-sm" style="margin-top: 7px; font-weight: bold">Přidat zápasy</a>
-            {% endif %}
             <table class=" unstriped margin-top-1"  id="table_all_matches">
                 <thead>
                     <tr class="row align-center">
