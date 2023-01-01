@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Matches;
 use App\Entity\Nomination;
+use App\Entity\Users;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,9 +24,9 @@ class NominationController extends AbstractController {
      */
     public function createNomination(Request $request, $matchId, UserInterface $user, EntityManagerInterface $entityManager): Response
     {
-        $match = $entityManager->getRepository('App:Matches')->findOneBy(array('id' => $matchId));
-        $players = $entityManager->getRepository('App:Users')->findAll();
-        $nomination = $entityManager->getRepository('App:Nomination')->findBy(array('matches_id' => $matchId));
+        $match = $entityManager->getRepository(Matches::class)->findOneBy(array('id' => $matchId));
+        $players = $entityManager->getRepository(Users::class)->findAll();
+        $nomination = $entityManager->getRepository(Nomination::class)->findBy(array('matches_id' => $matchId));
         $get = $this->get('security.token_storage')->getToken()->getUser();
         $user = $get->getCategoryId();
         $team = [];
@@ -51,8 +53,8 @@ class NominationController extends AbstractController {
      */
     public function submitCreateNomination(Request $request, $matchId, $userId, EntityManagerInterface $entityManager): Response{
 
-        $user = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
-        $match = $entityManager->getRepository('App:Matches')->findOneBy(array('id' => $matchId));
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
+        $match = $entityManager->getRepository(Matches::class)->findOneBy(array('id' => $matchId));
 
         $nomination = new Nomination();
 
@@ -84,7 +86,7 @@ class NominationController extends AbstractController {
      */
     public function deleteNomination(Request $request, $matchId, $userId, EntityManagerInterface $entityManager): Response{
 
-        $nomination = $entityManager->getRepository('App:Nomination')->findOneBy(array(
+        $nomination = $entityManager->getRepository(Nomination::class)->findOneBy(array(
             'matches_id' => $matchId,
             'users_id' => $userId
         ));

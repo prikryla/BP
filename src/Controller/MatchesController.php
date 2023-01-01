@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Test\Constraint\EmailTextBodyContains;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MatchesController extends AbstractController {
@@ -37,17 +38,17 @@ class MatchesController extends AbstractController {
     /**
      * @Route("/matches/U12", name="show-matches-u12")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
 
-    public function showMatchesU12(Request $request): Response
+    public function showMatchesU12(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 2));
-
+        $matches = $entityManager->getRepository(Matches::class)->findBy(array('category_id' => 2));
         $allMatches = [];
 
         foreach ($matches as $match){
-            array_push($allMatches, $match);
+            $allMatches[] = $match;
         }
 
         return $this->render('showMatchesU12.html.twig',[
@@ -58,17 +59,17 @@ class MatchesController extends AbstractController {
     /**
      * @Route("/matches/U15", name="show-matches-u15")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
 
-    public function showMatchesU15(Request $request): Response
+    public function showMatchesU15(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 3));
-
+        $matches = $entityManager->getRepository(Matches::class)->findBy(array('category_id' => 3));
         $allMatches = [];
 
         foreach ($matches as $match){
-            array_push($allMatches, $match);
+            $allMatches[] = $match;
         }
 
         return $this->render('showMatchesU15.html.twig',[
@@ -79,17 +80,17 @@ class MatchesController extends AbstractController {
     /**
      * @Route("/matches/U17", name="show-matches-u17")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
 
-    public function showMatchesU17(Request $request): Response
+    public function showMatchesU17(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 4));
-
+        $matches = $entityManager->getRepository(Matches::class)->findBy(array('category_id' => 4));
         $allMatches = [];
 
         foreach ($matches as $match){
-            array_push($allMatches, $match);
+            $allMatches[] = $match;
         }
 
         return $this->render('showMatchesU17.html.twig',[
@@ -100,17 +101,17 @@ class MatchesController extends AbstractController {
     /**
      * @Route("/matches/U19-U20", name="show-matches-u19/u20")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
 
-    public function showMatchesU19(Request $request): Response
+    public function showMatchesU19(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $matches = $this->getDoctrine()->getRepository('App:Matches')->findBy(array('category_id' => 5));
-
+        $matches = $entityManager->getRepository(Matches::class)->findBy(array('category_id' => 5));
         $allMatches = [];
 
         foreach ($matches as $match){
-            array_push($allMatches, $match);
+            $allMatches[] = $match;
         }
 
         return $this->render('showMatchesU19U20.html.twig',[
@@ -121,17 +122,17 @@ class MatchesController extends AbstractController {
     /**
      * @Route("/matches/away", name="show-away-matches")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function showAwayMatches(Request $request): Response
+    public function showAwayMatches(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $matches = $this->getDoctrine()->getRepository('App:Matches')->findAll();
-
+        $matches = $entityManager->getRepository(Matches::class)->findAll();
         $awayMatches = [];
 
         foreach ($matches as $match){
             if ($match->getHomeTeam() != 'BBK Blansko')
-            array_push($awayMatches, $match);
+            $awayMatches[] = $match;
         }
 
         return $this->render('showAwayMatches.html.twig',[
@@ -142,9 +143,10 @@ class MatchesController extends AbstractController {
     /**
      * @Route("/matches/add", name="add-match")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function addMatches(Request $request): Response
+    public function addMatches(Request $request, EntityManagerInterface $entityManager): Response
     {
         $match = new Matches();
         $form = $this->createForm(AddMatchFormType::class, $match);
@@ -153,10 +155,8 @@ class MatchesController extends AbstractController {
 
         if ($form->isSubmitted() && $form->isValid()){
 
-//            $match->setMatchTime(new \DateTime());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($match);
-            $em->flush();
+            $entityManager->persist($match);
+            $entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -175,11 +175,12 @@ class MatchesController extends AbstractController {
      * @Route("/matches/{matchId}/detail", name="show-detail-match")
      * @param Request $request
      * @param $matchId
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function showMatchesDetail(Request $request, $matchId): Response
+    public function showMatchesDetail(Request $request, $matchId, EntityManagerInterface $entityManager): Response
     {
-        $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id' => $matchId));
+        $match = $entityManager->getRepository(Matches::class)->findOneBy(array('id' => $matchId));
 
         return $this->render('showMatchDetail.html.twig',[
             'match' => $match
@@ -190,22 +191,21 @@ class MatchesController extends AbstractController {
      * @Route("/matches/{matchId}/edit", name="edit-match")
      * @param Request $request
      * @param $matchId
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function editMatches(Request $request, $matchId): Response
+    public function editMatches(Request $request, $matchId, EntityManagerInterface $entityManager): Response
     {
 
-        $match = $this->getDoctrine()->getRepository('App:Matches')->findOneBy(array('id'=> $matchId));
+        $match = $entityManager->getRepository(Matches::class)->findOneBy(array('id'=> $matchId));
         $form = $this->createForm(AddMatchFormType::class, $match);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()){
             $match = $form->getData();
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($match);
-            $em->flush();
+            $entityManager->persist($match);
+            $entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -225,27 +225,21 @@ class MatchesController extends AbstractController {
      * @Route("/matches/{matchId}/delete", name="delete-match")
      * @param Request $request
      * @param $matchId
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function deleteMatches(Request $request, $matchId): Response
+    public function deleteMatches(Request $request, $matchId, EntityManagerInterface $entityManager): Response
     {
-
-        $em = $this->getDoctrine()->getManager();
-
-        $match = $em->getRepository('App:Matches')->find($matchId);
+        $match = $entityManager->getRepository(Matches::class)->find($matchId);
 
         $this->addFlash(
             'warning',
             'Zápas byl odstraněn!'
         );
-        $em->remove($match);
-        $em->flush();
+
+        $entityManager->remove($match);
+        $entityManager->flush();
 
         return $this->redirectToRoute('show-matches');
     }
-
-
-
-
-
 }

@@ -21,7 +21,7 @@ class CarsController extends AbstractController {
      */
     public function showCars(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $cars = $entityManager->getRepository('App:Cars')->findAll();
+        $cars = $entityManager->getRepository(Cars::class)->findAll();
 
         $allCars = [];
 
@@ -75,7 +75,7 @@ class CarsController extends AbstractController {
      */
     public function editCars(Request $request, $carsId, EntityManagerInterface $entityManager): Response
     {
-        $car = $entityManager->getRepository('App:Cars')->findOneBy(array('id' => $carsId));
+        $car = $entityManager->getRepository(Cars::class)->findOneBy(array('id' => $carsId));
         $form = $this->createForm(CarsEditType::class, $car);
         $form->handleRequest($request);
 

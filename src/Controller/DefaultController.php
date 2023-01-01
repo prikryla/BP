@@ -112,7 +112,7 @@ class DefaultController extends AbstractController {
      */
     public function showUsersProfileDetail(Request $request, $userId, EntityManagerInterface $entityManager): Response
     {
-        $user = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
 
         return $this->render('userProfileTeam.html.twig', [
             'user' => $user
@@ -128,7 +128,7 @@ class DefaultController extends AbstractController {
      */
     public function editUsersProfile(Request $request, EntityManagerInterface $entityManager, $userId): Response
     {
-        $user = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
 
         $form = $this->createForm(UserEditType::class, $user);
 
@@ -165,7 +165,7 @@ class DefaultController extends AbstractController {
      */
     public function changeUsersPassword(Request $request, EntityManagerInterface $entityManager, UserPasswordHasher $passwordHasher, $userId, TokenStorageInterface $tokenStorage): Response
     {
-        $user = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
 
         $form = $this->createForm(UserChangePasswordType::class, $user);
 
@@ -208,7 +208,7 @@ class DefaultController extends AbstractController {
      */
     public function deleteUsers(Request $request, EntityManagerInterface $entityManager, $userId, $usersId): RedirectResponse
     {
-        $user = $entityManager->getRepository('App:Users')->find($userId);
+        $user = $entityManager->getRepository(Users::class)->find($userId);
         $entityManager->remove($user);
         $entityManager->flush();
 

@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Attendance;
+use App\Entity\Users;
 use App\Form\AddAttendanceType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,7 @@ class AttendanceController extends AbstractController {
     public function showAttendance(Request $request, EntityManagerInterface $entityManager): Response
     {
         $usr = $this->getUser();
-        $users = $entityManager->getRepository('App:Users')->findAll();
+        $users = $entityManager->getRepository(Users::class)->findAll();
         $team = [];
 
         foreach ($users as $user){
@@ -46,7 +47,7 @@ class AttendanceController extends AbstractController {
      */
     public function showAllAttendance(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $attendance = $entityManager->getRepository('App:Attendance')->findAll();
+        $attendance = $entityManager->getRepository(Attendance::class)->findAll();
 
         return $this->render('showAllAttendance.html.twig', [
             'attendance' => $attendance
@@ -62,7 +63,7 @@ class AttendanceController extends AbstractController {
      */
     public function showUserAttendance(Request $request, $userId, EntityManagerInterface $entityManager): Response
     {
-        $attendance = $entityManager->getRepository('App:Attendance')->findBy(array('usersId' => $userId));
+        $attendance = $entityManager->getRepository(Attendance::class)->findBy(array('usersId' => $userId));
 
         return $this->render('showAttendanceUser.html.twig', [
             'attendance' => $attendance
@@ -84,7 +85,7 @@ class AttendanceController extends AbstractController {
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
-            $user = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
+            $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
             $attendance->setUsers($user);
 
             $entityManager->persist($attendance);

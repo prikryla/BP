@@ -28,7 +28,7 @@ class TeamController extends AbstractController {
      */
     public function showAllAction(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $users = $entityManager->getRepository('App:Users')->findAll();
+        $users = $entityManager->getRepository(Users::class)->findAll();
 
         return $this->render('showAllClub.html.twig', [
             'members' => $users
@@ -44,8 +44,8 @@ class TeamController extends AbstractController {
      */
     public function showAction(Request $request, $userId, EntityManagerInterface $entityManager): Response
     {
-        $usr = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
-        $users = $entityManager->getRepository('App:Users')->findAll();
+        $usr = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
+        $users = $entityManager->getRepository(Users::class)->findAll();
         $team = [];
 
         foreach ($users as $user){
@@ -116,7 +116,7 @@ class TeamController extends AbstractController {
     public function detailAction(Request $request, $userId, EntityManagerInterface $entityManager): Response
     {
 
-        $user = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
 
         return $this->render('showUserTeam.html.twig', [
             'user' => $user
@@ -132,7 +132,7 @@ class TeamController extends AbstractController {
      */
     public function detailEditAction(Request $request, EntityManagerInterface $entityManager, $userId): Response
     {
-        $user = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
         $form = $this->createForm(UserEditType::class, $user);
 
         $form->handleRequest($request);
@@ -165,7 +165,7 @@ class TeamController extends AbstractController {
     public function fineAction(Request $request, $userId, EntityManagerInterface $entityManager): Response
     {
 
-        $user = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
         $form = $this->createForm(FinePlayerType::class, $user);
 
         $form->handleRequest($request);
@@ -199,7 +199,7 @@ class TeamController extends AbstractController {
      */
     public function showAllFinesAction(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = $entityManager->getRepository('App:Users')->findAll();
+        $user = $entityManager->getRepository(Users::class)->findAll();
         $users = [];
 
         foreach ($user as $usr){
@@ -222,7 +222,7 @@ class TeamController extends AbstractController {
      */
     public function deleteAction(Request $request, EntityManagerInterface $entityManager, $userId): RedirectResponse
     {
-        $user = $entityManager->getRepository('App:Users')->find($userId);
+        $user = $entityManager->getRepository(Users::class)->find($userId);
 
         $entityManager->remove($user);
         $entityManager->flush();

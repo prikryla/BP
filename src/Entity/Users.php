@@ -264,7 +264,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
         /**
          * @return string
          */
-        public function getPassword()
+        public function getPassword(): ?string
         {
             return $this->password;
         }
