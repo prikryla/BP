@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Player_statistics;
 use App\Form\CreateStatisticsType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,11 +17,12 @@ class PlayerStatisticsController extends AbstractController {
     /**
      * @Route ("/statistics", name="show-statistics")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function showStatistics(Request $request): Response
+    public function showStatistics(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $statistics = $this->getDoctrine()->getRepository('App:Player_statistics')->findAll();
+        $statistics = $entityManager->getRepository('App:Player_statistics')->findAll();
 
         return $this->render('showStatistics.html.twig',[
             'statistics' => $statistics
@@ -30,11 +32,12 @@ class PlayerStatisticsController extends AbstractController {
     /**
      * @Route ("/statistics/create", name="create-statistics")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function createStatistics(Request $request): Response
+    public function createStatistics(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $users = $this->getDoctrine()->getRepository('App:Users')->findAll();
+        $users = $entityManager->getRepository('App:Users')->findAll();
 
         return $this->render('createStatistics.html.twig',[
             'users' => $users
@@ -45,25 +48,22 @@ class PlayerStatisticsController extends AbstractController {
      * @Route ("/statistics/create/{userId}", name="create-statistics-user")
      * @param Request $request
      * @param $userId
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function createUsersStatistics(Request $request, $userId): Response
+    public function createUsersStatistics(Request $request, $userId, EntityManagerInterface $entityManager): Response
     {
         $statistic = new Player_statistics();
-
         $form = $this->createForm(CreateStatisticsType::class, $statistic);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()){
 
-            $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
-//            $statistic->setUsersId($userId);
+            $user = $entityManager->getRepository('App:Users')->findOneBy(array('id' => $userId));
             $statistic->setUsers($user);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($statistic);
-            $em->flush();
+            $entityManager->persist($statistic);
+            $entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -82,15 +82,15 @@ class PlayerStatisticsController extends AbstractController {
      * @Route ("/statistics/show/{userId}", name="show-statistics-user")
      * @param Request $request
      * @param $userId
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function showUsersStatistics(Request $request, $userId): Response
+    public function showUsersStatistics(Request $request, $userId, EntityManagerInterface $entityManager): Response
     {
-        $statistics = $this->getDoctrine()->getRepository('App:Player_statistics')->findBy(array('users_id' => $userId));
+        $statistics = $entityManager->getRepository('App:Player_statistics')->findBy(array('users_id' => $userId));
 
         return $this->render('showUsersStatistics.html.twig',[
             'statistics' => $statistics
         ]);
     }
-
 }

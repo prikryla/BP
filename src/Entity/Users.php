@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
      * @package App\Entity
      * @ORM\Entity
      */
-    class Users implements UserInterface, \Serializable
+    class Users implements UserInterface, \Serializable, \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
     {
 
         /**
