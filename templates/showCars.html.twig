@@ -3,32 +3,28 @@
 {% block title %} IS BBK - Auta {% endblock %}
 
 {% block body %}
-    <div class="grid-container">
-        <div class="cell large-10">
-            <h3>Auta</h3>
-            <a href="{{ path('create-cars')}}" class="btn btn-primary btn-sm" style="font-weight: bold">Přidat auto</a>
-            <table class="unstriped margin-top-1"  id="table_cars">
-                <thead>
-                    <tr class="row align-center">
-                        <th class="columns small-3 text-center">Vůz</th>
-                        <th class="columns small-3 text-center">SPZ</th>
-                        <th class="columns small-2 text-center">Počet míst</th>
-                        <th class="columns small-2 text-center">řidič</th>
-                        <th class="columns small-2 text-center">Akce</th>
-                    </tr>
-                </thead>
-                <tbody id="table_cars">
-                {% for car in cars %}
-                    <tr class="row align-center">
-                        <td class="columns small-3 text-center">{{ car.carName }}</td>
-                        <td class="columns small-3 text-center">{{ car.spz }}</td>
-                        <td class="columns small-2 text-center">{{ car.numberOfSeats}}</td>
-                        <td class="columns small-2 text-center">{{ car.driverFirstName }} {{ car.driverLastName }}</td>
-                        <td class="columns small-2 text-center"><a href="{{ path('edit-cars', {'carsId': car.id}) }}" style="font-weight: bold">Editovat</a></td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <h3>Auta</h3>
+    <a href="{{ path('create-cars')}}" class="btn btn-primary btn-sm" style="font-weight: bold">Přidat auto</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col">Vůz</th>
+                <th class="col">SPZ</th>
+                <th class="col">Počet míst</th>
+                <th class="col">řidič</th>
+                <th class="col">Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for car in cars %}
+            <tr scope="row">
+                <td>{{ car.carName }}</td>
+                <td>{{ car.spz }}</td>
+                <td>{{ car.numberOfSeats}}</td>
+                <td>{{ car.driverFirstName }} {{ car.driverLastName }}</td>
+                <td><a href="{{ path('edit-cars', {'carsId': car.id}) }}" style="font-weight: bold">Editovat</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
