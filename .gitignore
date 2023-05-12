@@ -7,6 +7,7 @@
 /public/bundles/
 /var/
 /vendor/
+.idea/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
@@ -17,6 +18,7 @@
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
+/public/error/
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###

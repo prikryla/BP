@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Entity\Cars;
 use App\Form\CarsAddType;
@@ -18,16 +16,17 @@ class CarsController extends AbstractController {
     /**
      * @Route("/cars", name="show-cars")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function showCars(Request $request): Response
+    public function showCars(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $cars = $this->getDoctrine()->getRepository('App:Cars')->findAll();
+        $cars = $entityManager->getRepository(Cars::class)->findAll();
 
         $allCars = [];
 
         foreach ($cars as $car){
-            array_push($allCars, $car);
+            $allCars[] = $car;
         }
 
         return $this->render('showCars.html.twig',[
@@ -38,12 +37,11 @@ class CarsController extends AbstractController {
     /**
      * @Route("/cars/create", name="create-cars")
      * @param Request $request
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function addCars(Request $request): Response
+    public function addCars(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $em = $this->getDoctrine()->getManager();
-
         $car = new Cars();
         $form = $this->createForm(CarsAddType::class, $car);
 
@@ -51,8 +49,8 @@ class CarsController extends AbstractController {
 
         if ($form->isSubmitted() && $form->isValid()){
             $car = $form->getData();
-            $em->persist($car);
-            $em->flush();
+            $entityManager->persist($car);
+            $entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -71,23 +69,20 @@ class CarsController extends AbstractController {
     /**
      * @Route("/cars/edit/{carsId}", name="edit-cars")
      * @param Request $request
-     * @param EntityManagerInterface $em
      * @param $carsId
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function editCars(Request $request, $carsId, EntityManagerInterface $em): Response
+    public function editCars(Request $request, $carsId, EntityManagerInterface $entityManager): Response
     {
-        $car = $this->getDoctrine()->getRepository('App:Cars')->findOneBy(array('id' => $carsId));
-
+        $car = $entityManager->getRepository(Cars::class)->findOneBy(array('id' => $carsId));
         $form = $this->createForm(CarsEditType::class, $car);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
             $car = $form->getData();
-
-            $em->persist($car);
-            $em->flush();
+            $entityManager->persist($car);
+            $entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -102,7 +97,4 @@ class CarsController extends AbstractController {
            'form' => $form->createView()
         ]);
     }
-
-
-
 }

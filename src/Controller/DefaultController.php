@@ -2,11 +2,9 @@
 
 namespace App\Controller;
 
-
 use App\Form\UserChangePasswordType;
 use App\Form\UserEditType;
 use App\Form\UserRegisterType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,16 +12,15 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
 use App\Entity\Users;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Constraints\DateTime;
 
-class DefaultController extends AbstractController{
+class DefaultController extends AbstractController {
 
     /**
      * @Route("/", name="default")
@@ -48,18 +45,17 @@ class DefaultController extends AbstractController{
     /**
      * @Route("/register", name="user_registration")
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param UserPasswordHasherInterface $passwordHasher
+     * @param EntityManagerInterface $entityManager
      * @return RedirectResponse|Response
      * @throws Exception
      */
-    public function usersRegistration(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function usersRegistration(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager)
     {
 
-// 1) build the form
         $user = new Users();
         $form = $this->createForm(UserRegisterType::class, $user);
 
-// 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -67,20 +63,15 @@ class DefaultController extends AbstractController{
             $randomBytes = random_bytes(32);
             $user->setSalt(bin2hex($randomBytes));
 
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $password = $passwordHasher->hashPassword($user, $user->getPlainPassword());
             $user->setPassword($password);
-            //      $user->setUsername($user->getEmail());
-            //$user->setUsername($user->getEmail());
             $user->setAuthRole('ROLE_PLAYER');
             $user->setFines(0);
             $user->setDressNumber(0);
             $user->setDateOfBirth($request->request->get('dateOfBirth'));
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-
-            // dump($user);
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             $session = new Session();
             $session->getFlashBag()->add('notice', 'Profil vytvořen.');
@@ -101,15 +92,10 @@ class DefaultController extends AbstractController{
     /**
      * @Route("/profil", name="user-detail")
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
      * @return Response
      */
-    public function showUsersProfile(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function showUsersProfile(Request $request): Response
     {
-//        if(!$user = $this->getUser()) {
-//            return $this->redirectToRoute('login');
-//        }
-
         $user = $this->getUser();
 
         return $this->render('userProfile.html.twig', [
@@ -120,17 +106,13 @@ class DefaultController extends AbstractController{
     /**
      * @Route("/profil/{userId}", name="user-profile")
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
      * @param $userId
+     * @param EntityManagerInterface $entityManager
      * @return Response
      */
-    public function showUsersProfileDetail(Request $request, UserPasswordEncoderInterface $passwordEncoder, $userId)
+    public function showUsersProfileDetail(Request $request, $userId, EntityManagerInterface $entityManager): Response
     {
-//        if(!$user = $this->getUser()) {
-//            return $this->redirectToRoute('login');
-//        }
-
-        $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
 
         return $this->render('userProfileTeam.html.twig', [
             'user' => $user
@@ -140,13 +122,13 @@ class DefaultController extends AbstractController{
     /**
      * @Route("/profil/edit/{userId}", name="user-edit")
      * @param Request $request
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $entityManager
      * @param $userId
      * @return Response
      */
-    public function editUsersProfile(Request $request, EntityManagerInterface $em, $userId)
+    public function editUsersProfile(Request $request, EntityManagerInterface $entityManager, $userId): Response
     {
-        $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
 
         $form = $this->createForm(UserEditType::class, $user);
 
@@ -155,8 +137,8 @@ class DefaultController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()){
             $user = $form->getData();
 
-            $em->persist($user);
-            $em->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -174,15 +156,16 @@ class DefaultController extends AbstractController{
     /**
      * @Route ("/profil/changePassword/{userId}", name="user-changePassword")
      * @param Request $request
-     * @param EntityManagerInterface $em
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordHasher $passwordHasher
      * @param $userId
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
+     * @param TokenStorageInterface $tokenStorage
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      */
-    public function changeUsersPassword(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, $userId, TokenStorageInterface $tokenStorage){
-        $user = $this->getDoctrine()->getRepository('App:Users')->findOneBy(array('id' => $userId));
+    public function changeUsersPassword(Request $request, EntityManagerInterface $entityManager, UserPasswordHasher $passwordHasher, $userId, TokenStorageInterface $tokenStorage): Response
+    {
+        $user = $entityManager->getRepository(Users::class)->findOneBy(array('id' => $userId));
 
         $form = $this->createForm(UserChangePasswordType::class, $user);
 
@@ -193,13 +176,13 @@ class DefaultController extends AbstractController{
             if ($user->getPlainPassword()) {
                 $randomBytes = random_bytes(32);
                 $user->setSalt(bin2hex($randomBytes));
-                $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+                $password = $passwordHasher->hashPassword($user, $user->getPlainPassword());
                 $user->setPassword($password);
             }
             $tokenStorage->setToken();
 
-            $em->persist($user);
-            $em->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             $this->addFlash(
                 'notice',
@@ -218,28 +201,22 @@ class DefaultController extends AbstractController{
     /**
      * @Route ("/user/delete/{usersId}/{userId}", name="delete-user")
      * @param Request $request
-     * @param EntityManagerInterface $em
+     * @param EntityManagerInterface $entityManager
      * @param $userId
      * @param $usersId
      * @return RedirectResponse
      */
-    public function deleteUsers(Request $request, EntityManagerInterface $em, $userId, $usersId){
+    public function deleteUsers(Request $request, EntityManagerInterface $entityManager, $userId, $usersId): RedirectResponse
+    {
+        $user = $entityManager->getRepository(Users::class)->find($userId);
+        $entityManager->remove($user);
+        $entityManager->flush();
 
-            $em = $this->getDoctrine()->getManager();
+        $this->addFlash(
+            'warning',
+            'Uživatel byl odstraněn!'
+        );
 
-            $user = $em->getRepository('App:Users')->find($userId);
-
-            $currentUser = $usersId;
-            $em->remove($user);
-            $em->flush();
-
-            $this->addFlash(
-                'warning',
-                'Uživatel byl odstraněn!'
-            );
-
-            return $this->redirectToRoute('show-club');
+        return $this->redirectToRoute('show-club');
     }
-
-
 }

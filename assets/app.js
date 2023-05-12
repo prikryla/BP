@@ -6,12 +6,13 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+import './styles/styles.css';
 
 // start the Stimulus application
-import './bootstrap';
+// import './bootstrap';
+import 'bootstrap';
 
-$('[data-app-dashboard-toggle-shrink]').on('click', function(e) {
-    e.preventDefault();
-    $(this).parents('.app-dashboard').toggleClass('shrink-medium').toggleClass('shrink-large');
-});
+const $ = require('jquery');
+// this "modifies" the jquery module: adding behavior to it
+// the bootstrap module doesn't export/return anything
+require('bootstrap');
