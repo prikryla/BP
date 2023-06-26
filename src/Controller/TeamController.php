@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Players;
 use App\Entity\Users;
 use App\Form\AddTeamMemberType;
 use App\Form\FinePlayerType;
@@ -28,7 +29,7 @@ class TeamController extends AbstractController {
      */
     public function showAllAction(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $users = $entityManager->getRepository(Users::class)->findAll();
+        $users = $entityManager->getRepository(Players::class)->findAll();
 
         return $this->render('showAllClub.html.twig', [
             'members' => $users

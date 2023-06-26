@@ -11,30 +11,16 @@
     <table class="table">
         <thead>
             <tr>
-                <th class="col">Kategorie</th>
                 <th class="col">Jméno</th>
                 <th class="col">Příjmení</th>
-                <th class="col">Datum narození</th>
                 <th class="col">Možnosti</th>
             </tr>
         </thead>
         <tbody>
         {% for user in members %}
             <tr scope="row">
-                {% if user.categoryId == 2 %}
-                    <td>U12</td>
-                {% elseif user.categoryId == 3 %}
-                    <td>U15</td>
-                {% elseif user.categoryId == 4 %}
-                    <td>U17</td>
-                {% elseif user.categoryId == 5 %}
-                    <td>U19/U20</td>
-                {% elseif user.categoryId == 1 %}
-                    <td>Admin</td>
-                {% endif %}
                 <td>{{ user.firstName }}</td>
                 <td>{{ user.lastName }}</td>
-                <td>{{ user.dateOfBirth|date("d-m-Y") }}</td>
                 <td>
                     <a href="{{ path('user-detail-team', {'userId' : user.id}) }}" style="font-weight: bold">Detail hráče</a>
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_COACH') %}
